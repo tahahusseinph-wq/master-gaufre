@@ -1,0 +1,1005 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+</head>
+<body>
+<title>مستر غوفر</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Doto:wght@800&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Lalezar&family=Space+Mono:wght@400;700&display=swap">
+<style>
+/* Layout: one scroll story. A night storefront pinned on scroll (shutter up, neon on, camera through the door),
+   the waffles lift off the shelf and land on the sweet board, then a shutter comes down to close the night.
+   Single dark look built from the logo: black, purple, yellow. */
+:root{
+  color-scheme: dark;
+  --night:#09060C;
+  --plum:#140C19;
+  --card:#1A1121;
+  --line:#2E2137;
+  --purple:#950BA1;
+  --purple-hi:#CF5BDD;
+  --yellow:#FEC50B;
+  --cream:#F6EDE0;
+  --muted:#A897B2;
+  --f-ar-display:"Lalezar","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --f-en-display:"Bagel Fat One","Lalezar",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"Space Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --f-led:"Doto","Space Mono",ui-monospace,monospace;
+  --display:var(--f-ar-display);
+}
+html[lang="en"]{--display:var(--f-en-display)}
+html{scroll-behavior:smooth;background:var(--night)}
+body{margin:0;background:var(--night);color:var(--cream);font-family:var(--f-body);font-size:15px;line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+[hidden]{display:none!important}
+button{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--yellow);outline-offset:3px;border-radius:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- header ---------- */
+.hdr{position:fixed;inset-inline:0;top:0;z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;
+  padding:calc(env(safe-area-inset-top,0px) + 14px) clamp(16px,3vw,32px) 12px;pointer-events:none}
+.hdr>*{pointer-events:auto}
+.hdr::before{content:"";position:absolute;inset:0 0 -28px;z-index:-1;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:linear-gradient(180deg,rgba(9,6,12,.94),rgba(9,6,12,.7) 60%,rgba(9,6,12,0))}
+.hdr.solid::before{opacity:1}
+.hdr-logo{justify-self:start;display:block;height:46px;opacity:0;transition:opacity .3s}
+.hdr-logo img{height:100%;width:auto;display:block;filter:drop-shadow(0 4px 10px rgba(0,0,0,.5))}
+.pill{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:999px;background:rgba(12,7,16,.66);
+  border:1px solid rgba(255,255,255,.09);color:var(--cream);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font:500 14px/1 var(--f-body);text-decoration:none;white-space:nowrap}
+button.pill{cursor:pointer}
+button.pill:hover{border-color:rgba(254,197,11,.5)}
+.clock{justify-self:center;gap:9px}
+.clock .dot{width:7px;height:7px;border-radius:50%;background:var(--yellow);box-shadow:0 0 10px var(--yellow);animation:pulse 1.8s ease-in-out infinite}
+.clock .t{font:800 20px/1 var(--f-led);letter-spacing:.03em;font-variant-numeric:tabular-nums;direction:ltr}
+.clock .ap{font:400 12px/1 var(--f-body);color:var(--muted)}
+.hdr-actions{justify-self:end;display:flex;gap:8px}
+.lang-pill{font-family:var(--f-mono);font-size:13px;letter-spacing:.04em}
+html[lang="en"] .lang-pill{font-family:var(--f-body);font-size:14px;letter-spacing:0}
+.bag-pill svg{width:16px;height:16px}
+.bag-count{min-width:20px;height:20px;border-radius:999px;background:var(--yellow);color:#170b00;font:700 12px/20px var(--f-mono);text-align:center;padding:0 5px}
+.bag-count.bump{animation:bump .45s ease}
+@keyframes bump{40%{transform:scale(1.35)}}
+@keyframes pulse{50%{opacity:.35}}
+.menu-pill svg{display:none;width:18px;height:18px}
+@media (max-width:560px){
+  .hdr{grid-template-columns:auto 1fr;gap:8px}
+  .hdr-logo{display:none}
+  .clock{justify-self:start}
+  .pill{height:36px;padding:0 11px}
+  .menu-word{display:none}
+  .menu-pill svg{display:block}
+}
+
+/* ---------- hero: pinned scene ---------- */
+.hero{position:relative;height:640vh;height:640svh}
+@media (max-width:760px){.hero{height:580vh;height:580svh}}
+.hero-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#0B0610;}
+.sky,.sky-night,.stars,.moon{position:absolute;pointer-events:none}
+.sky,.sky-night,.stars{inset:0}
+.sky{background:linear-gradient(180deg,#2A0D42 0%,#7A2470 14%,#D2587A 24%,#F5A14E 34%,#F7B866 46%)}
+.sky-night{background:linear-gradient(180deg,#04020A 0%,#0C0618 30%,#1B0C2C 60%);opacity:0;will-change:opacity}
+.stars{opacity:0;will-change:opacity}
+.moon{width:34px;height:34px;border-radius:50%;top:max(70px,9vh);inset-inline-end:16%;background:radial-gradient(circle at 38% 38%,#FFF6DD,#E9D6A8 60%,#C9B07C);
+  box-shadow:0 0 40px 8px rgba(255,236,190,.18);opacity:0;will-change:opacity}
+.camera{position:absolute;left:0;top:0;width:1600px;height:1000px;transform-origin:0 0;will-change:transform}
+.layer{position:absolute;inset:0;transform-origin:800px 668px;will-change:transform}
+
+/* interior */
+.room{position:absolute;left:-300px;top:-300px;width:2200px;height:2000px;
+  background:
+    radial-gradient(ellipse 260px 340px at 1020px 760px,rgba(255,196,110,.22),transparent 70%),
+    radial-gradient(ellipse 260px 340px at 1260px 760px,rgba(255,196,110,.22),transparent 70%),
+    linear-gradient(180deg,#130A18 0%,#1F1027 40%,#24112D 55%);}
+.tiles{position:absolute;left:-300px;top:600px;width:2200px;height:262px;background-color:#4B0F59;
+  background-image:linear-gradient(90deg,rgba(10,0,14,.6) 3px,transparent 3px),linear-gradient(0deg,rgba(10,0,14,.6) 3px,transparent 3px),
+  linear-gradient(135deg,rgba(255,255,255,.13),transparent 45%);background-size:46px 46px,46px 46px,46px 46px;
+  box-shadow:inset 0 6px 0 rgba(246,237,224,.18)}
+.floor{position:absolute;left:-300px;top:862px;width:2200px;height:840px;background:
+  repeating-conic-gradient(#0D070F 0 25%,#140B18 0 50%) 0 0/80px 80px}
+.mascot{position:absolute;left:700px;top:392px;width:200px;height:96px;opacity:.25;will-change:opacity;
+  filter:drop-shadow(0 0 4px rgba(254,197,11,.9)) drop-shadow(0 0 16px rgba(254,197,11,.5))}
+.pendant{position:absolute;top:372px;width:84px;height:120px}
+.pendant::before{content:"";position:absolute;left:41px;top:0;width:2px;height:44px;background:#0A070C}
+.pendant .shade{position:absolute;left:0;top:42px;width:84px;height:34px;border-radius:50% 50% 6px 6px/100% 100% 6px 6px;
+  background:linear-gradient(180deg,#D7A84B,#8E6524 70%,#5E4115);box-shadow:inset 0 -3px 0 rgba(0,0,0,.35)}
+.pendant .bulb{position:absolute;left:12px;top:72px;width:60px;height:14px;border-radius:50%;background:#FFE7AE;
+  box-shadow:0 0 22px 8px rgba(255,214,140,.55),0 30px 90px 40px rgba(255,190,100,.18);opacity:0;will-change:opacity}
+.shelf{position:absolute;left:470px;top:520px;width:660px;height:300px}
+.shelf .post{position:absolute;top:0;width:16px;height:300px;background:linear-gradient(90deg,#5A3519,#8A5A2E 50%,#4A2B14);border-radius:3px}
+.shelf .post.l{left:0}.shelf .post.r{right:0}
+.shelf .plank{position:absolute;left:-8px;right:-8px;height:22px;border-radius:3px;
+  background:linear-gradient(180deg,#B47B43 0,#B47B43 5px,#7A4B23 6px,#5B3416);box-shadow:0 10px 18px rgba(0,0,0,.45)}
+.shelf .b1{top:116px}.shelf .b2{top:266px}
+.slot{position:absolute;width:204px;height:140px;display:flex;align-items:flex-end;justify-content:center}
+.slot img{display:block;width:auto;height:auto;max-width:200px;max-height:126px;filter:drop-shadow(0 10px 8px rgba(0,0,0,.55))}
+.steam{position:absolute;top:452px;width:60px;height:90px;opacity:0;will-change:opacity;pointer-events:none}
+.steam i{position:absolute;bottom:0;left:20px;width:16px;height:60px;border-radius:50%;background:rgba(255,255,255,.5);filter:blur(9px);will-change:transform,opacity;animation:steam 3.4s ease-in infinite}
+.steam i:nth-child(2){left:32px;animation-delay:1.2s}.steam i:nth-child(3){left:8px;animation-delay:2.3s}
+@keyframes steam{0%{transform:translateY(20px) scaleX(.6);opacity:0}30%{opacity:.8}100%{transform:translateY(-50px) scaleX(1.4);opacity:0}}
+.counter{position:absolute;left:440px;top:806px;width:720px;height:58px;background:linear-gradient(180deg,#2A1A12,#120B08);
+  box-shadow:0 -3px 0 #C254D1,0 -6px 26px rgba(207,91,221,.55)}
+.lights-off{position:absolute;left:-300px;top:-300px;width:2200px;height:2000px;background:#030106;opacity:1;will-change:opacity;pointer-events:none}
+
+/* glass storefront */
+.tint{position:absolute;left:420px;top:372px;width:760px;height:488px;
+  background:linear-gradient(115deg,transparent 18%,rgba(255,255,255,.07) 24%,transparent 31%,transparent 58%,rgba(255,255,255,.05) 63%,transparent 70%),rgba(150,120,190,.05)}
+.bar{position:absolute;background:#0D0A10;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
+.bar.v{top:372px;width:12px;height:488px}
+.bar.h{left:420px;width:760px;height:12px}
+.door{position:absolute;top:452px;width:116px;height:408px;border:9px solid #0D0A10;box-sizing:border-box;
+  background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.06) 38%,transparent 46%)}
+.door.l{left:684px}.door.r{left:800px}
+.door .handle{position:absolute;top:150px;width:6px;height:96px;border-radius:3px;background:linear-gradient(90deg,#9A8E7E,#E8DCC7,#8B7F70)}
+.door.l .handle{right:8px}.door.r .handle{left:8px}
+.open-sign{position:absolute;left:456px;top:470px;width:170px;height:62px;display:grid;place-items:center;
+  font:72px/1 var(--f-ar-display);color:var(--yellow);border-radius:14px}
+html[lang="en"] .open-sign{font:44px/1 var(--f-en-display)}
+.open-sign .dim{position:absolute;opacity:.18;color:#7d6a3a}
+.open-sign .lit{position:absolute;opacity:0;will-change:opacity;text-shadow:0 0 6px #FEC50B,0 0 18px rgba(254,197,11,.8),0 0 40px rgba(207,91,221,.7)}
+.open-sign::before,.open-sign::after{content:"";position:absolute;top:-98px;width:1px;height:98px;background:rgba(255,255,255,.25)}
+.open-sign::before{left:30px}.open-sign::after{right:30px}
+
+/* facade */
+.wall{position:absolute;left:0;top:120px;width:1600px;height:780px;
+  clip-path:polygon(evenodd,0 0,1600px 0,1600px 780px,0 780px,0 0,420px 252px,1180px 252px,1180px 740px,420px 740px,420px 252px);
+  background-color:#231B29;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .10 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
+    linear-gradient(180deg,#1A131F 0%,#2A2030 60%,#211A26 100%)}
+.wall-shade{position:absolute;left:0;top:120px;width:1600px;height:780px;background:#040207;opacity:.08;will-change:opacity;pointer-events:none}
+.wall-clip{clip-path:polygon(evenodd,0 0,1600px 0,1600px 780px,0 780px,0 0,420px 252px,1180px 252px,1180px 740px,420px 740px,420px 252px)}
+.wash{position:absolute;top:360px;width:380px;height:520px;border-radius:50%;
+  background:radial-gradient(ellipse at 50% 12%,rgba(255,196,110,.42),rgba(255,170,80,.12) 45%,transparent 70%);opacity:0;will-change:opacity;pointer-events:none}
+.wash.l{left:50px}.wash.r{left:1170px}
+.sconce{position:absolute;top:342px;width:34px;height:48px;border-radius:6px 6px 14px 14px;background:linear-gradient(180deg,#141016,#050306)}
+.sconce .glow{position:absolute;left:7px;bottom:-6px;width:20px;height:10px;border-radius:50%;background:#FFE3A1;opacity:0;will-change:opacity;
+  box-shadow:0 0 16px 6px rgba(255,210,130,.6)}
+.sconce.l{left:223px}.sconce.r{left:1343px}
+.cornice{position:absolute;left:0;top:76px;width:1600px;height:58px;
+  background:repeating-linear-gradient(90deg,transparent 0 118px,rgba(0,0,0,.45) 118px 121px),linear-gradient(180deg,#3A3040,#2A2230 60%,#17111B);
+  box-shadow:0 10px 18px rgba(0,0,0,.45)}
+.signbox{position:absolute;left:410px;top:146px;width:780px;height:184px;border-radius:12px;
+  background:linear-gradient(180deg,#18121C,#060408);box-shadow:0 20px 40px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.07)}
+.signbox .tube{position:absolute;inset:12px;border-radius:9px;border:3px solid #4B2352}
+.signbox .tube.lit{border-color:#DB70E8;box-shadow:0 0 8px #DB70E8,0 0 26px rgba(149,11,161,.9),inset 0 0 16px rgba(207,91,221,.5);opacity:0;will-change:opacity}
+.signbox .bolt{position:absolute;top:-34px;width:4px;height:34px;background:#0C090E}
+.signbox .bolt.l{left:120px}.signbox .bolt.r{right:120px}
+.signbox .side{position:absolute;top:50%;transform:translateY(-50%);opacity:.35;will-change:opacity}
+.signbox .side.l{left:46px;font:700 16px/1.75 var(--f-mono);letter-spacing:.24em;color:#EADFF0}
+.signbox .side.r{right:46px;font:400 36px/1.15 var(--f-ar-display);color:var(--yellow);text-align:right}
+.signlogo{position:absolute;left:662px;top:126px;width:276px;height:211px}
+.signlogo img{position:absolute;inset:0;width:100%;height:100%}
+.signlogo .dim{filter:brightness(.42) saturate(.55)}
+.signlogo .lit{opacity:0;will-change:opacity;filter:drop-shadow(0 0 6px rgba(207,91,221,.9)) drop-shadow(0 0 22px rgba(149,11,161,.85)) drop-shadow(0 0 34px rgba(254,197,11,.3))}
+.housing{position:absolute;left:408px;top:334px;width:784px;height:40px;border-radius:4px;
+  background:linear-gradient(180deg,#5D5966,#3A3741 45%,#1E1C23);box-shadow:0 8px 12px rgba(0,0,0,.5)}
+.shutter-mask{position:absolute;left:420px;top:372px;width:760px;height:488px;overflow:hidden}
+.shutter{position:absolute;inset:0;will-change:transform}
+.slats{background:
+  linear-gradient(180deg,rgba(255,210,150,.06),rgba(0,0,0,.2) 75%),
+  repeating-linear-gradient(180deg,#45424D 0 2px,#76727F 2px 6px,#55525D 6px 11px,#28262E 11px 14px)}
+.shutter .bottom{position:absolute;left:0;right:0;bottom:0;height:22px;background:linear-gradient(180deg,#77737F,#3A3740 60%,#1D1B22)}
+.shutter .bottom::after{content:"";position:absolute;left:350px;top:6px;width:60px;height:9px;border-radius:5px;background:#16141A;box-shadow:inset 0 1px 0 rgba(255,255,255,.15)}
+.shutter-copy{position:absolute;inset:0 0 22px;display:grid;place-content:center;text-align:center;gap:18px;opacity:1;will-change:opacity;padding:0 30px}
+.shutter-copy h1{margin:0;font:400 80px/1.12 var(--display);color:#F7ECDC;text-shadow:0 2px 0 rgba(0,0,0,.25);text-wrap:balance}
+html[lang="en"] .shutter-copy h1{font-size:62px;line-height:1.08;letter-spacing:-.01em}
+.shutter-copy p{margin:0;font:400 19px/1.4 var(--f-mono);color:#DED2C4;letter-spacing:.02em}
+.sill{position:absolute;left:400px;top:858px;width:800px;height:34px;background:linear-gradient(180deg,#4A4150,#2B2430);box-shadow:0 8px 14px rgba(0,0,0,.5)}
+.poster{position:absolute;left:140px;top:470px;width:230px;height:330px;border-radius:10px;background:#0B080D;padding:10px;box-sizing:border-box;
+  box-shadow:0 18px 30px rgba(0,0,0,.55)}
+.poster .inner{position:relative;height:100%;border-radius:6px;overflow:hidden;display:grid;place-items:center;
+  background:radial-gradient(circle at 50% 42%,#7A1689,#2B0733 70%)}
+.poster .dark{position:absolute;inset:0;background:#000;opacity:.55;will-change:opacity}
+.poster img{width:190px;height:auto;margin-top:-40px;filter:drop-shadow(0 12px 10px rgba(0,0,0,.6))}
+.poster b{position:absolute;bottom:16px;inset-inline:0;text-align:center;font:400 30px/1 var(--display);color:var(--yellow)}
+html[lang="en"] .poster b{font-size:22px}
+.aframe{position:absolute;left:1250px;top:688px;width:184px;height:214px}
+.aframe .chalk{position:absolute;inset:0 0 18px;border:9px solid #6B4423;border-radius:6px;box-sizing:border-box;
+  background:radial-gradient(ellipse at 40% 30%,#2A302E,#151918 75%);display:grid;place-content:center;text-align:center;gap:2px;padding:6px}
+.aframe .chalk span{font:400 34px/1.15 var(--display);color:rgba(240,236,226,.88)}
+html[lang="en"] .aframe .chalk span{font-size:22px;line-height:1.35}
+.aframe .chalk em{font:700 15px/1.6 var(--f-mono);color:var(--yellow);font-style:normal}
+.aframe .leg{position:absolute;bottom:0;width:10px;height:26px;background:#5A381B}
+.aframe .leg.l{left:16px}.aframe .leg.r{right:16px}
+.ground-glow{position:absolute;left:560px;top:880px;width:480px;height:170px;border-radius:50%;opacity:0;will-change:opacity;
+  background:radial-gradient(ellipse at 50% 20%,rgba(255,190,100,.3),transparent 70%)}
+.ground{position:absolute;left:-400px;top:890px;width:2400px;height:1800px;
+  background:
+    repeating-linear-gradient(90deg,transparent 0 98px,rgba(0,0,0,.4) 98px 100px),
+    repeating-linear-gradient(0deg,transparent 0 58px,rgba(0,0,0,.35) 58px 60px),
+    linear-gradient(180deg,#2B2430 0,#2B2430 10px,#1A151D 11px,#120E15)}
+
+/* hero overlays */
+.hero-fade{position:absolute;inset:0;background:var(--night);opacity:0;will-change:opacity;pointer-events:none;z-index:3}
+.hero-ui{position:absolute;inset:0;z-index:5;pointer-events:none;will-change:opacity}
+.hero-ui::before{content:"";position:absolute;inset:auto 0 0;height:46%;background:linear-gradient(0deg,rgba(6,3,9,.88),transparent)}
+.intro{position:absolute;inset-inline-start:clamp(16px,4vw,52px);bottom:clamp(22px,5vh,52px);max-width:440px;display:grid;gap:16px}
+.intro p{margin:0;font-size:16px;line-height:1.75;color:#EDE2F2;text-wrap:pretty}
+.btn{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:46px;padding:0 22px;border-radius:999px;font:700 15px/1 var(--f-body);
+  text-decoration:none;cursor:pointer;border:0;transition:transform .15s ease,background-color .15s}
+.btn:active{transform:scale(.97)}
+.btn-y{background:var(--yellow);color:#1A0E00}
+.btn-y:hover{background:#FFD447}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--cream);border:1px solid rgba(255,255,255,.18);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.btn-ghost:hover{background:rgba(255,255,255,.14)}
+.led-note{position:absolute;inset-inline-end:clamp(16px,4vw,52px);bottom:clamp(26px,5vh,56px);text-align:end;display:grid;gap:6px}
+.led-note b{font:800 clamp(44px,5.4vw,72px)/1 var(--f-led);color:var(--yellow);text-shadow:0 0 18px rgba(254,197,11,.45);direction:ltr}
+.led-note span{font-size:14px;color:#E2D6E8}
+.scroll-hint{position:absolute;left:50%;transform:translateX(-50%);bottom:18px;font:400 12px/1 var(--f-mono);color:#BFAFC8;letter-spacing:.06em;display:flex;align-items:center;gap:8px}
+html[lang="ar"] .scroll-hint{font-family:var(--f-body);letter-spacing:0;font-size:13px}
+.scroll-hint i{width:1px;height:18px;background:currentColor;animation:hint 1.6s ease-in-out infinite}
+@keyframes hint{50%{transform:translateY(5px);opacity:.4}}
+@media (max-width:760px){
+  .led-note{display:none}
+  .intro{inset-inline-end:16px;max-width:none;bottom:74px}
+  .scroll-hint{bottom:calc(env(safe-area-inset-bottom,0px) + 26px);font-size:13px}
+  .intro p{font-size:15px}
+}
+
+/* flyers */
+.flyers{position:fixed;inset:0;z-index:90;pointer-events:none;overflow:hidden}
+.flyers img{position:absolute;left:0;top:0;display:none;transform-origin:50% 50%;will-change:transform,opacity;filter:drop-shadow(0 24px 22px rgba(0,0,0,.55))}
+
+/* ---------- sweet board ---------- */
+.board{position:relative;background:var(--night);padding-block:clamp(40px,8vh,90px) 40px}
+.board::before,.board::after{content:"";position:absolute;width:340px;height:340px;pointer-events:none;opacity:.55;
+  background:radial-gradient(circle,var(--purple) 1.6px,transparent 2.2px) 0 0/14px 14px;
+  -webkit-mask:radial-gradient(circle at var(--mx) var(--my),#000,transparent 68%);mask:radial-gradient(circle at var(--mx) var(--my),#000,transparent 68%)}
+.board::before{top:38%;inset-inline-end:0;--mx:100%;--my:50%}
+.board::after{bottom:4%;inset-inline-start:0;--mx:0%;--my:60%}
+.wrap{position:relative;z-index:1;max-width:1240px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+.board-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:end}
+.eyebrow{margin:0 0 8px;font:400 14px/1 var(--f-mono);color:var(--muted);letter-spacing:.08em}
+html[lang="ar"] .eyebrow{font-family:var(--f-body);letter-spacing:0;font-size:15px}
+.board h2{margin:0;font:400 clamp(44px,6.4vw,92px)/1.04 var(--display);color:var(--cream);text-wrap:balance}
+html[lang="en"] .board h2{font-size:clamp(38px,5.4vw,76px);letter-spacing:-.015em}
+.now-card{width:min(400px,100%);box-sizing:border-box;padding:20px 22px;border-radius:22px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+  border:1px solid var(--line);display:grid;gap:12px}
+.now-top{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.now-top .lbl{font-size:14px;color:var(--muted)}
+.now-top .led{font:800 46px/1 var(--f-led);color:var(--yellow);text-shadow:0 0 16px rgba(254,197,11,.35);direction:ltr;font-variant-numeric:tabular-nums}
+.now-status{margin:0;font-size:14.5px;color:var(--cream)}
+.now-status .st{display:inline-block;width:8px;height:8px;border-radius:50%;margin-inline-end:8px;background:#5BE38A;box-shadow:0 0 8px #5BE38A;vertical-align:middle}
+.now-status.closed .st{background:#E35B6A;box-shadow:0 0 8px #E35B6A}
+.night-bar{position:relative;height:6px;border-radius:6px;background:linear-gradient(90deg,var(--purple),var(--yellow));direction:ltr}
+html[lang="ar"] .night-bar{transform:scaleX(-1)}
+.night-bar .thumb{position:absolute;top:50%;width:18px;height:18px;margin:-9px 0 0 -9px;border-radius:50%;background:#140A18;border:3px solid var(--yellow);box-sizing:border-box}
+.night-ends{display:flex;justify-content:space-between;font:400 12px/1 var(--f-mono);color:var(--muted)}
+.tabs{display:flex;gap:8px;margin:34px 0 8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{flex:none;height:40px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--cream);cursor:pointer;font:500 14.5px/1 var(--f-body)}
+.tab:hover{border-color:rgba(254,197,11,.5)}
+.tab[aria-selected="true"]{background:var(--yellow);color:#1A0E00;border-color:var(--yellow);font-weight:700}
+.cat{margin-top:46px}
+.cat[hidden]{display:none}
+.cat-h{display:flex;align-items:baseline;flex-wrap:wrap;gap:6px 16px;margin:0 0 20px;font:400 clamp(32px,4vw,48px)/1.1 var(--f-ar-display);color:var(--yellow)}
+.cat-h .lat{font:400 .74em/1 var(--f-en-display);color:var(--purple-hi);display:inline-block;transform:skewX(-10deg);letter-spacing:.02em}
+.cat-h .slash{display:inline-block;width:46px;height:20px;align-self:center}
+html[lang="ar"] .cat-h .slash{transform:scaleX(-1)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.board-head{grid-template-columns:1fr}}
+@media (max-width:640px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{position:relative;display:flex;flex-direction:column;gap:10px;padding:16px 18px 18px;border-radius:24px;min-width:0;
+  background:linear-gradient(180deg,#1E1426,#140D19);border:1px solid rgba(254,197,11,.2);box-shadow:0 18px 40px rgba(0,0,0,.35)}
+.card-media{position:relative;aspect-ratio:16/10;min-height:0;overflow:visible;display:grid;place-items:center;margin:-4px -6px 4px;border-radius:18px;
+  background:radial-gradient(ellipse at 50% 58%,rgba(149,11,161,.32),transparent 66%)}
+.card-media::after{content:"";position:absolute;left:18%;right:18%;bottom:9%;height:10%;border-radius:50%;background:rgba(0,0,0,.55);filter:blur(10px);z-index:0}
+.card-img{position:absolute;inset:0;margin:auto;z-index:1;display:block;width:auto;height:auto;max-width:92%;max-height:86%;transition:transform .35s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 16px 14px rgba(0,0,0,.5))}
+.card:hover .card-img{transform:translateY(-6px) rotate(-1.5deg)}
+.card-img.pending{visibility:hidden}
+.card-meta{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.card-meta .kind{font:400 12.5px/1 var(--f-mono);color:var(--muted);letter-spacing:.04em}
+html[lang="ar"] .card-meta .kind{font-family:var(--f-body);letter-spacing:0;font-size:13px}
+.tag{display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 11px;border-radius:999px;border:1px solid rgba(207,91,221,.45);color:#E7C9EC;font-size:12.5px;white-space:nowrap}
+.tag::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.8}
+.tag.sig{background:var(--yellow);border-color:var(--yellow);color:#1A0E00;font-weight:700}
+.card-name{margin:2px 0 0;font:400 25px/1.25 var(--display)}
+html[lang="en"] .card-name{font-size:20px;line-height:1.3}
+.card-name span{display:inline;padding:2px 12px 4px;color:var(--yellow);-webkit-box-decoration-break:clone;box-decoration-break:clone;
+  background:linear-gradient(90deg,rgba(149,11,161,.9),rgba(94,8,104,.85));clip-path:polygon(0 8%,100% 0,99% 100%,1% 94%)}
+.card-alt{margin:-4px 0 0;font-size:13px;color:var(--muted)}
+.card-desc{margin:0;font-size:14.5px;line-height:1.7;color:#D6C9DD;flex:1}
+.card-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:4px}
+.price{font:700 17px/1 var(--f-mono);color:var(--cream);direction:ltr}
+.add{height:40px;padding:0 18px;border-radius:999px;border:0;background:var(--yellow);color:#1A0E00;font:700 14.5px/1 var(--f-body);cursor:pointer;margin-inline-start:auto}
+.add:hover{background:#FFD447}
+.add:active{transform:scale(.96)}
+.note-card{justify-content:center;gap:14px;background:radial-gradient(circle at 80% 20%,rgba(149,11,161,.35),transparent 60%),#120B17;border-style:dashed}
+.note-card .big{font:800 96px/1 var(--f-led);color:var(--yellow);text-shadow:0 0 22px rgba(254,197,11,.4)}
+.note-card p{margin:0;font-size:16px;line-height:1.7}
+.note-card p + p{color:var(--muted);font-size:14.5px}
+.addons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+@media (max-width:900px){.addons{grid-template-columns:minmax(0,1fr)}}
+.addon{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;align-items:center;padding:16px;border-radius:22px;background:#150E1A;border:1px solid var(--line)}
+.addon .pic{height:96px;display:grid;place-items:center;border-radius:16px;background:radial-gradient(circle,rgba(149,11,161,.35),transparent 70%)}
+.addon .pic img{width:auto;height:auto;max-width:104px;max-height:88px;filter:drop-shadow(0 10px 10px rgba(0,0,0,.5))}
+.addon h4{margin:0;font:400 23px/1.2 var(--display);color:var(--yellow)}
+html[lang="en"] .addon h4{font-size:18px}
+.addon p{margin:4px 0 10px;font-size:13.5px;line-height:1.65;color:#CDBFD4}
+.addon .add{height:34px;padding:0 14px;font-size:13.5px;margin:0}
+.allergy{display:flex;gap:12px;align-items:center;margin:34px 0 0;padding:14px 18px;border-radius:16px;background:rgba(149,11,161,.16);border:1px solid rgba(207,91,221,.3);font-size:14.5px}
+.allergy svg{flex:none;width:26px;height:26px}
+
+/* ---------- closing ---------- */
+.closing{position:relative;height:200vh;height:200svh}
+.closing-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
+  background:radial-gradient(ellipse 70% 50% at 50% 110%,rgba(149,11,161,.35),transparent 70%),var(--night)}
+.closing-shutter{position:absolute;inset:0;transform:translateY(-100%);will-change:transform;display:grid;place-items:center;
+  background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.05) 40%,rgba(0,0,0,.4)),
+  repeating-linear-gradient(180deg,#3E3B46 0 3px,#6E6A77 3px 9px,#4D4A55 9px 16px,#24222A 16px 20px)}
+.closing-shutter::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34px;background:linear-gradient(180deg,#77737F,#3A3740 60%,#1D1B22)}
+.closing-copy{position:relative;z-index:1;display:grid;justify-items:center;text-align:center;gap:14px;padding:0 16px;opacity:0}
+.closing-copy img{width:min(420px,72vw);height:auto;transform:rotate(-4deg);filter:drop-shadow(0 18px 24px rgba(0,0,0,.55))}
+.closing-copy .see{margin:6px 0 0;font:400 clamp(38px,6vw,76px)/1.05 var(--display);color:var(--cream);text-shadow:0 3px 0 rgba(0,0,0,.35)}
+.closing-copy .hours{margin:0;font:400 15px/1.5 var(--f-mono);color:#E6DACB}
+html[lang="ar"] .closing-copy .hours{font-family:var(--f-body)}
+.btn-cream{background:var(--cream);color:#1A0E00;margin-top:8px}
+.btn-cream:hover{background:#fff}
+.credit{position:absolute;bottom:46px;left:0;right:0;text-align:center;margin:0;font-size:12px;color:#CFC4D6;z-index:1}
+
+/* ---------- drawer, menu, toast ---------- */
+.scrim{position:fixed;inset:0;z-index:110;background:rgba(4,2,6,.6);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.drawer{position:fixed;top:0;bottom:0;inset-inline-end:0;z-index:120;width:min(430px,100%);box-sizing:border-box;display:flex;flex-direction:column;
+  background:#120B16;border-inline-start:1px solid var(--line);padding:calc(env(safe-area-inset-top,0px) + 18px) 20px calc(env(safe-area-inset-bottom,0px) + 18px);box-shadow:-30px 0 60px rgba(0,0,0,.5)}
+.drawer-h{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.drawer-h h3{margin:0;font:400 34px/1 var(--display);color:var(--yellow)}
+html[lang="en"] .drawer-h h3{font-size:26px}
+.x{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;cursor:pointer;display:grid;place-items:center}
+.x svg{width:16px;height:16px}
+.lines{flex:1;overflow:auto;display:grid;align-content:start;gap:10px;margin:0;padding:0;list-style:none}
+.line{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px;border-radius:16px;background:#1A1120}
+.line img{width:64px;height:48px;object-fit:contain}
+.line b{display:block;font-weight:500;font-size:14.5px;line-height:1.4}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:transparent;cursor:pointer;font:700 16px/1 var(--f-mono)}
+.qty span{min-width:20px;text-align:center;font:700 15px/1 var(--f-mono)}
+.empty{color:var(--muted);padding:24px 4px}
+.fields{display:grid;gap:10px;margin:14px 0}
+.fields label{display:grid;gap:6px;font-size:13px;color:var(--muted)}
+.fields input,.fields textarea{width:100%;box-sizing:border-box;border-radius:14px;border:1px solid var(--line);background:#0C070F;color:var(--cream);font:400 15px/1.5 var(--f-body);padding:10px 12px}
+.fields textarea{min-height:70px;resize:vertical}
+.send{width:100%;height:50px}
+.send[aria-disabled="true"]{opacity:.4;pointer-events:none}
+.send-hint{margin:10px 0 0;font-size:12.5px;color:var(--muted);text-align:center}
+.menu-panel{position:fixed;inset:0;z-index:115;background:radial-gradient(ellipse at 80% 0%,rgba(149,11,161,.4),transparent 55%),#0A060D;display:grid;place-items:center;padding:24px}
+.menu-panel .x{position:absolute;top:calc(env(safe-area-inset-top,0px) + 16px);inset-inline-end:16px}
+.menu-panel nav{display:grid;gap:6px;justify-items:center;text-align:center}
+.menu-panel img{width:min(260px,60vw);height:auto;margin-bottom:18px}
+.menu-panel a,.menu-panel button.lnk{font:400 clamp(36px,7vw,60px)/1.2 var(--display);color:var(--cream);text-decoration:none;background:none;border:0;cursor:pointer;padding:0}
+.menu-panel a:hover,.menu-panel button.lnk:hover{color:var(--yellow)}
+.menu-panel .meta{margin-top:18px;font:400 14px/1.6 var(--f-mono);color:var(--muted)}
+html[lang="ar"] .menu-panel .meta{font-family:var(--f-body)}
+.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);z-index:130;transform:translate(-50%,20px);opacity:0;pointer-events:none;
+  padding:12px 18px;border-radius:999px;background:var(--cream);color:#1A0E00;font-weight:700;font-size:14px;transition:opacity .2s,transform .2s;box-shadow:0 12px 30px rgba(0,0,0,.4)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* reduced motion: a still, open shop */
+html.reduced{scroll-behavior:auto}
+html.reduced .hero{height:100vh;height:100svh}
+html.reduced .steam,html.reduced .clock .dot,html.reduced .scroll-hint{animation:none}
+html.reduced .closing{height:100vh;height:100svh}
+</style>
+
+<header class="hdr">
+  <a class="hdr-logo" href="#top" aria-label="Master Gaufre"><img src="img/logo.webp" alt="" width="828" height="632"></a>
+  <div class="pill clock" aria-live="off"><i class="dot"></i><span class="t" id="clock-t">5:58</span><span class="ap" id="clock-ap">م</span></div>
+  <div class="hdr-actions">
+    <button class="pill lang-pill" id="lang-btn" type="button">EN</button>
+    <button class="pill bag-pill" type="button" data-open-bag aria-label="">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      <span class="bag-count" id="bag-count">0</span>
+    </button>
+    <button class="pill menu-pill" id="menu-btn" type="button"><span class="menu-word" data-i18n="menu"></span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg></button>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" id="hero" aria-label="">
+  <div class="hero-pin" id="pin">
+    <div class="sky"></div><div class="sky-night"></div><canvas class="stars" id="stars"></canvas><div class="moon"></div>
+    <div class="camera" id="camera" dir="ltr">
+      <div class="layer interior">
+        <div class="room"></div>
+        <div class="tiles"></div>
+        <div class="floor"></div>
+        <svg class="mascot" viewBox="0 0 200 96" fill="none" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M74 8h52v40H74z M58 48h84" stroke="#E07BEB" stroke-width="3.5"/>
+          <path d="M74 38h52" stroke="#E07BEB" stroke-width="3.5"/>
+          <path d="M100 72c-8-10-24-13-36-6-8 4-15 3-20-3 2 13 16 20 31 15 10-3 18-6 25-2 7-4 15-1 25 2 15 5 29-2 31-15-5 6-12 7-20 3-12-7-28-4-36 6z" stroke="#FEC50B" stroke-width="3.5"/>
+        </svg>
+        <div class="pendant" style="left:598px"><i class="shade"></i><i class="bulb"></i></div>
+        <div class="pendant" style="left:918px"><i class="shade"></i><i class="bulb"></i></div>
+        <div class="steam" style="left:550px"><i></i><i></i><i></i></div>
+        <div class="steam" style="left:770px"><i></i><i></i><i></i></div>
+        <div class="steam" style="left:990px"><i></i><i></i><i></i></div>
+        <div class="shelf"><i class="post l"></i><i class="post r"></i><i class="plank b1"></i><i class="plank b2"></i></div>
+        <div class="slot" style="left:478px;top:500px"><img alt=""></div>
+        <div class="slot" style="left:698px;top:500px"><img alt=""></div>
+        <div class="slot" style="left:918px;top:500px"><img alt=""></div>
+        <div class="slot" style="left:478px;top:650px"><img alt=""></div>
+        <div class="slot" style="left:698px;top:650px"><img alt=""></div>
+        <div class="slot" style="left:918px;top:650px"><img alt=""></div>
+        <div class="counter"></div>
+        <div class="lights-off"></div>
+      </div>
+      <div class="layer glass" id="glass">
+        <div class="tint"></div>
+        <div class="open-sign"><span class="dim" data-i18n="open_sign"></span><span class="lit" data-i18n="open_sign"></span></div>
+        <i class="bar h" style="top:440px"></i>
+        <i class="bar v" style="left:420px"></i><i class="bar v" style="left:672px"></i><i class="bar v" style="left:916px"></i><i class="bar v" style="left:1168px"></i>
+        <div class="door l" id="door-l"><i class="handle"></i></div>
+        <div class="door r" id="door-r"><i class="handle"></i></div>
+      </div>
+      <div class="layer facade" id="facade">
+        <div class="ground"></div>
+        <div class="ground-glow"></div>
+        <div class="wall"></div>
+        <div class="wall-shade wall-clip"></div>
+        <div class="wash l"></div><div class="wash r"></div>
+        <div class="cornice"></div>
+        <i class="sconce l"><i class="glow"></i></i><i class="sconce r"><i class="glow"></i></i>
+        <div class="signbox"><i class="bolt l"></i><i class="bolt r"></i><i class="tube"></i><i class="tube lit"></i><span class="side l">WAFFLE<br>PANCAKE<br>ICE CREAM</span><span class="side r">وافل<br>بان كيك</span></div>
+        <div class="signlogo"><img class="dim" src="img/logo.webp" alt="" width="828" height="632"><img class="lit" src="img/logo.webp" alt="" width="828" height="632"></div>
+        <div class="housing"></div>
+        <div class="shutter-mask"><div class="shutter slats" id="shutter">
+          <div class="shutter-copy" dir="auto"><h1 data-i18n-html="hero_h1"></h1><p id="hero-hours"></p></div>
+          <i class="bottom"></i>
+        </div></div>
+        <div class="sill"></div>
+        <div class="poster"><div class="inner"><img src="img/hero-stack.webp" alt="" width="845" height="844"><b data-i18n="poster"></b><i class="dark"></i></div></div>
+        <div class="aframe"><div class="chalk" dir="auto"><span data-i18n-html="aframe"></span><em data-i18n="aframe_x"></em></div><i class="leg l"></i><i class="leg r"></i></div>
+      </div>
+    </div>
+    <div class="hero-fade"></div>
+    <div class="hero-ui">
+      <div class="intro" id="intro">
+        <p data-i18n="intro"></p>
+      </div>
+      <div class="led-note"><b id="hero-led">6:00</b><span id="hero-led-note"></span></div>
+      <div class="scroll-hint"><i></i><span id="hint-text"></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="board" id="menu">
+  <div class="wrap">
+    <div class="board-head">
+      <div>
+        <p class="eyebrow" data-i18n="eyebrow"></p>
+        <h2 data-i18n="board_h2"></h2>
+      </div>
+      <aside class="now-card" aria-live="polite">
+        <div class="now-top"><span class="lbl" data-i18n="now_lbl"></span><b class="led" id="now-led">0:00</b></div>
+        <p class="now-status" id="now-status"><i class="st"></i><span></span></p>
+        <div class="night-bar"><i class="thumb" id="night-thumb"></i></div>
+        <div class="night-ends"><span id="ends-open"></span><span id="ends-close"></span></div>
+      </aside>
+    </div>
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="cat" data-cat="waffle"><h3 class="cat-h"><span data-i18n="cat_waffle"></span><svg class="slash" viewBox="0 0 46 20"><path d="M6 18 18 2M18 18 30 2M30 18 42 2" stroke="#CF5BDD" stroke-width="4" stroke-linecap="round"/></svg><span class="lat">GAUFRE</span></h3><div class="grid" id="grid-waffle"></div></div>
+    <div class="cat" data-cat="mini"><h3 class="cat-h"><span data-i18n="cat_mini"></span><svg class="slash" viewBox="0 0 46 20"><path d="M6 18 18 2M18 18 30 2M30 18 42 2" stroke="#CF5BDD" stroke-width="4" stroke-linecap="round"/></svg><span class="lat">MINI PANCAKE</span></h3><div class="grid" id="grid-mini"></div></div>
+    <div class="cat" data-cat="stack"><h3 class="cat-h"><span data-i18n="cat_stack"></span><svg class="slash" viewBox="0 0 46 20"><path d="M6 18 18 2M18 18 30 2M30 18 42 2" stroke="#CF5BDD" stroke-width="4" stroke-linecap="round"/></svg><span class="lat">PANCAKE</span></h3><div class="grid" id="grid-stack"></div></div>
+    <div class="cat" data-cat="addon" id="addons"><h3 class="cat-h"><span data-i18n="cat_addon"></span><svg class="slash" viewBox="0 0 46 20"><path d="M6 18 18 2M18 18 30 2M30 18 42 2" stroke="#CF5BDD" stroke-width="4" stroke-linecap="round"/></svg><span class="lat">EXTRAS</span></h3><div class="addons" id="grid-addon"></div></div>
+    <p class="allergy"><svg viewBox="0 0 24 24"><path d="M12 3 22 20H2z" fill="#FEC50B"/><path d="M12 9v5" stroke="#1A0E00" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.3" fill="#1A0E00"/></svg><span data-i18n="allergy"></span></p>
+  </div>
+</section>
+
+<section class="closing" id="closing">
+  <div class="closing-pin">
+    <div class="closing-shutter" id="closing-shutter">
+      <div class="closing-copy" id="closing-copy">
+        <img src="img/logo.webp" alt="Master Gaufre" width="828" height="632">
+        <p class="see" id="see-you"></p>
+        <p class="hours" id="closing-hours"></p>
+        <button class="btn btn-cream" type="button" id="reopen" data-i18n="reopen"></button>
+      </div>
+      <p class="credit" data-i18n="credit"></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="flyers" id="flyers" aria-hidden="true"></div>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-labelledby="bag-title" role="dialog" aria-modal="true">
+  <div class="drawer-h"><h3 id="bag-title" data-i18n="bag_title"></h3><button class="x" type="button" id="bag-close" data-i18n-aria="close"><svg viewBox="0 0 16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3l10 10M13 3 3 13"/></svg></button></div>
+  <ul class="lines" id="lines"></ul>
+  <div class="fields">
+    <label for="order-name"><span data-i18n="f_name"></span><input id="order-name" type="text" autocomplete="name"></label>
+    <label for="order-notes"><span data-i18n="f_notes"></span><textarea id="order-notes"></textarea></label>
+  </div>
+  <a class="btn btn-y send" id="send" href="#" target="_blank" rel="noopener" data-i18n="send"></a>
+  <p class="send-hint" data-i18n="send_hint"></p>
+</aside>
+
+<div class="menu-panel" id="menu-panel" hidden role="dialog" aria-modal="true">
+  <button class="x" type="button" id="menu-close" data-i18n-aria="close"><svg viewBox="0 0 16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3l10 10M13 3 3 13"/></svg></button>
+  <nav>
+    <img src="img/logo.webp" alt="Master Gaufre" width="828" height="632">
+    <a href="#menu" data-close-menu data-i18n="nav_menu"></a>
+    <a href="#addons" data-close-menu data-i18n="nav_addons"></a>
+    <button class="lnk" type="button" data-open-bag data-i18n="nav_bag"></button>
+    <p class="meta" id="menu-hours"></p>
+  </nav>
+</div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(() => {
+/* ================= settings — edit these ================= */
+const CONFIG = {
+  whatsapp: "",          // رقم الواتساب بصيغة دولية بدون + أو أصفار بالبداية، مثال: "963912345678"
+  open: "18:00",         // وقت الفتح
+  close: "02:00",        // وقت التسكير
+  preheat: "17:00",      // من أي ساعة القوالب عم تسخن
+  currency: { ar: "ل.س", en: "SYP" },
+  year: 2026
+};
+/* price: حط السعر رقم (مثلاً 25000) أو خليه null ليختفي */
+const PRODUCTS = [
+  { id:"w_choco", cat:"waffle", img:"img/waffle-choco.webp", w:900, h:495, price:null,
+    ar:{ name:"غوفر شوكولا فواكه", tag:"3 فواكه موسمية", desc:"عجينة وافل ذهبية مقرمشة مغطسة بالشوكولا السائلة ومزينة بثلاثة أنواع من الفواكه الموسمية الطازجة." },
+    en:{ name:"chocolate fruit gaufre", tag:"3 seasonal fruits", desc:"Golden crispy waffle dipped in melted chocolate and topped with three kinds of fresh seasonal fruit." } },
+  { id:"w_kinder", cat:"waffle", img:"img/waffle-kinder.webp", w:900, h:495, price:null,
+    ar:{ name:"غوفر كيندر فواكه", tag:"3 فواكه موسمية", desc:"عجينة وافل ذهبية مقرمشة مغطسة بصوص الكيندر الغني ومزينة بثلاثة أنواع من الفواكه الموسمية الطازجة." },
+    en:{ name:"kinder fruit gaufre", tag:"3 seasonal fruits", desc:"Golden crispy waffle dipped in rich Kinder sauce and topped with three kinds of fresh seasonal fruit." } },
+  { id:"w_lotus", cat:"waffle", img:"img/waffle-lotus.webp", w:900, h:477, price:null,
+    ar:{ name:"غوفر لوتس فواكه", tag:"3 فواكه موسمية", desc:"عجينة وافل ذهبية مقرمشة مغطسة بصوص اللوتس الكريمي ومزينة بثلاثة أنواع من الفواكه الموسمية الطازجة." },
+    en:{ name:"lotus fruit gaufre", tag:"3 seasonal fruits", desc:"Golden crispy waffle dipped in creamy Lotus sauce and topped with three kinds of fresh seasonal fruit." } },
+  { id:"w_mix", cat:"waffle", img:"img/waffle-mix.webp", w:900, h:460, price:null,
+    ar:{ name:"غوفر ميكس فواكه", tag:"صوصين على ذوقك", desc:"عجينة وافل ذهبية مقرمشة مغطسة بمزيج من صوصين حسب اختيارك ومزينة بثلاثة أنواع من الفواكه الموسمية الطازجة." },
+    en:{ name:"mix fruit gaufre", tag:"two sauces, your pick", desc:"Golden crispy waffle dipped in two sauces of your choice and topped with three kinds of fresh seasonal fruit." } },
+  { id:"w_pistachio", cat:"waffle", img:"img/waffle-pistachio.webp", w:900, h:390, price:null,
+    ar:{ name:"غوفر بيستاشيو", tag:"فستق حلبي", desc:"عجينة وافل ذهبية مقرمشة مغطسة بكريمة البيستاشيو الفاخرة ومزينة بحبات الفستق الحلبي." },
+    en:{ name:"pistachio gaufre", tag:"aleppo pistachio", desc:"Golden crispy waffle dipped in rich pistachio cream and finished with Aleppo pistachios." } },
+  { id:"w_master", cat:"waffle", img:"img/waffle-master.webp", w:900, h:412, price:null, sig:true,
+    ar:{ name:"غوفر مستر غوفر الخاص", tag:"وصفة البيت", desc:"عجينة وافل ذهبية مقرمشة محضرة بوصفة مستر غوفر الخاصة مع تشكيلة مميزة من النكهات والإضافات." },
+    en:{ name:"master gaufre special", tag:"house recipe", desc:"Golden crispy waffle made to Master Gaufre's own recipe, with a signature mix of flavours and toppings." } },
+
+  { id:"m_choco", cat:"mini", img:"img/mini-choco.webp", w:670, h:474, price:null,
+    ar:{ name:"ميني بان كيك شوكولا", tag:"10 قطع", desc:"10 قطع من البان كيك الهش مغطسة بالشوكولا السائلة ومقدمة بطريقة شهية ومميزة." },
+    en:{ name:"mini pancakes, chocolate", tag:"10 pieces", desc:"10 fluffy mini pancakes dipped in melted chocolate." } },
+  { id:"m_kinder", cat:"mini", img:"img/mini-kinder.webp", w:685, h:440, price:null,
+    ar:{ name:"ميني بان كيك كيندر", tag:"10 قطع", desc:"10 قطع من البان كيك الهش مغطسة بصوص الكيندر الغني ومقدمة بطريقة شهية ومميزة." },
+    en:{ name:"mini pancakes, kinder", tag:"10 pieces", desc:"10 fluffy mini pancakes dipped in rich Kinder sauce." } },
+  { id:"m_lotus", cat:"mini", img:"img/mini-lotus.webp", w:674, h:468, price:null,
+    ar:{ name:"ميني بان كيك لوتس", tag:"10 قطع", desc:"10 قطع من البان كيك الهش مغطسة بصوص اللوتس الكريمي ومقدمة بطريقة شهية ومميزة." },
+    en:{ name:"mini pancakes, lotus", tag:"10 pieces", desc:"10 fluffy mini pancakes dipped in creamy Lotus sauce." } },
+  { id:"m_pistachio", cat:"mini", img:"img/mini-pistachio.webp", w:635, h:406, price:null,
+    ar:{ name:"ميني بان كيك بيستاشيو", tag:"10 قطع", desc:"10 قطع من البان كيك الهش مغطسة بكريمة البيستاشيو الفاخرة ومزينة بحبات الفستق الحلبي." },
+    en:{ name:"mini pancakes, pistachio", tag:"10 pieces", desc:"10 fluffy mini pancakes dipped in rich pistachio cream and finished with Aleppo pistachios." } },
+  { id:"m_mix", cat:"mini", img:"img/mini-mix.webp", w:630, h:415, price:null,
+    ar:{ name:"ميني بان كيك ميكس", tag:"صوصين على ذوقك", desc:"10 قطع من البان كيك الهش مغطسة بمزيج من صوصين حسب اختيارك لتجربة غنية ومتنوعة." },
+    en:{ name:"mini pancakes, mix", tag:"two sauces, your pick", desc:"10 fluffy mini pancakes dipped in two sauces of your choice." } },
+
+  { id:"p_fruit", cat:"stack", img:"img/stack-fruit.webp", w:599, h:665, price:null,
+    ar:{ name:"بان كيك فواكه", tag:"طبقتين", desc:"طبقتان من البان كيك الهش محشوتان بالفواكه الموسمية والكريمة والبراونيز ومغطستان بالشوكولا السائلة." },
+    en:{ name:"fruit pancake stack", tag:"2 layers", desc:"Two layers of fluffy pancakes filled with seasonal fruit, cream and brownies, drenched in melted chocolate." } },
+  { id:"p_brownie", cat:"stack", img:"img/stack-brownie.webp", w:666, h:654, price:null,
+    ar:{ name:"بان كيك براونيز", tag:"4 طبقات", desc:"أربع طبقات من البان كيك الهش محشوة بالبراونيز الغني ومغطاة بالشوكولا السائلة." },
+    en:{ name:"brownie pancake stack", tag:"4 layers", desc:"Four layers of fluffy pancakes filled with rich brownies, drenched in melted chocolate." } },
+  { id:"p_master", cat:"stack", img:"img/stack-master.webp", w:583, h:668, price:null, sig:true,
+    ar:{ name:"بان كيك مستر غوفر", tag:"وصفة البيت", desc:"طبقات بان كيك محضرة بوصفة مستر غوفر الخاصة مع مزيج مميز من النكهات والإضافات المختارة." },
+    en:{ name:"master gaufre stack", tag:"house recipe", desc:"Pancake layers made to Master Gaufre's own recipe, with a signature mix of flavours and toppings." } },
+
+  { id:"a_icecream", cat:"addon", img:"img/add-icecream.webp", w:420, h:223, price:null,
+    ar:{ name:"كرة بوظة", desc:"اختيارك من بوظة الفانيلا أو الشوكولا لإضافة لمسة منعشة إلى طلبك." },
+    en:{ name:"ice cream scoop", desc:"Vanilla or chocolate, for a cool finish on your plate." } },
+  { id:"a_sauce", cat:"addon", img:"img/add-sauce.webp", w:226, h:336, price:null,
+    ar:{ name:"صوص دبل", desc:"كمية إضافية من الصوص المفضل لديك: شوكولا، لوتس، أو كيندر." },
+    en:{ name:"double sauce", desc:"An extra pour of your favourite: chocolate, Lotus or Kinder." } },
+  { id:"a_fruit", cat:"addon", img:"img/add-fruit.webp", w:354, h:181, price:null,
+    ar:{ name:"فواكه موسمية", desc:"اختار 3 أصناف من الفواكه الموسمية المتوفرة: فراولة، موز، كيوي، أناناس، كرز وغيرها." },
+    en:{ name:"seasonal fruit", desc:"Pick 3 of today's fresh fruit: strawberry, banana, kiwi, pineapple, cherry and more." } },
+];
+
+const T = {
+  ar: {
+    menu:"القائمة", lang:"EN", ap_pm:"م", ap_am:"ص",
+    hero_h1:"الحلو بيصحى<br>لما الشمس بتنام.", open_sign:"مفتوح", poster:"بان كيك طبقات",
+    aframe:"وافل<br>بان كيك<br>بوظة", aframe_x:"+ صوص دبل",
+    intro:"وافل ذهبي مقرمش وبان كيك هش، مغطّسين بصوصات غنية ومزيّنين بفواكه موسمية طازة.",
+    hint:"نزّل لتحت، ومنفتحلك", hint_touch:"اسحب لفوق، ومنفتحلك",
+    led_note:(h)=>`قوالب الوافل عم تسخن من الساعة ${h}.`,
+    eyebrow:"لوح الحلو", board_h2:"شو عم يطلع سخن الليلة؟", now_lbl:"الوقت هلق",
+    st_open:(t)=>`مفتوحين هلق · منسكّر الساعة ${t}`, st_closed:(t)=>`مسكّرين هلق · منفتح الساعة ${t}`,
+    tab_all:"الكل", cat_waffle:"الوافل", cat_mini:"ميني بان كيك", cat_stack:"بان كيك طبقات", cat_addon:"الإضافات (+)",
+    kind_waffle:"وافل", kind_mini:"ميني بان كيك", kind_stack:"بان كيك طبقات",
+    add:"+ أضف", added:"انضاف لطلبك",
+    note_big:"10", note_1:"قطع بكل طبق ميني بان كيك.", note_2:"وبالميكس بتختار صوصين على ذوقك.",
+    allergy:"ملاحظة: يرجى إخبارنا في حال وجود حساسية من أحد أنواع الفواكه أو المكونات المستخدمة.",
+    bag_title:"طلبك", empty:"طلبك لسا فاضي. اختار شي طيّب من المنيو.", f_name:"الاسم", f_notes:"ملاحظات (حساسية؟ أي صوصين للميكس؟)",
+    send:"ابعت الطلب على واتساب", send_hint:"رح ينفتح واتساب والطلب مكتوب، بس اضغط إرسال.", close:"سكّر",
+    nav_menu:"المنيو", nav_addons:"الإضافات", nav_bag:"طلبك",
+    see_you:(h)=>`نشوفك الساعة ${h} المسا.`, reopen:"افتحلنا كمان مرة",
+    credit:"© 2026 مستر غوفر · Master Gaufre",
+    hours:(o,c)=>`من ${o} المسا لـ ${c} بعد نص الليل`,
+    wa_hello:"مرحبا مستر غوفر، بدي اطلب:", wa_notes:"ملاحظات", wa_name:"الاسم",
+    inc:"زيد", dec:"نقّص", hero_label:"واجهة المحل"
+  },
+  en: {
+    menu:"menu", lang:"عربي", ap_pm:"pm", ap_am:"am",
+    hero_h1:"sweet wakes up<br>when the sun goes down.", open_sign:"open", poster:"pancake stacks",
+    aframe:"waffles<br>pancakes<br>ice cream", aframe_x:"+ double sauce",
+    intro:"Golden crispy waffles and fluffy pancakes, dipped in rich sauces and topped with fresh seasonal fruit.",
+    hint:"scroll down and we'll open up", hint_touch:"swipe up and we'll open up",
+    led_note:(h)=>`the waffle irons have been heating since ${h}.`,
+    eyebrow:"the sweet board", board_h2:"what's coming off the iron tonight?", now_lbl:"right now",
+    st_open:(t)=>`open now · we close at ${t}`, st_closed:(t)=>`closed now · we open at ${t}`,
+    tab_all:"all", cat_waffle:"waffles", cat_mini:"mini pancakes", cat_stack:"pancake stacks", cat_addon:"add-ons (+)",
+    kind_waffle:"waffle", kind_mini:"mini pancakes", kind_stack:"pancake stack",
+    add:"+ add", added:"added to your order",
+    note_big:"10", note_1:"pieces in every mini pancake plate.", note_2:"go mix and pick any two sauces.",
+    allergy:"Note: please tell us if you're allergic to any fruit or ingredient we use.",
+    bag_title:"your order", empty:"your order is empty. pick something sweet from the menu.", f_name:"name", f_notes:"notes (allergies? which two sauces for the mix?)",
+    send:"send order on whatsapp", send_hint:"whatsapp opens with your order typed in. just hit send.", close:"close",
+    nav_menu:"menu", nav_addons:"add-ons", nav_bag:"your order",
+    see_you:(h)=>`see you at ${h}.`, reopen:"open up again",
+    credit:"© 2026 Master Gaufre · مستر غوفر",
+    hours:(o,c)=>`${o} pm till ${c} am`,
+    wa_hello:"Hi Master Gaufre, I'd like to order:", wa_notes:"Notes", wa_name:"Name",
+    inc:"add one", dec:"remove one", hero_label:"shop front"
+  }
+};
+
+/* ================= helpers ================= */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const clamp = (v, a=0, b=1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const seg = (p, a, b) => clamp((p - a) / (b - a));
+const ease = t => t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+const easeOut = t => 1 - Math.pow(1 - t, 3);
+const sine = t => -(Math.cos(Math.PI * t) - 1) / 2;
+const FLICK = [0,1,0,0,1,1,0,1,0,0,1,1];
+const flick = (p, a, d) => p < a ? 0 : p >= a + d ? 1 : FLICK[Math.floor((p - a) / d * FLICK.length)] ?? 1;
+const toMin = s => { const [h, m] = s.split(":").map(Number); return h * 60 + m; };
+const hm = m => { m = ((Math.round(m) % 1440) + 1440) % 1440; const h = Math.floor(m / 60), mm = m % 60; return { h12: (h % 12) || 12, mm: String(mm).padStart(2, "0"), pm: h >= 12 }; };
+const fmt = m => { const t = hm(m); return `${t.h12}:${t.mm}`; };
+
+const root = document.documentElement;
+const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (reduced) root.classList.add("reduced");
+let lang = "ar";
+try { const saved = localStorage.getItem("mg-lang"); if (saved === "en" || saved === "ar") lang = saved; } catch (e) {}
+
+const OPEN = toMin(CONFIG.open), CLOSE = toMin(CONFIG.close), PRE = toMin(CONFIG.preheat);
+const WAFFLES = PRODUCTS.filter(p => p.cat === "waffle");
+const bag = new Map();
+
+const hdr = $(".hdr"), interior = $(".interior"), pin = $("#pin"), camera = $("#camera"), facade = $("#facade"), glass = $("#glass");
+const shutter = $("#shutter"), doorL = $("#door-l"), doorR = $("#door-r");
+const intro = $("#intro"), hero = $("#hero"), closing = $("#closing");
+const slots = $$(".slot img"), flyersBox = $("#flyers");
+const flyers = WAFFLES.map(() => { const im = document.createElement("img"); im.alt = ""; flyersBox.appendChild(im); return im; });
+
+/* ================= text ================= */
+function applyText() {
+  const t = T[lang];
+  root.lang = lang; root.dir = lang === "ar" ? "rtl" : "ltr";
+  $$("[data-i18n]").forEach(el => { const v = t[el.dataset.i18n]; if (typeof v === "string") el.textContent = v; });
+  $$("[data-i18n-html]").forEach(el => { el.innerHTML = t[el.dataset.i18nHtml]; });
+  $$("[data-i18n-aria]").forEach(el => el.setAttribute("aria-label", t[el.dataset.i18nAria]));
+  $("#lang-btn").textContent = t.lang;
+  $("#lang-btn").setAttribute("aria-label", lang === "ar" ? "English" : "العربية");
+  $(".bag-pill").setAttribute("aria-label", t.bag_title);
+  hero.setAttribute("aria-label", t.hero_label);
+  const o = fmt(OPEN), c = fmt(CLOSE);
+  $("#hint-text").textContent = window.matchMedia("(pointer: coarse)").matches ? t.hint_touch : t.hint;
+  $("#hero-hours").textContent = t.hours(o, c);
+  $("#hero-led").textContent = o;
+  $("#hero-led-note").textContent = t.led_note(hm(PRE).h12);
+  $("#see-you").textContent = t.see_you(hm(OPEN).h12);
+  $("#closing-hours").textContent = t.hours(o, c);
+  $("#menu-hours").textContent = t.hours(o, c) + (CONFIG.whatsapp ? `  ·  WhatsApp +${CONFIG.whatsapp}` : "");
+  $("#ends-open").textContent = `${o} ${t.ap_pm}`;
+  $("#ends-close").textContent = `${c} ${t.ap_am}`;
+  document.title = lang === "ar" ? "مستر غوفر" : "Master Gaufre";
+  // shelf: first waffle sits where the first card is read from
+  const order = lang === "ar" ? [2,1,0,5,4,3] : [0,1,2,3,4,5];
+  WAFFLES.forEach((p, i) => { const im = slots[order[i]]; im.src = p.img; im.width = p.w; im.height = p.h; im.dataset.idx = i; flyers[i].src = p.img; });
+  renderTabs(); renderCards(); renderBag(); renderNow();
+}
+
+/* ================= menu cards ================= */
+let filter = "all";
+function priceText(p) { return p.price != null ? `${Number(p.price).toLocaleString("en")} ${CONFIG.currency[lang]}` : ""; }
+function cardHTML(p) {
+  const L = p[lang], t = T[lang], other = p[lang === "ar" ? "en" : "ar"].name;
+  return `<article class="card" data-id="${p.id}">
+    <div class="card-media"><img class="card-img" src="${p.img}" alt="${L.name}" width="${p.w}" height="${p.h}" decoding="async"></div>
+    <div class="card-meta"><span class="kind">${t["kind_" + p.cat]}</span><span class="tag${p.sig ? " sig" : ""}">${L.tag}</span></div>
+    <h4 class="card-name"><span>${L.name}</span></h4>
+    <p class="card-alt" lang="${lang === "ar" ? "en" : "ar"}">${other}</p>
+    <p class="card-desc">${L.desc}</p>
+    <div class="card-foot"><span class="price">${priceText(p)}</span><button class="add" type="button" data-add="${p.id}">${t.add}</button></div>
+  </article>`;
+}
+function renderCards() {
+  const t = T[lang];
+  $("#grid-waffle").innerHTML = PRODUCTS.filter(p => p.cat === "waffle").map(cardHTML).join("");
+  $("#grid-mini").innerHTML = PRODUCTS.filter(p => p.cat === "mini").map(cardHTML).join("") +
+    `<article class="card note-card"><b class="big" dir="ltr">${t.note_big}</b><p>${t.note_1}</p><p>${t.note_2}</p></article>`;
+  $("#grid-stack").innerHTML = PRODUCTS.filter(p => p.cat === "stack").map(cardHTML).join("");
+  $("#grid-addon").innerHTML = PRODUCTS.filter(p => p.cat === "addon").map(p => `<article class="addon">
+      <div class="pic"><img src="${p.img}" alt="${p[lang].name}" width="${p.w}" height="${p.h}" loading="lazy"></div>
+      <div><h4>${p[lang].name}</h4><p>${p[lang].desc}</p>
+      <div class="card-foot"><span class="price">${priceText(p)}</span><button class="add" type="button" data-add="${p.id}">${t.add}</button></div></div>
+    </article>`).join("");
+  cardImgs = WAFFLES.map(p => $(`#grid-waffle .card[data-id="${p.id}"] .card-img`));
+  measure();
+}
+function renderTabs() {
+  const t = T[lang];
+  const tabs = [["all", t.tab_all], ["waffle", t.cat_waffle], ["mini", t.cat_mini], ["stack", t.cat_stack], ["addon", t.nav_addons]];
+  $("#tabs").innerHTML = tabs.map(([k, label]) => `<button class="tab" role="tab" type="button" data-f="${k}" aria-selected="${filter === k}">${label}</button>`).join("");
+}
+$("#tabs").addEventListener("click", e => {
+  const b = e.target.closest(".tab"); if (!b) return;
+  filter = b.dataset.f;
+  $$(".tab").forEach(x => x.setAttribute("aria-selected", x === b));
+  $$(".cat").forEach(c => c.hidden = !(filter === "all" || c.dataset.cat === filter));
+  measure();
+});
+
+/* ================= bag ================= */
+function renderBag() {
+  const t = T[lang];
+  let count = 0; bag.forEach(q => count += q);
+  const badge = $("#bag-count"); badge.textContent = count;
+  const lines = $("#lines");
+  if (!bag.size) { lines.innerHTML = `<li class="empty">${t.empty}</li>`; }
+  else {
+    lines.innerHTML = [...bag].map(([id, q]) => { const p = PRODUCTS.find(x => x.id === id);
+      return `<li class="line"><img src="${p.img}" alt=""><div><b>${p[lang].name}</b>${p.price != null ? `<span class="price" style="font-size:13px">${priceText(p)}</span>` : ""}</div>
+        <div class="qty"><button type="button" data-dec="${id}" aria-label="${t.dec}">−</button><span>${q}</span><button type="button" data-inc="${id}" aria-label="${t.inc}">+</button></div></li>`; }).join("");
+  }
+  updateSend();
+}
+function updateSend() {
+  const t = T[lang], send = $("#send");
+  if (!bag.size) { send.setAttribute("aria-disabled", "true"); send.href = "#"; return; }
+  send.removeAttribute("aria-disabled");
+  const rows = [...bag].map(([id, q]) => `• ${q} × ${PRODUCTS.find(x => x.id === id)[lang].name}`);
+  const name = $("#order-name").value.trim(), notes = $("#order-notes").value.trim();
+  let msg = `${t.wa_hello}\n${rows.join("\n")}`;
+  if (notes) msg += `\n\n${t.wa_notes}: ${notes}`;
+  if (name) msg += `\n${t.wa_name}: ${name}`;
+  send.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+}
+$("#order-name").addEventListener("input", updateSend);
+$("#order-notes").addEventListener("input", updateSend);
+let toastTimer;
+function toast(msg) { const el = $("#toast"); el.textContent = msg; el.classList.add("on"); clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove("on"), 1600); }
+document.addEventListener("click", e => {
+  const add = e.target.closest("[data-add]");
+  if (add) { const id = add.dataset.add; bag.set(id, (bag.get(id) || 0) + 1); renderBag(); const b = $("#bag-count"); b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump"); toast(T[lang].added); return; }
+  const inc = e.target.closest("[data-inc]"); if (inc) { bag.set(inc.dataset.inc, bag.get(inc.dataset.inc) + 1); renderBag(); return; }
+  const dec = e.target.closest("[data-dec]"); if (dec) { const id = dec.dataset.dec, q = bag.get(id) - 1; q > 0 ? bag.set(id, q) : bag.delete(id); renderBag(); return; }
+  if (e.target.closest("[data-open-bag]")) { closeMenu(); openBag(); return; }
+  if (e.target.closest("[data-close-menu]")) { closeMenu(); }
+});
+function openBag() { $("#drawer").hidden = false; $("#scrim").hidden = false; $("#bag-close").focus(); }
+function closeBag() { $("#drawer").hidden = true; $("#scrim").hidden = true; }
+$("#bag-close").addEventListener("click", closeBag);
+$("#scrim").addEventListener("click", closeBag);
+$("#menu-btn").addEventListener("click", () => { $("#menu-panel").hidden = false; $("#menu-close").focus(); });
+function closeMenu() { $("#menu-panel").hidden = true; }
+$("#menu-close").addEventListener("click", closeMenu);
+document.addEventListener("keydown", e => { if (e.key === "Escape") { closeBag(); closeMenu(); } });
+$("#lang-btn").addEventListener("click", () => { lang = lang === "ar" ? "en" : "ar"; try { localStorage.setItem("mg-lang", lang); } catch (e) {} applyText(); update(window.scrollY); });
+$("#reopen").addEventListener("click", () => window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" }));
+
+/* ================= clock ================= */
+function nowMin() { const d = new Date(); return d.getHours() * 60 + d.getMinutes(); }
+function isOpen(m) { return CLOSE > OPEN ? (m >= OPEN && m < CLOSE) : (m >= OPEN || m < CLOSE); }
+function setClock(m) {
+  const t = hm(m), s = `${t.h12}:${t.mm}`;
+  const el = $("#clock-t"); if (el.textContent !== s) el.textContent = s;
+  const ap = t.pm ? T[lang].ap_pm : T[lang].ap_am; const a = $("#clock-ap"); if (a.textContent !== ap) a.textContent = ap;
+}
+function renderNow() {
+  const m = nowMin(), t = T[lang];
+  $("#now-led").textContent = fmt(m);
+  const open = isOpen(m), st = $("#now-status");
+  st.classList.toggle("closed", !open);
+  st.querySelector("span").textContent = open ? t.st_open(fmt(CLOSE)) : t.st_closed(fmt(OPEN));
+  const span = ((CLOSE - OPEN) + 1440) % 1440 || 1440;
+  const pos = open ? (((m - OPEN) + 1440) % 1440) / span : 0;
+  $("#night-thumb").style.left = (pos * 100).toFixed(1) + "%";
+}
+
+/* ================= stars ================= */
+function drawStars() {
+  const c = $("#stars"), dpr = Math.min(2, window.devicePixelRatio || 1);
+  c.width = vw * dpr; c.height = vh * dpr;
+  const g = c.getContext("2d"); g.scale(dpr, dpr);
+  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
+  for (let i = 0; i < 150; i++) {
+    const x = rnd() * vw, y = rnd() * vh * .62, r = rnd() * 1.2 + .3;
+    g.globalAlpha = .3 + rnd() * .7; g.fillStyle = "#fff"; g.beginPath(); g.arc(x, y, r, 0, 7); g.fill();
+  }
+}
+
+/* ================= layout ================= */
+let vw = 0, vh = 0, portrait = false, base = 1, sEnd = 1, heroTop = 0, heroH = 1, pinEnd = 0, closingTop = 0, cols = 3;
+let cardImgs = [], slotsByIdx = [], flightState = "";
+function measure() {
+  vw = window.innerWidth; vh = window.innerHeight;
+  portrait = vw / vh < .8;
+  base = portrait ? vw / 800 : Math.max(vw / 1600, vh / 1000);
+  sEnd = Math.max(base * 1.08, Math.min(vw * .94 / 660, vh * .72 / 300));
+  const y = window.scrollY;
+  heroTop = hero.getBoundingClientRect().top + y; heroH = hero.offsetHeight;
+  pinEnd = heroTop + heroH - vh;
+  closingTop = closing.getBoundingClientRect().top + y;
+  const g = $("#grid-waffle");
+  cols = g ? getComputedStyle(g).gridTemplateColumns.split(" ").filter(Boolean).length || 1 : 3;
+  slotsByIdx = WAFFLES.map((_, i) => slots.find(s => s.dataset.idx == i));
+  flightState = "";
+  if (vw && vh) drawStars();
+  update(cur = y);
+}
+
+/* ================= scene ================= */
+/* write a style only when it changes, so the browser only repaints what moved */
+const memo = new WeakMap();
+function put(el, prop, v) {
+  if (!el) return;
+  let m = memo.get(el); if (!m) memo.set(el, m = {});
+  if (m[prop] === v) return; m[prop] = v; el.style[prop] = v;
+}
+const op = (el, v) => put(el, "opacity", String(Math.round(clamp(v) * 1000) / 1000));
+/* neon that warms up with a soft flicker instead of a hard on/off */
+const soft = (p, a, d) => { const t = seg(p, a, a + d); if (t <= 0 || t >= 1) return t; return sine(t) * (FLICK[Math.floor(t * FLICK.length)] ? 1 : .4); };
+
+const E = {
+  skyNight: $(".sky-night"), stars: $("#stars"), moon: $(".moon"), washes: $$(".wash"), glows: $$(".sconce .glow"),
+  posterDark: $(".poster .dark"), signLit: $(".signlogo .lit"), tubeLit: $(".tube.lit"), sides: $$(".signbox .side"),
+  bulbs: $$(".pendant .bulb"), groundGlow: $(".ground-glow"), steam: $$(".steam"), mascot: $(".mascot"), lightsOff: $(".lights-off"),
+  openLit: $(".open-sign .lit"), wallShade: $(".wall-shade"), head: $(".shutter-copy"), ui: $(".hero-ui"), fade: $(".hero-fade"), hdrLogo: $(".hdr-logo")
+};
+
+function renderHero(P) {
+  const night = sine(seg(P, 0, .14));
+  const lamps = sine(seg(P, .015, .08));
+  const sign = soft(P, .005, .1);
+  const sh = ease(seg(P, .05, .3));
+  const inside = sine(seg(P, .1, .24));
+  const openSign = soft(P, .25, .07);
+  const z = ease(seg(P, .28, .8));
+  const doors = ease(seg(P, .42, .6));
+  const glassA = 1 - sine(seg(P, .5, .64));
+  const ui = 1 - sine(seg(P, .015, .1));
+  const head = 1 - sine(seg(P, .1, .22));
+  const fade = sine(seg(P, .84, .96));
+
+  op(E.skyNight, night); op(E.stars, night * .9); op(E.moon, night);
+  E.washes.forEach(w => op(w, lamps)); E.glows.forEach(g => op(g, lamps)); op(E.posterDark, .55 - lamps * .5);
+  op(E.signLit, sign); op(E.tubeLit, sign); E.sides.forEach(s => op(s, .35 + sign * .65));
+  E.bulbs.forEach(b => op(b, inside)); op(E.groundGlow, inside * sh); E.steam.forEach(s => op(s, inside * .55));
+  op(E.mascot, .25 + inside * .75); op(E.lightsOff, 1 - inside * .88); op(E.openLit, openSign);
+  op(E.wallShade, .08 + night * .5); op(E.head, head); op(E.ui, ui); op(E.fade, fade);
+  op(E.hdrLogo, seg(P, .86, .96));
+  put(intro, "pointerEvents", ui < .2 ? "none" : "auto");
+
+  // camera: from the whole shop front to the shelf
+  const S = base * Math.pow(sEnd / base, z);
+  const fx = 800, fy = lerp(portrait ? 540 : 500, 668, z);
+  const cx = vw / 2, cy = lerp(portrait ? vh * .45 : vh / 2, vh * .5, z);
+  put(camera, "transform", `translate3d(${(cx - fx * S).toFixed(1)}px,${(cy - fy * S).toFixed(1)}px,0) scale(${S.toFixed(4)})`);
+  // depth: the front of the shop passes the camera faster than the shelf
+  const k = 1 + 1.6 * z * z;
+  put(facade, "transform", `scale(${k.toFixed(4)})`);
+  put(facade, "visibility", z > .985 ? "hidden" : "visible");
+  const L = 800 + (420 - 800) * k, R = 800 + (1180 - 800) * k, Tp = 668 + (372 - 668) * k, B = 668 + (860 - 668) * k;
+  put(interior, "clipPath", `polygon(${L.toFixed(1)}px ${Tp.toFixed(1)}px,${R.toFixed(1)}px ${Tp.toFixed(1)}px,${R.toFixed(1)}px ${B.toFixed(1)}px,${L.toFixed(1)}px ${B.toFixed(1)}px)`);
+  put(glass, "transform", `scale(${(1 + .9 * z * z).toFixed(4)})`);
+  op(glass, glassA);
+  put(doorL, "transform", `translate3d(${(-doors * 112).toFixed(1)}px,0,0)`);
+  put(doorR, "transform", `translate3d(${(doors * 112).toFixed(1)}px,0,0)`);
+  put(shutter, "transform", `translate3d(0,${(-sh * 100).toFixed(2)}%,0)`);
+}
+
+/* the waffles lift off the shelf and land in their cards */
+function renderFlight(P, y) {
+  if (reduced) {
+    if (flightState !== "still") { flightState = "still"; slots.forEach(s => s.style.visibility = "visible"); cardImgs.forEach(c => c && c.classList.remove("pending")); flyers.forEach(f => f.style.display = "none"); }
+    return;
+  }
+  const flyN = Math.min(WAFFLES.length, cols * 2);
+  if (P < .8) {
+    if (flightState !== "shelf") {
+      flightState = "shelf";
+      slotsByIdx.forEach(s => s && put(s, "visibility", "visible"));
+      flyers.forEach(f => put(f, "display", "none"));
+      cardImgs.forEach((c, i) => c && c.classList.toggle("pending", i < flyN && c.offsetParent !== null));
+    }
+    return;
+  }
+  const gridTop = $("#grid-waffle").getBoundingClientRect().top + window.scrollY;
+  const flightEnd = Math.max(pinEnd + vh * .4, gridTop - vh * .3);
+  const f = clamp((y - pinEnd) / (flightEnd - pinEnd));
+  if (f >= 1) {
+    if (flightState !== "landed") {
+      flightState = "landed";
+      flyers.forEach(fl => put(fl, "display", "none"));
+      slotsByIdx.forEach(s => s && put(s, "visibility", "hidden"));
+      cardImgs.forEach(c => c && c.classList.remove("pending"));
+    }
+    return;
+  }
+  flightState = "air";
+  const lift = easeOut(seg(P, .8, .94)), fe = ease(f);
+  WAFFLES.forEach((p, i) => {
+    const slotImg = slotsByIdx[i], card = cardImgs[i], fl = flyers[i];
+    if (!slotImg || !card) return;
+    put(slotImg, "visibility", "hidden");
+    const b = card.getBoundingClientRect();
+    const canFly = i < flyN && b.width > 0;
+    card.classList.toggle("pending", canFly);
+    if (!canFly && f > .3) { put(fl, "display", "none"); return; }
+    const a = slotImg.getBoundingClientRect();
+    const bw = canFly ? b.width : a.width, bh = canFly ? b.height : a.height;
+    put(fl, "width", bw.toFixed(1) + "px"); put(fl, "height", bh.toFixed(1) + "px");
+    const dir = i % 2 ? 1 : -1;
+    const acx = a.left + a.width / 2, acy = a.top + a.height / 2 - vh * .05 * lift;
+    let cx, cy, sc, rot, o = 1;
+    if (canFly) {
+      cx = lerp(acx, b.left + b.width / 2, fe);
+      cy = lerp(acy, b.top + b.height / 2, fe) - vh * .1 * Math.sin(Math.PI * f);
+      sc = lerp(a.width / b.width, 1, fe) * (1 + .05 * lift * (1 - fe));
+      rot = lerp(dir * 6 * lift, 0, fe);
+    } else { cx = acx; cy = acy - f * vh * .3; sc = 1 + .05 * lift; rot = dir * 6 * lift; o = 1 - f / .3; }
+    put(fl, "display", "block"); op(fl, o);
+    fl.style.transform = `translate3d(${(cx - bw / 2).toFixed(1)}px,${(cy - bh / 2).toFixed(1)}px,0) rotate(${rot.toFixed(2)}deg) scale(${sc.toFixed(4)})`;
+  });
+}
+
+const closingShutter = $("#closing-shutter"), closingCopy = $("#closing-copy");
+function renderClosing(y) {
+  const c = reduced ? 1 : ease(clamp((y - (closingTop - vh * .6)) / (vh * 1.2)));
+  put(closingShutter, "transform", `translate3d(0,${((c - 1) * 100).toFixed(2)}%,0)`);
+  op(closingCopy, seg(c, .72, 1));
+}
+
+function update(y) {
+  const P = reduced ? .36 : clamp((y - heroTop) / Math.max(1, heroH - vh));
+  if (y < pinEnd + vh * 2) renderHero(P);
+  renderFlight(P, y);
+  if (y > closingTop - vh * 2) renderClosing(y);
+  hdr.classList.toggle("solid", !reduced ? y > pinEnd + vh * .55 : y > vh * .5);
+  if (!reduced && y < pinEnd - 2) setClock(OPEN - 2 + seg(P, 0, .3) * 2 + seg(P, .3, 1) * 12);
+  else setClock(nowMin());
+}
+
+/* scroll follows the finger with a soft, frame-rate independent glide */
+let cur = window.scrollY, running = false, lastT = 0;
+function tick(t) {
+  const target = window.scrollY;
+  const dt = lastT ? Math.min(50, t - lastT) : 16.7; lastT = t;
+  cur += (target - cur) * (1 - Math.exp(-dt / 120));
+  if (Math.abs(target - cur) < .25) cur = target;
+  update(cur);
+  if (cur !== target) requestAnimationFrame(tick); else { running = false; lastT = 0; }
+}
+window.addEventListener("scroll", () => { if (reduced) { update(window.scrollY); return; } if (!running) { running = true; requestAnimationFrame(tick); } }, { passive: true });
+let rz; window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(measure, 80); });
+window.addEventListener("load", measure);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+setInterval(() => { renderNow(); if (window.scrollY >= pinEnd - 2) setClock(nowMin()); }, 15000);
+
+applyText();
+measure();
+})();
+</script>
+
+</body>
+</html>
