@@ -3,12 +3,31 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-</head>
-<body>
-<title>مستر غوفر</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bagel+Fat+One&family=Doto:wght@800&family=IBM+Plex+Sans+Arabic:wght@400;500;700&family=Lalezar&family=Space+Mono:wght@400;700&display=swap">
+<title>مستر غوفر | Master Gaufre</title>
+<meta name="description" content="وافل ذهبي مقرمش وبان كيك هش، مغطّسين بصوصات غنية ومزيّنين بفواكه موسمية طازة. اطلب على واتساب.">
+<meta name="theme-color" content="#09060C">
+<link rel="icon" type="image/png" href="img/icon.png">
+<link rel="apple-touch-icon" href="img/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="مستر غوفر | Master Gaufre">
+<meta property="og:description" content="وافل وبان كيك سخن كل ليلة. شوف المنيو واطلب على واتساب.">
+<meta property="og:image" content="https://tahahusseinph-wq.github.io/master-gaufre/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://tahahusseinph-wq.github.io/master-gaufre/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="fonts/lalezar.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/plex-ar-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="img/logo.webp" as="image" fetchpriority="high">
+<style>
+@font-face{font-family:"Lalezar";src:url(fonts/lalezar.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"IBM Plex Sans Arabic";src:url(fonts/plex-ar-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Sans Arabic";src:url(fonts/plex-ar-700.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Space Mono";src:url(fonts/spacemono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Space Mono";src:url(fonts/spacemono-700.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Bagel Fat One";src:url(fonts/bagel.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"Doto";src:url(fonts/doto-800.woff2) format("woff2");font-weight:100 900;font-display:swap}
+</style>
 <style>
 /* Layout: one scroll story. A night storefront pinned on scroll (shutter up, neon on, camera through the door),
    the waffles lift off the shelf and land on the sweet board, then a shutter comes down to close the night.
@@ -50,8 +69,8 @@ a{color:inherit}
 .hdr.solid::before{opacity:1}
 .hdr-logo{justify-self:start;display:block;height:46px;opacity:0;transition:opacity .3s}
 .hdr-logo img{height:100%;width:auto;display:block;filter:drop-shadow(0 4px 10px rgba(0,0,0,.5))}
-.pill{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:999px;background:rgba(12,7,16,.66);
-  border:1px solid rgba(255,255,255,.09);color:var(--cream);-webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);font:500 14px/1 var(--f-body);text-decoration:none;white-space:nowrap}
+.pill{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:999px;background:rgba(14,8,18,.86);
+  border:1px solid rgba(255,255,255,.09);color:var(--cream);font:500 14px/1 var(--f-body);text-decoration:none;white-space:nowrap}
 button.pill{cursor:pointer}
 button.pill:hover{border-color:rgba(254,197,11,.5)}
 .clock{justify-self:center;gap:9px}
@@ -89,6 +108,8 @@ html[lang="en"] .lang-pill{font-family:var(--f-body);font-size:14px;letter-spaci
   box-shadow:0 0 40px 8px rgba(255,236,190,.18);opacity:0;will-change:opacity}
 .camera{position:absolute;left:0;top:0;width:1600px;height:1000px;transform-origin:0 0;will-change:transform}
 .layer{position:absolute;inset:0;transform-origin:800px 668px;will-change:transform}
+.win{position:absolute;left:420px;top:372px;width:760px;height:488px;overflow:hidden;transform-origin:380px 296px;will-change:transform}
+.interior{position:absolute;left:-420px;top:-372px;width:1600px;height:1000px;transform-origin:800px 668px;will-change:transform}
 
 /* interior */
 .room{position:absolute;left:-300px;top:-300px;width:2200px;height:2000px;
@@ -384,7 +405,8 @@ html.reduced .hero{height:100vh;height:100svh}
 html.reduced .steam,html.reduced .clock .dot,html.reduced .scroll-hint{animation:none}
 html.reduced .closing{height:100vh;height:100svh}
 </style>
-
+</head>
+<body>
 <header class="hdr">
   <a class="hdr-logo" href="#top" aria-label="Master Gaufre"><img src="img/logo.webp" alt="" width="828" height="632"></a>
   <div class="pill clock" aria-live="off"><i class="dot"></i><span class="t" id="clock-t">5:58</span><span class="ap" id="clock-ap">م</span></div>
@@ -404,7 +426,7 @@ html.reduced .closing{height:100vh;height:100svh}
   <div class="hero-pin" id="pin">
     <div class="sky"></div><div class="sky-night"></div><canvas class="stars" id="stars"></canvas><div class="moon"></div>
     <div class="camera" id="camera" dir="ltr">
-      <div class="layer interior">
+      <div class="win" id="win"><div class="interior">
         <div class="room"></div>
         <div class="tiles"></div>
         <div class="floor"></div>
@@ -427,7 +449,7 @@ html.reduced .closing{height:100vh;height:100svh}
         <div class="slot" style="left:918px;top:650px"><img alt=""></div>
         <div class="counter"></div>
         <div class="lights-off"></div>
-      </div>
+      </div></div>
       <div class="layer glass" id="glass">
         <div class="tint"></div>
         <div class="open-sign"><span class="dim" data-i18n="open_sign"></span><span class="lit" data-i18n="open_sign"></span></div>
@@ -445,14 +467,14 @@ html.reduced .closing{height:100vh;height:100svh}
         <div class="cornice"></div>
         <i class="sconce l"><i class="glow"></i></i><i class="sconce r"><i class="glow"></i></i>
         <div class="signbox"><i class="bolt l"></i><i class="bolt r"></i><i class="tube"></i><i class="tube lit"></i><span class="side l">WAFFLE<br>PANCAKE<br>ICE CREAM</span><span class="side r">وافل<br>بان كيك</span></div>
-        <div class="signlogo"><img class="dim" src="img/logo.webp" alt="" width="828" height="632"><img class="lit" src="img/logo.webp" alt="" width="828" height="632"></div>
+        <div class="signlogo"><img class="dim" src="img/logo.webp" alt="" width="828" height="632" fetchpriority="high"><img class="lit" src="img/logo.webp" alt="" width="828" height="632"></div>
         <div class="housing"></div>
         <div class="shutter-mask"><div class="shutter slats" id="shutter">
           <div class="shutter-copy" dir="auto"><h1 data-i18n-html="hero_h1"></h1><p id="hero-hours"></p></div>
           <i class="bottom"></i>
         </div></div>
         <div class="sill"></div>
-        <div class="poster"><div class="inner"><img src="img/hero-stack.webp" alt="" width="845" height="844"><b data-i18n="poster"></b><i class="dark"></i></div></div>
+        <div class="poster"><div class="inner"><img src="img/hero-stack.webp" alt="" width="420" height="420" decoding="async"><b data-i18n="poster"></b><i class="dark"></i></div></div>
         <div class="aframe"><div class="chalk" dir="auto"><span data-i18n-html="aframe"></span><em data-i18n="aframe_x"></em></div><i class="leg l"></i><i class="leg r"></i></div>
       </div>
     </div>
@@ -544,58 +566,58 @@ const CONFIG = {
 };
 /* price: حط السعر رقم (مثلاً 25000) أو خليه null ليختفي */
 const PRODUCTS = [
-  { id:"w_choco", cat:"waffle", img:"img/waffle-choco.webp", w:900, h:495, price:null,
+  { id:"w_choco", cat:"waffle", img:"img/waffle-choco.webp", w:720, h:396, price:null,
     ar:{ name:"غوفر شوكولا فواكه", tag:"3 فواكه موسمية", desc:"عجينة وافل ذهبية مقرمشة مغطسة بالشوكولا السائلة ومزينة بثلاثة أنواع من الفواكه الموسمية الطازجة." },
     en:{ name:"chocolate fruit gaufre", tag:"3 seasonal fruits", desc:"Golden crispy waffle dipped in melted chocolate and topped with three kinds of fresh seasonal fruit." } },
-  { id:"w_kinder", cat:"waffle", img:"img/waffle-kinder.webp", w:900, h:495, price:null,
+  { id:"w_kinder", cat:"waffle", img:"img/waffle-kinder.webp", w:720, h:396, price:null,
     ar:{ name:"غوفر كيندر فواكه", tag:"3 فواكه موسمية", desc:"عجينة وافل ذهبية مقرمشة مغطسة بصوص الكيندر الغني ومزينة بثلاثة أنواع من الفواكه الموسمية الطازجة." },
     en:{ name:"kinder fruit gaufre", tag:"3 seasonal fruits", desc:"Golden crispy waffle dipped in rich Kinder sauce and topped with three kinds of fresh seasonal fruit." } },
-  { id:"w_lotus", cat:"waffle", img:"img/waffle-lotus.webp", w:900, h:477, price:null,
+  { id:"w_lotus", cat:"waffle", img:"img/waffle-lotus.webp", w:720, h:381, price:null,
     ar:{ name:"غوفر لوتس فواكه", tag:"3 فواكه موسمية", desc:"عجينة وافل ذهبية مقرمشة مغطسة بصوص اللوتس الكريمي ومزينة بثلاثة أنواع من الفواكه الموسمية الطازجة." },
     en:{ name:"lotus fruit gaufre", tag:"3 seasonal fruits", desc:"Golden crispy waffle dipped in creamy Lotus sauce and topped with three kinds of fresh seasonal fruit." } },
-  { id:"w_mix", cat:"waffle", img:"img/waffle-mix.webp", w:900, h:460, price:null,
+  { id:"w_mix", cat:"waffle", img:"img/waffle-mix.webp", w:720, h:368, price:null,
     ar:{ name:"غوفر ميكس فواكه", tag:"صوصين على ذوقك", desc:"عجينة وافل ذهبية مقرمشة مغطسة بمزيج من صوصين حسب اختيارك ومزينة بثلاثة أنواع من الفواكه الموسمية الطازجة." },
     en:{ name:"mix fruit gaufre", tag:"two sauces, your pick", desc:"Golden crispy waffle dipped in two sauces of your choice and topped with three kinds of fresh seasonal fruit." } },
-  { id:"w_pistachio", cat:"waffle", img:"img/waffle-pistachio.webp", w:900, h:390, price:null,
+  { id:"w_pistachio", cat:"waffle", img:"img/waffle-pistachio.webp", w:720, h:312, price:null,
     ar:{ name:"غوفر بيستاشيو", tag:"فستق حلبي", desc:"عجينة وافل ذهبية مقرمشة مغطسة بكريمة البيستاشيو الفاخرة ومزينة بحبات الفستق الحلبي." },
     en:{ name:"pistachio gaufre", tag:"aleppo pistachio", desc:"Golden crispy waffle dipped in rich pistachio cream and finished with Aleppo pistachios." } },
-  { id:"w_master", cat:"waffle", img:"img/waffle-master.webp", w:900, h:412, price:null, sig:true,
+  { id:"w_master", cat:"waffle", img:"img/waffle-master.webp", w:720, h:330, price:null, sig:true,
     ar:{ name:"غوفر مستر غوفر الخاص", tag:"وصفة البيت", desc:"عجينة وافل ذهبية مقرمشة محضرة بوصفة مستر غوفر الخاصة مع تشكيلة مميزة من النكهات والإضافات." },
     en:{ name:"master gaufre special", tag:"house recipe", desc:"Golden crispy waffle made to Master Gaufre's own recipe, with a signature mix of flavours and toppings." } },
 
-  { id:"m_choco", cat:"mini", img:"img/mini-choco.webp", w:670, h:474, price:null,
+  { id:"m_choco", cat:"mini", img:"img/mini-choco.webp", w:620, h:439, price:null,
     ar:{ name:"ميني بان كيك شوكولا", tag:"10 قطع", desc:"10 قطع من البان كيك الهش مغطسة بالشوكولا السائلة ومقدمة بطريقة شهية ومميزة." },
     en:{ name:"mini pancakes, chocolate", tag:"10 pieces", desc:"10 fluffy mini pancakes dipped in melted chocolate." } },
-  { id:"m_kinder", cat:"mini", img:"img/mini-kinder.webp", w:685, h:440, price:null,
+  { id:"m_kinder", cat:"mini", img:"img/mini-kinder.webp", w:620, h:398, price:null,
     ar:{ name:"ميني بان كيك كيندر", tag:"10 قطع", desc:"10 قطع من البان كيك الهش مغطسة بصوص الكيندر الغني ومقدمة بطريقة شهية ومميزة." },
     en:{ name:"mini pancakes, kinder", tag:"10 pieces", desc:"10 fluffy mini pancakes dipped in rich Kinder sauce." } },
-  { id:"m_lotus", cat:"mini", img:"img/mini-lotus.webp", w:674, h:468, price:null,
+  { id:"m_lotus", cat:"mini", img:"img/mini-lotus.webp", w:620, h:431, price:null,
     ar:{ name:"ميني بان كيك لوتس", tag:"10 قطع", desc:"10 قطع من البان كيك الهش مغطسة بصوص اللوتس الكريمي ومقدمة بطريقة شهية ومميزة." },
     en:{ name:"mini pancakes, lotus", tag:"10 pieces", desc:"10 fluffy mini pancakes dipped in creamy Lotus sauce." } },
-  { id:"m_pistachio", cat:"mini", img:"img/mini-pistachio.webp", w:635, h:406, price:null,
+  { id:"m_pistachio", cat:"mini", img:"img/mini-pistachio.webp", w:620, h:396, price:null,
     ar:{ name:"ميني بان كيك بيستاشيو", tag:"10 قطع", desc:"10 قطع من البان كيك الهش مغطسة بكريمة البيستاشيو الفاخرة ومزينة بحبات الفستق الحلبي." },
     en:{ name:"mini pancakes, pistachio", tag:"10 pieces", desc:"10 fluffy mini pancakes dipped in rich pistachio cream and finished with Aleppo pistachios." } },
-  { id:"m_mix", cat:"mini", img:"img/mini-mix.webp", w:630, h:415, price:null,
+  { id:"m_mix", cat:"mini", img:"img/mini-mix.webp", w:620, h:408, price:null,
     ar:{ name:"ميني بان كيك ميكس", tag:"صوصين على ذوقك", desc:"10 قطع من البان كيك الهش مغطسة بمزيج من صوصين حسب اختيارك لتجربة غنية ومتنوعة." },
     en:{ name:"mini pancakes, mix", tag:"two sauces, your pick", desc:"10 fluffy mini pancakes dipped in two sauces of your choice." } },
 
-  { id:"p_fruit", cat:"stack", img:"img/stack-fruit.webp", w:599, h:665, price:null,
+  { id:"p_fruit", cat:"stack", img:"img/stack-fruit.webp", w:560, h:622, price:null,
     ar:{ name:"بان كيك فواكه", tag:"طبقتين", desc:"طبقتان من البان كيك الهش محشوتان بالفواكه الموسمية والكريمة والبراونيز ومغطستان بالشوكولا السائلة." },
     en:{ name:"fruit pancake stack", tag:"2 layers", desc:"Two layers of fluffy pancakes filled with seasonal fruit, cream and brownies, drenched in melted chocolate." } },
-  { id:"p_brownie", cat:"stack", img:"img/stack-brownie.webp", w:666, h:654, price:null,
+  { id:"p_brownie", cat:"stack", img:"img/stack-brownie.webp", w:560, h:550, price:null,
     ar:{ name:"بان كيك براونيز", tag:"4 طبقات", desc:"أربع طبقات من البان كيك الهش محشوة بالبراونيز الغني ومغطاة بالشوكولا السائلة." },
     en:{ name:"brownie pancake stack", tag:"4 layers", desc:"Four layers of fluffy pancakes filled with rich brownies, drenched in melted chocolate." } },
-  { id:"p_master", cat:"stack", img:"img/stack-master.webp", w:583, h:668, price:null, sig:true,
+  { id:"p_master", cat:"stack", img:"img/stack-master.webp", w:560, h:642, price:null, sig:true,
     ar:{ name:"بان كيك مستر غوفر", tag:"وصفة البيت", desc:"طبقات بان كيك محضرة بوصفة مستر غوفر الخاصة مع مزيج مميز من النكهات والإضافات المختارة." },
     en:{ name:"master gaufre stack", tag:"house recipe", desc:"Pancake layers made to Master Gaufre's own recipe, with a signature mix of flavours and toppings." } },
 
-  { id:"a_icecream", cat:"addon", img:"img/add-icecream.webp", w:420, h:223, price:null,
+  { id:"a_icecream", cat:"addon", img:"img/add-icecream.webp", w:300, h:159, price:null,
     ar:{ name:"كرة بوظة", desc:"اختيارك من بوظة الفانيلا أو الشوكولا لإضافة لمسة منعشة إلى طلبك." },
     en:{ name:"ice cream scoop", desc:"Vanilla or chocolate, for a cool finish on your plate." } },
-  { id:"a_sauce", cat:"addon", img:"img/add-sauce.webp", w:226, h:336, price:null,
+  { id:"a_sauce", cat:"addon", img:"img/add-sauce.webp", w:200, h:297, price:null,
     ar:{ name:"صوص دبل", desc:"كمية إضافية من الصوص المفضل لديك: شوكولا، لوتس، أو كيندر." },
     en:{ name:"double sauce", desc:"An extra pour of your favourite: chocolate, Lotus or Kinder." } },
-  { id:"a_fruit", cat:"addon", img:"img/add-fruit.webp", w:354, h:181, price:null,
+  { id:"a_fruit", cat:"addon", img:"img/add-fruit.webp", w:300, h:153, price:null,
     ar:{ name:"فواكه موسمية", desc:"اختار 3 أصناف من الفواكه الموسمية المتوفرة: فراولة، موز، كيوي، أناناس، كرز وغيرها." },
     en:{ name:"seasonal fruit", desc:"Pick 3 of today's fresh fruit: strawberry, banana, kiwi, pineapple, cherry and more." } },
 ];
@@ -674,7 +696,7 @@ const OPEN = toMin(CONFIG.open), CLOSE = toMin(CONFIG.close), PRE = toMin(CONFIG
 const WAFFLES = PRODUCTS.filter(p => p.cat === "waffle");
 const bag = new Map();
 
-const hdr = $(".hdr"), interior = $(".interior"), pin = $("#pin"), camera = $("#camera"), facade = $("#facade"), glass = $("#glass");
+const hdr = $(".hdr"), win = $("#win"), interior = $(".interior"), pin = $("#pin"), camera = $("#camera"), facade = $("#facade"), glass = $("#glass");
 const shutter = $("#shutter"), doorL = $("#door-l"), doorR = $("#door-r");
 const intro = $("#intro"), hero = $("#hero"), closing = $("#closing");
 const slots = $$(".slot img"), flyersBox = $("#flyers");
@@ -714,7 +736,7 @@ function priceText(p) { return p.price != null ? `${Number(p.price).toLocaleStri
 function cardHTML(p) {
   const L = p[lang], t = T[lang], other = p[lang === "ar" ? "en" : "ar"].name;
   return `<article class="card" data-id="${p.id}">
-    <div class="card-media"><img class="card-img" src="${p.img}" alt="${L.name}" width="${p.w}" height="${p.h}" decoding="async"></div>
+    <div class="card-media"><img class="card-img" src="${p.img}" alt="${L.name}" width="${p.w}" height="${p.h}" decoding="async"${p.cat === "waffle" ? "" : ' loading="lazy"'}></div>
     <div class="card-meta"><span class="kind">${t["kind_" + p.cat]}</span><span class="tag${p.sig ? " sig" : ""}">${L.tag}</span></div>
     <h4 class="card-name"><span>${L.name}</span></h4>
     <p class="card-alt" lang="${lang === "ar" ? "en" : "ar"}">${other}</p>
@@ -899,8 +921,8 @@ function renderHero(P) {
   const k = 1 + 1.6 * z * z;
   put(facade, "transform", `scale(${k.toFixed(4)})`);
   put(facade, "visibility", z > .985 ? "hidden" : "visible");
-  const L = 800 + (420 - 800) * k, R = 800 + (1180 - 800) * k, Tp = 668 + (372 - 668) * k, B = 668 + (860 - 668) * k;
-  put(interior, "clipPath", `polygon(${L.toFixed(1)}px ${Tp.toFixed(1)}px,${R.toFixed(1)}px ${Tp.toFixed(1)}px,${R.toFixed(1)}px ${B.toFixed(1)}px,${L.toFixed(1)}px ${B.toFixed(1)}px)`);
+  put(win, "transform", `scale(${k.toFixed(4)})`);
+  put(interior, "transform", `scale(${(1 / k).toFixed(4)})`);
   put(glass, "transform", `scale(${(1 + .9 * z * z).toFixed(4)})`);
   op(glass, glassA);
   put(doorL, "transform", `translate3d(${(-doors * 112).toFixed(1)}px,0,0)`);
@@ -985,7 +1007,7 @@ let cur = window.scrollY, running = false, lastT = 0;
 function tick(t) {
   const target = window.scrollY;
   const dt = lastT ? Math.min(50, t - lastT) : 16.7; lastT = t;
-  cur += (target - cur) * (1 - Math.exp(-dt / 120));
+  cur += (target - cur) * (1 - Math.exp(-dt / 100));
   if (Math.abs(target - cur) < .25) cur = target;
   update(cur);
   if (cur !== target) requestAnimationFrame(tick); else { running = false; lastT = 0; }
