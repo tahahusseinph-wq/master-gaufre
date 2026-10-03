@@ -18,7 +18,9 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preload" href="fonts/lalezar.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="fonts/plex-ar-400.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="img/logo.webp" as="image" fetchpriority="high">
+<link rel="preload" href="frames/p/000.webp" as="image" media="(max-aspect-ratio: 4/5)" fetchpriority="high">
+<link rel="preload" href="frames/l/000.webp" as="image" media="(min-aspect-ratio: 4/5)" fetchpriority="high">
+<link rel="preload" href="img/logo.webp" as="image">
 <style>
 @font-face{font-family:"Lalezar";src:url(fonts/lalezar.woff2) format("woff2");font-display:swap}
 @font-face{font-family:"IBM Plex Sans Arabic";src:url(fonts/plex-ar-400.woff2) format("woff2");font-weight:400;font-display:swap}
@@ -51,7 +53,7 @@
   --display:var(--f-ar-display);
 }
 html[lang="en"]{--display:var(--f-en-display)}
-html{scroll-behavior:smooth;background:var(--night)}
+html{background:var(--night)}
 body{margin:0;background:var(--night);color:var(--cream);font-family:var(--f-body);font-size:15px;line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased}
 img{max-width:100%}
 [hidden]{display:none!important}
@@ -67,7 +69,7 @@ a{color:inherit}
 .hdr::before{content:"";position:absolute;inset:0 0 -28px;z-index:-1;pointer-events:none;opacity:0;transition:opacity .3s;
   background:linear-gradient(180deg,rgba(9,6,12,.94),rgba(9,6,12,.7) 60%,rgba(9,6,12,0))}
 .hdr.solid::before{opacity:1}
-.hdr-logo{justify-self:start;display:block;height:46px;opacity:0;transition:opacity .3s}
+.hdr-logo{justify-self:start;display:block;height:46px}
 .hdr-logo img{height:100%;width:auto;display:block;filter:drop-shadow(0 4px 10px rgba(0,0,0,.5))}
 .pill{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:999px;background:rgba(14,8,18,.86);
   border:1px solid rgba(255,255,255,.09);color:var(--cream);font:500 14px/1 var(--f-body);text-decoration:none;white-space:nowrap}
@@ -85,155 +87,20 @@ html[lang="en"] .lang-pill{font-family:var(--f-body);font-size:14px;letter-spaci
 .bag-count.bump{animation:bump .45s ease}
 @keyframes bump{40%{transform:scale(1.35)}}
 @keyframes pulse{50%{opacity:.35}}
-.menu-pill svg{display:none;width:18px;height:18px}
 @media (max-width:560px){
-  .hdr{grid-template-columns:auto 1fr;gap:8px}
-  .hdr-logo{display:none}
-  .clock{justify-self:start}
+  .hdr{gap:6px}
+  .hdr-logo{height:40px}
   .pill{height:36px;padding:0 11px}
-  .menu-word{display:none}
-  .menu-pill svg{display:block}
+  .clock{padding:0 10px;gap:7px}
 }
+.veil{position:fixed;inset:0;z-index:140;background:var(--night);opacity:0;pointer-events:none;transition:opacity .3s ease}
+.veil.on{opacity:1}
 
 /* ---------- hero: pinned scene ---------- */
 .hero{position:relative;height:640vh;height:640svh}
 @media (max-width:760px){.hero{height:580vh;height:580svh}}
 .hero-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#0B0610;}
-.sky,.sky-night,.stars,.moon{position:absolute;pointer-events:none}
-.sky,.sky-night,.stars{inset:0}
-.sky{background:linear-gradient(180deg,#2A0D42 0%,#7A2470 14%,#D2587A 24%,#F5A14E 34%,#F7B866 46%)}
-.sky-night{background:linear-gradient(180deg,#04020A 0%,#0C0618 30%,#1B0C2C 60%);opacity:0;will-change:opacity}
-.stars{opacity:0;will-change:opacity}
-.moon{width:34px;height:34px;border-radius:50%;top:max(70px,9vh);inset-inline-end:16%;background:radial-gradient(circle at 38% 38%,#FFF6DD,#E9D6A8 60%,#C9B07C);
-  box-shadow:0 0 40px 8px rgba(255,236,190,.18);opacity:0;will-change:opacity}
-.camera{position:absolute;left:0;top:0;width:1600px;height:1000px;transform-origin:0 0;will-change:transform}
-.layer{position:absolute;inset:0;transform-origin:800px 668px;will-change:transform}
-.win{position:absolute;left:420px;top:372px;width:760px;height:488px;overflow:hidden;transform-origin:380px 296px;will-change:transform}
-.interior{position:absolute;left:-420px;top:-372px;width:1600px;height:1000px;transform-origin:800px 668px;will-change:transform}
-
-/* interior */
-.room{position:absolute;left:-300px;top:-300px;width:2200px;height:2000px;
-  background:
-    radial-gradient(ellipse 260px 340px at 1020px 760px,rgba(255,196,110,.22),transparent 70%),
-    radial-gradient(ellipse 260px 340px at 1260px 760px,rgba(255,196,110,.22),transparent 70%),
-    linear-gradient(180deg,#130A18 0%,#1F1027 40%,#24112D 55%);}
-.tiles{position:absolute;left:-300px;top:600px;width:2200px;height:262px;background-color:#4B0F59;
-  background-image:linear-gradient(90deg,rgba(10,0,14,.6) 3px,transparent 3px),linear-gradient(0deg,rgba(10,0,14,.6) 3px,transparent 3px),
-  linear-gradient(135deg,rgba(255,255,255,.13),transparent 45%);background-size:46px 46px,46px 46px,46px 46px;
-  box-shadow:inset 0 6px 0 rgba(246,237,224,.18)}
-.floor{position:absolute;left:-300px;top:862px;width:2200px;height:840px;background:
-  repeating-conic-gradient(#0D070F 0 25%,#140B18 0 50%) 0 0/80px 80px}
-.mascot{position:absolute;left:700px;top:392px;width:200px;height:96px;opacity:.25;will-change:opacity;
-  filter:drop-shadow(0 0 4px rgba(254,197,11,.9)) drop-shadow(0 0 16px rgba(254,197,11,.5))}
-.pendant{position:absolute;top:372px;width:84px;height:120px}
-.pendant::before{content:"";position:absolute;left:41px;top:0;width:2px;height:44px;background:#0A070C}
-.pendant .shade{position:absolute;left:0;top:42px;width:84px;height:34px;border-radius:50% 50% 6px 6px/100% 100% 6px 6px;
-  background:linear-gradient(180deg,#D7A84B,#8E6524 70%,#5E4115);box-shadow:inset 0 -3px 0 rgba(0,0,0,.35)}
-.pendant .bulb{position:absolute;left:12px;top:72px;width:60px;height:14px;border-radius:50%;background:#FFE7AE;
-  box-shadow:0 0 22px 8px rgba(255,214,140,.55),0 30px 90px 40px rgba(255,190,100,.18);opacity:0;will-change:opacity}
-.shelf{position:absolute;left:470px;top:520px;width:660px;height:300px}
-.shelf .post{position:absolute;top:0;width:16px;height:300px;background:linear-gradient(90deg,#5A3519,#8A5A2E 50%,#4A2B14);border-radius:3px}
-.shelf .post.l{left:0}.shelf .post.r{right:0}
-.shelf .plank{position:absolute;left:-8px;right:-8px;height:22px;border-radius:3px;
-  background:linear-gradient(180deg,#B47B43 0,#B47B43 5px,#7A4B23 6px,#5B3416);box-shadow:0 10px 18px rgba(0,0,0,.45)}
-.shelf .b1{top:116px}.shelf .b2{top:266px}
-.slot{position:absolute;width:204px;height:140px;display:flex;align-items:flex-end;justify-content:center}
-.slot img{display:block;width:auto;height:auto;max-width:200px;max-height:126px;filter:drop-shadow(0 10px 8px rgba(0,0,0,.55))}
-.steam{position:absolute;top:452px;width:60px;height:90px;opacity:0;will-change:opacity;pointer-events:none}
-.steam i{position:absolute;bottom:0;left:20px;width:16px;height:60px;border-radius:50%;background:rgba(255,255,255,.5);filter:blur(9px);will-change:transform,opacity;animation:steam 3.4s ease-in infinite}
-.steam i:nth-child(2){left:32px;animation-delay:1.2s}.steam i:nth-child(3){left:8px;animation-delay:2.3s}
-@keyframes steam{0%{transform:translateY(20px) scaleX(.6);opacity:0}30%{opacity:.8}100%{transform:translateY(-50px) scaleX(1.4);opacity:0}}
-.counter{position:absolute;left:440px;top:806px;width:720px;height:58px;background:linear-gradient(180deg,#2A1A12,#120B08);
-  box-shadow:0 -3px 0 #C254D1,0 -6px 26px rgba(207,91,221,.55)}
-.lights-off{position:absolute;left:-300px;top:-300px;width:2200px;height:2000px;background:#030106;opacity:1;will-change:opacity;pointer-events:none}
-
-/* glass storefront */
-.tint{position:absolute;left:420px;top:372px;width:760px;height:488px;
-  background:linear-gradient(115deg,transparent 18%,rgba(255,255,255,.07) 24%,transparent 31%,transparent 58%,rgba(255,255,255,.05) 63%,transparent 70%),rgba(150,120,190,.05)}
-.bar{position:absolute;background:#0D0A10;box-shadow:inset 0 0 0 1px rgba(255,255,255,.05)}
-.bar.v{top:372px;width:12px;height:488px}
-.bar.h{left:420px;width:760px;height:12px}
-.door{position:absolute;top:452px;width:116px;height:408px;border:9px solid #0D0A10;box-sizing:border-box;
-  background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.06) 38%,transparent 46%)}
-.door.l{left:684px}.door.r{left:800px}
-.door .handle{position:absolute;top:150px;width:6px;height:96px;border-radius:3px;background:linear-gradient(90deg,#9A8E7E,#E8DCC7,#8B7F70)}
-.door.l .handle{right:8px}.door.r .handle{left:8px}
-.open-sign{position:absolute;left:456px;top:470px;width:170px;height:62px;display:grid;place-items:center;
-  font:72px/1 var(--f-ar-display);color:var(--yellow);border-radius:14px}
-html[lang="en"] .open-sign{font:44px/1 var(--f-en-display)}
-.open-sign .dim{position:absolute;opacity:.18;color:#7d6a3a}
-.open-sign .lit{position:absolute;opacity:0;will-change:opacity;text-shadow:0 0 6px #FEC50B,0 0 18px rgba(254,197,11,.8),0 0 40px rgba(207,91,221,.7)}
-.open-sign::before,.open-sign::after{content:"";position:absolute;top:-98px;width:1px;height:98px;background:rgba(255,255,255,.25)}
-.open-sign::before{left:30px}.open-sign::after{right:30px}
-
-/* facade */
-.wall{position:absolute;left:0;top:120px;width:1600px;height:780px;
-  clip-path:polygon(evenodd,0 0,1600px 0,1600px 780px,0 780px,0 0,420px 252px,1180px 252px,1180px 740px,420px 740px,420px 252px);
-  background-color:#231B29;
-  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='220' height='220'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 .10 0'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>"),
-    linear-gradient(180deg,#1A131F 0%,#2A2030 60%,#211A26 100%)}
-.wall-shade{position:absolute;left:0;top:120px;width:1600px;height:780px;background:#040207;opacity:.08;will-change:opacity;pointer-events:none}
-.wall-clip{clip-path:polygon(evenodd,0 0,1600px 0,1600px 780px,0 780px,0 0,420px 252px,1180px 252px,1180px 740px,420px 740px,420px 252px)}
-.wash{position:absolute;top:360px;width:380px;height:520px;border-radius:50%;
-  background:radial-gradient(ellipse at 50% 12%,rgba(255,196,110,.42),rgba(255,170,80,.12) 45%,transparent 70%);opacity:0;will-change:opacity;pointer-events:none}
-.wash.l{left:50px}.wash.r{left:1170px}
-.sconce{position:absolute;top:342px;width:34px;height:48px;border-radius:6px 6px 14px 14px;background:linear-gradient(180deg,#141016,#050306)}
-.sconce .glow{position:absolute;left:7px;bottom:-6px;width:20px;height:10px;border-radius:50%;background:#FFE3A1;opacity:0;will-change:opacity;
-  box-shadow:0 0 16px 6px rgba(255,210,130,.6)}
-.sconce.l{left:223px}.sconce.r{left:1343px}
-.cornice{position:absolute;left:0;top:76px;width:1600px;height:58px;
-  background:repeating-linear-gradient(90deg,transparent 0 118px,rgba(0,0,0,.45) 118px 121px),linear-gradient(180deg,#3A3040,#2A2230 60%,#17111B);
-  box-shadow:0 10px 18px rgba(0,0,0,.45)}
-.signbox{position:absolute;left:410px;top:146px;width:780px;height:184px;border-radius:12px;
-  background:linear-gradient(180deg,#18121C,#060408);box-shadow:0 20px 40px rgba(0,0,0,.65),inset 0 1px 0 rgba(255,255,255,.07)}
-.signbox .tube{position:absolute;inset:12px;border-radius:9px;border:3px solid #4B2352}
-.signbox .tube.lit{border-color:#DB70E8;box-shadow:0 0 8px #DB70E8,0 0 26px rgba(149,11,161,.9),inset 0 0 16px rgba(207,91,221,.5);opacity:0;will-change:opacity}
-.signbox .bolt{position:absolute;top:-34px;width:4px;height:34px;background:#0C090E}
-.signbox .bolt.l{left:120px}.signbox .bolt.r{right:120px}
-.signbox .side{position:absolute;top:50%;transform:translateY(-50%);opacity:.35;will-change:opacity}
-.signbox .side.l{left:46px;font:700 16px/1.75 var(--f-mono);letter-spacing:.24em;color:#EADFF0}
-.signbox .side.r{right:46px;font:400 36px/1.15 var(--f-ar-display);color:var(--yellow);text-align:right}
-.signlogo{position:absolute;left:662px;top:126px;width:276px;height:211px}
-.signlogo img{position:absolute;inset:0;width:100%;height:100%}
-.signlogo .dim{filter:brightness(.42) saturate(.55)}
-.signlogo .lit{opacity:0;will-change:opacity;filter:drop-shadow(0 0 6px rgba(207,91,221,.9)) drop-shadow(0 0 22px rgba(149,11,161,.85)) drop-shadow(0 0 34px rgba(254,197,11,.3))}
-.housing{position:absolute;left:408px;top:334px;width:784px;height:40px;border-radius:4px;
-  background:linear-gradient(180deg,#5D5966,#3A3741 45%,#1E1C23);box-shadow:0 8px 12px rgba(0,0,0,.5)}
-.shutter-mask{position:absolute;left:420px;top:372px;width:760px;height:488px;overflow:hidden}
-.shutter{position:absolute;inset:0;will-change:transform}
-.slats{background:
-  linear-gradient(180deg,rgba(255,210,150,.06),rgba(0,0,0,.2) 75%),
-  repeating-linear-gradient(180deg,#45424D 0 2px,#76727F 2px 6px,#55525D 6px 11px,#28262E 11px 14px)}
-.shutter .bottom{position:absolute;left:0;right:0;bottom:0;height:22px;background:linear-gradient(180deg,#77737F,#3A3740 60%,#1D1B22)}
-.shutter .bottom::after{content:"";position:absolute;left:350px;top:6px;width:60px;height:9px;border-radius:5px;background:#16141A;box-shadow:inset 0 1px 0 rgba(255,255,255,.15)}
-.shutter-copy{position:absolute;inset:0 0 22px;display:grid;place-content:center;text-align:center;gap:18px;opacity:1;will-change:opacity;padding:0 30px}
-.shutter-copy h1{margin:0;font:400 80px/1.12 var(--display);color:#F7ECDC;text-shadow:0 2px 0 rgba(0,0,0,.25);text-wrap:balance}
-html[lang="en"] .shutter-copy h1{font-size:62px;line-height:1.08;letter-spacing:-.01em}
-.shutter-copy p{margin:0;font:400 19px/1.4 var(--f-mono);color:#DED2C4;letter-spacing:.02em}
-.sill{position:absolute;left:400px;top:858px;width:800px;height:34px;background:linear-gradient(180deg,#4A4150,#2B2430);box-shadow:0 8px 14px rgba(0,0,0,.5)}
-.poster{position:absolute;left:140px;top:470px;width:230px;height:330px;border-radius:10px;background:#0B080D;padding:10px;box-sizing:border-box;
-  box-shadow:0 18px 30px rgba(0,0,0,.55)}
-.poster .inner{position:relative;height:100%;border-radius:6px;overflow:hidden;display:grid;place-items:center;
-  background:radial-gradient(circle at 50% 42%,#7A1689,#2B0733 70%)}
-.poster .dark{position:absolute;inset:0;background:#000;opacity:.55;will-change:opacity}
-.poster img{width:190px;height:auto;margin-top:-40px;filter:drop-shadow(0 12px 10px rgba(0,0,0,.6))}
-.poster b{position:absolute;bottom:16px;inset-inline:0;text-align:center;font:400 30px/1 var(--display);color:var(--yellow)}
-html[lang="en"] .poster b{font-size:22px}
-.aframe{position:absolute;left:1250px;top:688px;width:184px;height:214px}
-.aframe .chalk{position:absolute;inset:0 0 18px;border:9px solid #6B4423;border-radius:6px;box-sizing:border-box;
-  background:radial-gradient(ellipse at 40% 30%,#2A302E,#151918 75%);display:grid;place-content:center;text-align:center;gap:2px;padding:6px}
-.aframe .chalk span{font:400 34px/1.15 var(--display);color:rgba(240,236,226,.88)}
-html[lang="en"] .aframe .chalk span{font-size:22px;line-height:1.35}
-.aframe .chalk em{font:700 15px/1.6 var(--f-mono);color:var(--yellow);font-style:normal}
-.aframe .leg{position:absolute;bottom:0;width:10px;height:26px;background:#5A381B}
-.aframe .leg.l{left:16px}.aframe .leg.r{right:16px}
-.ground-glow{position:absolute;left:560px;top:880px;width:480px;height:170px;border-radius:50%;opacity:0;will-change:opacity;
-  background:radial-gradient(ellipse at 50% 20%,rgba(255,190,100,.3),transparent 70%)}
-.ground{position:absolute;left:-400px;top:890px;width:2400px;height:1800px;
-  background:
-    repeating-linear-gradient(90deg,transparent 0 98px,rgba(0,0,0,.4) 98px 100px),
-    repeating-linear-gradient(0deg,transparent 0 58px,rgba(0,0,0,.35) 58px 60px),
-    linear-gradient(180deg,#2B2430 0,#2B2430 10px,#1A151D 11px,#120E15)}
+.scene{position:absolute;inset:0;width:100%;height:100%;display:block}
 
 /* hero overlays */
 .hero-fade{position:absolute;inset:0;background:var(--night);opacity:0;will-change:opacity;pointer-events:none;z-index:3}
@@ -387,20 +254,11 @@ html[lang="en"] .drawer-h h3{font-size:26px}
 .send{width:100%;height:50px}
 .send[aria-disabled="true"]{opacity:.4;pointer-events:none}
 .send-hint{margin:10px 0 0;font-size:12.5px;color:var(--muted);text-align:center}
-.menu-panel{position:fixed;inset:0;z-index:115;background:radial-gradient(ellipse at 80% 0%,rgba(149,11,161,.4),transparent 55%),#0A060D;display:grid;place-items:center;padding:24px}
-.menu-panel .x{position:absolute;top:calc(env(safe-area-inset-top,0px) + 16px);inset-inline-end:16px}
-.menu-panel nav{display:grid;gap:6px;justify-items:center;text-align:center}
-.menu-panel img{width:min(260px,60vw);height:auto;margin-bottom:18px}
-.menu-panel a,.menu-panel button.lnk{font:400 clamp(36px,7vw,60px)/1.2 var(--display);color:var(--cream);text-decoration:none;background:none;border:0;cursor:pointer;padding:0}
-.menu-panel a:hover,.menu-panel button.lnk:hover{color:var(--yellow)}
-.menu-panel .meta{margin-top:18px;font:400 14px/1.6 var(--f-mono);color:var(--muted)}
-html[lang="ar"] .menu-panel .meta{font-family:var(--f-body)}
-.toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);z-index:130;transform:translate(-50%,20px);opacity:0;pointer-events:none;
+html[lang="ar"] .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);z-index:130;transform:translate(-50%,20px);opacity:0;pointer-events:none;
   padding:12px 18px;border-radius:999px;background:var(--cream);color:#1A0E00;font-weight:700;font-size:14px;transition:opacity .2s,transform .2s;box-shadow:0 12px 30px rgba(0,0,0,.4)}
 .toast.on{opacity:1;transform:translate(-50%,0)}
 
 /* reduced motion: a still, open shop */
-html.reduced{scroll-behavior:auto}
 html.reduced .hero{height:100vh;height:100svh}
 html.reduced .steam,html.reduced .clock .dot,html.reduced .scroll-hint{animation:none}
 html.reduced .closing{height:100vh;height:100svh}
@@ -416,68 +274,13 @@ html.reduced .closing{height:100vh;height:100svh}
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
       <span class="bag-count" id="bag-count">0</span>
     </button>
-    <button class="pill menu-pill" id="menu-btn" type="button"><span class="menu-word" data-i18n="menu"></span>
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg></button>
   </div>
 </header>
 
 <main id="top">
 <section class="hero" id="hero" aria-label="">
   <div class="hero-pin" id="pin">
-    <div class="sky"></div><div class="sky-night"></div><canvas class="stars" id="stars"></canvas><div class="moon"></div>
-    <div class="camera" id="camera" dir="ltr">
-      <div class="win" id="win"><div class="interior">
-        <div class="room"></div>
-        <div class="tiles"></div>
-        <div class="floor"></div>
-        <svg class="mascot" viewBox="0 0 200 96" fill="none" stroke-linecap="round" stroke-linejoin="round">
-          <path d="M74 8h52v40H74z M58 48h84" stroke="#E07BEB" stroke-width="3.5"/>
-          <path d="M74 38h52" stroke="#E07BEB" stroke-width="3.5"/>
-          <path d="M100 72c-8-10-24-13-36-6-8 4-15 3-20-3 2 13 16 20 31 15 10-3 18-6 25-2 7-4 15-1 25 2 15 5 29-2 31-15-5 6-12 7-20 3-12-7-28-4-36 6z" stroke="#FEC50B" stroke-width="3.5"/>
-        </svg>
-        <div class="pendant" style="left:598px"><i class="shade"></i><i class="bulb"></i></div>
-        <div class="pendant" style="left:918px"><i class="shade"></i><i class="bulb"></i></div>
-        <div class="steam" style="left:550px"><i></i><i></i><i></i></div>
-        <div class="steam" style="left:770px"><i></i><i></i><i></i></div>
-        <div class="steam" style="left:990px"><i></i><i></i><i></i></div>
-        <div class="shelf"><i class="post l"></i><i class="post r"></i><i class="plank b1"></i><i class="plank b2"></i></div>
-        <div class="slot" style="left:478px;top:500px"><img alt=""></div>
-        <div class="slot" style="left:698px;top:500px"><img alt=""></div>
-        <div class="slot" style="left:918px;top:500px"><img alt=""></div>
-        <div class="slot" style="left:478px;top:650px"><img alt=""></div>
-        <div class="slot" style="left:698px;top:650px"><img alt=""></div>
-        <div class="slot" style="left:918px;top:650px"><img alt=""></div>
-        <div class="counter"></div>
-        <div class="lights-off"></div>
-      </div></div>
-      <div class="layer glass" id="glass">
-        <div class="tint"></div>
-        <div class="open-sign"><span class="dim" data-i18n="open_sign"></span><span class="lit" data-i18n="open_sign"></span></div>
-        <i class="bar h" style="top:440px"></i>
-        <i class="bar v" style="left:420px"></i><i class="bar v" style="left:672px"></i><i class="bar v" style="left:916px"></i><i class="bar v" style="left:1168px"></i>
-        <div class="door l" id="door-l"><i class="handle"></i></div>
-        <div class="door r" id="door-r"><i class="handle"></i></div>
-      </div>
-      <div class="layer facade" id="facade">
-        <div class="ground"></div>
-        <div class="ground-glow"></div>
-        <div class="wall"></div>
-        <div class="wall-shade wall-clip"></div>
-        <div class="wash l"></div><div class="wash r"></div>
-        <div class="cornice"></div>
-        <i class="sconce l"><i class="glow"></i></i><i class="sconce r"><i class="glow"></i></i>
-        <div class="signbox"><i class="bolt l"></i><i class="bolt r"></i><i class="tube"></i><i class="tube lit"></i><span class="side l">WAFFLE<br>PANCAKE<br>ICE CREAM</span><span class="side r">وافل<br>بان كيك</span></div>
-        <div class="signlogo"><img class="dim" src="img/logo.webp" alt="" width="828" height="632" fetchpriority="high"><img class="lit" src="img/logo.webp" alt="" width="828" height="632"></div>
-        <div class="housing"></div>
-        <div class="shutter-mask"><div class="shutter slats" id="shutter">
-          <div class="shutter-copy" dir="auto"><h1 data-i18n-html="hero_h1"></h1><p id="hero-hours"></p></div>
-          <i class="bottom"></i>
-        </div></div>
-        <div class="sill"></div>
-        <div class="poster"><div class="inner"><img src="img/hero-stack.webp" alt="" width="420" height="420" decoding="async"><b data-i18n="poster"></b><i class="dark"></i></div></div>
-        <div class="aframe"><div class="chalk" dir="auto"><span data-i18n-html="aframe"></span><em data-i18n="aframe_x"></em></div><i class="leg l"></i><i class="leg r"></i></div>
-      </div>
-    </div>
+    <canvas class="scene" id="scene" aria-hidden="true"></canvas>
     <div class="hero-fade"></div>
     <div class="hero-ui">
       <div class="intro" id="intro">
@@ -541,16 +344,7 @@ html.reduced .closing{height:100vh;height:100svh}
   <p class="send-hint" data-i18n="send_hint"></p>
 </aside>
 
-<div class="menu-panel" id="menu-panel" hidden role="dialog" aria-modal="true">
-  <button class="x" type="button" id="menu-close" data-i18n-aria="close"><svg viewBox="0 0 16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3l10 10M13 3 3 13"/></svg></button>
-  <nav>
-    <img src="img/logo.webp" alt="Master Gaufre" width="828" height="632">
-    <a href="#menu" data-close-menu data-i18n="nav_menu"></a>
-    <a href="#addons" data-close-menu data-i18n="nav_addons"></a>
-    <button class="lnk" type="button" data-open-bag data-i18n="nav_bag"></button>
-    <p class="meta" id="menu-hours"></p>
-  </nav>
-</div>
+<div class="veil" id="veil" aria-hidden="true"></div>
 <div class="toast" id="toast" role="status"></div>
 
 <script>
@@ -696,10 +490,9 @@ const OPEN = toMin(CONFIG.open), CLOSE = toMin(CONFIG.close), PRE = toMin(CONFIG
 const WAFFLES = PRODUCTS.filter(p => p.cat === "waffle");
 const bag = new Map();
 
-const hdr = $(".hdr"), win = $("#win"), interior = $(".interior"), pin = $("#pin"), camera = $("#camera"), facade = $("#facade"), glass = $("#glass");
-const shutter = $("#shutter"), doorL = $("#door-l"), doorR = $("#door-r");
+const hdr = $(".hdr"), pin = $("#pin");
 const intro = $("#intro"), hero = $("#hero"), closing = $("#closing");
-const slots = $$(".slot img"), flyersBox = $("#flyers");
+const flyersBox = $("#flyers");
 const flyers = WAFFLES.map(() => { const im = document.createElement("img"); im.alt = ""; flyersBox.appendChild(im); return im; });
 
 /* ================= text ================= */
@@ -715,18 +508,14 @@ function applyText() {
   hero.setAttribute("aria-label", t.hero_label);
   const o = fmt(OPEN), c = fmt(CLOSE);
   $("#hint-text").textContent = window.matchMedia("(pointer: coarse)").matches ? t.hint_touch : t.hint;
-  $("#hero-hours").textContent = t.hours(o, c);
   $("#hero-led").textContent = o;
   $("#hero-led-note").textContent = t.led_note(hm(PRE).h12);
   $("#see-you").textContent = t.see_you(hm(OPEN).h12);
   $("#closing-hours").textContent = t.hours(o, c);
-  $("#menu-hours").textContent = t.hours(o, c) + (CONFIG.whatsapp ? `  ·  WhatsApp +${CONFIG.whatsapp}` : "");
   $("#ends-open").textContent = `${o} ${t.ap_pm}`;
   $("#ends-close").textContent = `${c} ${t.ap_am}`;
   document.title = lang === "ar" ? "مستر غوفر" : "Master Gaufre";
-  // shelf: first waffle sits where the first card is read from
-  const order = lang === "ar" ? [2,1,0,5,4,3] : [0,1,2,3,4,5];
-  WAFFLES.forEach((p, i) => { const im = slots[order[i]]; im.src = p.img; im.width = p.w; im.height = p.h; im.dataset.idx = i; flyers[i].src = p.img; });
+  WAFFLES.forEach((p, i) => { flyers[i].src = p.img; });
   renderTabs(); renderCards(); renderBag(); renderNow();
 }
 
@@ -805,19 +594,19 @@ document.addEventListener("click", e => {
   if (add) { const id = add.dataset.add; bag.set(id, (bag.get(id) || 0) + 1); renderBag(); const b = $("#bag-count"); b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump"); toast(T[lang].added); return; }
   const inc = e.target.closest("[data-inc]"); if (inc) { bag.set(inc.dataset.inc, bag.get(inc.dataset.inc) + 1); renderBag(); return; }
   const dec = e.target.closest("[data-dec]"); if (dec) { const id = dec.dataset.dec, q = bag.get(id) - 1; q > 0 ? bag.set(id, q) : bag.delete(id); renderBag(); return; }
-  if (e.target.closest("[data-open-bag]")) { closeMenu(); openBag(); return; }
-  if (e.target.closest("[data-close-menu]")) { closeMenu(); }
+  if (e.target.closest("[data-open-bag]")) { openBag(); return; }
 });
 function openBag() { $("#drawer").hidden = false; $("#scrim").hidden = false; $("#bag-close").focus(); }
 function closeBag() { $("#drawer").hidden = true; $("#scrim").hidden = true; }
 $("#bag-close").addEventListener("click", closeBag);
 $("#scrim").addEventListener("click", closeBag);
-$("#menu-btn").addEventListener("click", () => { $("#menu-panel").hidden = false; $("#menu-close").focus(); });
-function closeMenu() { $("#menu-panel").hidden = true; }
-$("#menu-close").addEventListener("click", closeMenu);
-document.addEventListener("keydown", e => { if (e.key === "Escape") { closeBag(); closeMenu(); } });
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeBag(); });
 $("#lang-btn").addEventListener("click", () => { lang = lang === "ar" ? "en" : "ar"; try { localStorage.setItem("mg-lang", lang); } catch (e) {} applyText(); update(window.scrollY); });
-$("#reopen").addEventListener("click", () => window.scrollTo({ top: 0, behavior: reduced ? "auto" : "smooth" }));
+$("#reopen").addEventListener("click", () => {
+  // fade out, jump to the top in one step, fade back in: no rushing back through the whole page
+  const v = $("#veil"); v.classList.add("on");
+  setTimeout(() => { window.scrollTo(0, 0); cur = 0; update(0); requestAnimationFrame(() => requestAnimationFrame(() => v.classList.remove("on"))); }, reduced ? 0 : 320);
+});
 
 /* ================= clock ================= */
 function nowMin() { const d = new Date(); return d.getHours() * 60 + d.getMinutes(); }
@@ -838,40 +627,84 @@ function renderNow() {
   $("#night-thumb").style.left = (pos * 100).toFixed(1) + "%";
 }
 
-/* ================= stars ================= */
-function drawStars() {
-  const c = $("#stars"), dpr = Math.min(2, window.devicePixelRatio || 1);
-  c.width = vw * dpr; c.height = vh * dpr;
-  const g = c.getContext("2d"); g.scale(dpr, dpr);
-  let seed = 7; const rnd = () => (seed = (seed * 16807) % 2147483647) / 2147483647;
-  for (let i = 0; i < 150; i++) {
-    const x = rnd() * vw, y = rnd() * vh * .62, r = rnd() * 1.2 + .3;
-    g.globalAlpha = .3 + rnd() * .7; g.fillStyle = "#fff"; g.beginPath(); g.arc(x, y, r, 0, 7); g.fill();
-  }
-}
-
 /* ================= layout ================= */
-let vw = 0, vh = 0, portrait = false, base = 1, sEnd = 1, heroTop = 0, heroH = 1, pinEnd = 0, closingTop = 0, cols = 3;
-let cardImgs = [], slotsByIdx = [], flightState = "";
+let vw = 0, vh = 0, heroTop = 0, heroH = 1, pinEnd = 0, closingTop = 0, cols = 3;
+let cardImgs = [], flightState = "";
 function measure() {
   vw = window.innerWidth; vh = window.innerHeight;
-  portrait = vw / vh < .8;
-  base = portrait ? vw / 800 : Math.max(vw / 1600, vh / 1000);
-  sEnd = Math.max(base * 1.08, Math.min(vw * .94 / 660, vh * .72 / 300));
   const y = window.scrollY;
   heroTop = hero.getBoundingClientRect().top + y; heroH = hero.offsetHeight;
   pinEnd = heroTop + heroH - vh;
   closingTop = closing.getBoundingClientRect().top + y;
   const g = $("#grid-waffle");
   cols = g ? getComputedStyle(g).gridTemplateColumns.split(" ").filter(Boolean).length || 1 : 3;
-  slotsByIdx = WAFFLES.map((_, i) => slots.find(s => s.dataset.idx == i));
   flightState = "";
-  if (vw && vh) drawStars();
+  sizeCanvas();
   update(cur = y);
 }
 
-/* ================= scene ================= */
-/* write a style only when it changes, so the browser only repaints what moved */
+/* ================= scene: pre-rendered frames played by scroll ================= */
+const SCENE = {"end":0.8,"sets":{"p":{"w":720,"h":1500,"n":96,"slots":[[483.1,608.5,205.1,112.8],[257.5,608.5,205.1,112.8],[31.9,612.8,205.1,108.5],[483.1,770.3,205.1,104.8],[257.5,786.3,205.1,88.9],[31.9,781.2,205.1,94.0]]},"l":{"w":1600,"h":1000,"n":72,"slots":[[1073.5,185.6,455.7,250.7],[572.2,185.6,455.7,250.7],[70.9,195.1,455.7,241.2],[1073.5,545.1,455.7,232.9],[572.2,580.6,455.7,197.5],[70.9,569.2,455.7,208.9]]}}};
+const canvas = $("#scene"), ctx = canvas.getContext("2d", { alpha: false });
+let setKey = "", frames = [], endFrame = null, drawn = "", cw = 0, ch = 0, dpr = 1, moving = false;
+const N = () => SCENE.sets[setKey].n;
+function frameOrder(n) { // coarse to fine, so a fast swipe always has a frame close by
+  const seen = new Set([0]), out = [0];
+  for (let step = 32; step >= 1; step >>= 1) for (let i = 0; i < n; i += step) if (!seen.has(i)) { seen.add(i); out.push(i); }
+  return out;
+}
+function loadSet(key) {
+  if (key === setKey) return;
+  setKey = key; frames = new Array(N()).fill(null); endFrame = null; drawn = "";
+  const queue = [...frameOrder(N()), "end"];
+  let active = 0;
+  const next = () => {
+    while (active < 4 && queue.length) {
+      const k = queue.shift(); active++;
+      const im = new Image();
+      const done = () => { active--; if (setKey === key) { if (k === "end") endFrame = im; else frames[k] = im; drawn = ""; requestUpdate(); } next(); };
+      im.onload = () => { (im.decode ? im.decode().catch(() => {}) : Promise.resolve()).then(done); };
+      im.onerror = () => { active--; next(); };
+      im.src = `frames/${key}/${k === "end" ? "end" : String(k).padStart(3, "0")}.webp`;
+    }
+  };
+  next();
+}
+function sizeCanvas() {
+  dpr = Math.min(2, window.devicePixelRatio || 1);
+  cw = Math.round(vw * dpr); ch = Math.round(vh * dpr);
+  if (canvas.width !== cw || canvas.height !== ch) { canvas.width = cw; canvas.height = ch; drawn = ""; }
+  loadSet(vw / vh < .8 ? "p" : "l");
+}
+function cover() { const s = SCENE.sets[setKey]; const k = Math.max(cw / s.w, ch / s.h); return { k, x: (cw - s.w * k) / 2, y: (ch - s.h * k) / 2, w: s.w * k, h: s.h * k }; }
+function nearest(i) { for (let d = 1; d < N(); d++) { if (frames[i - d]) return i - d; if (frames[i + d]) return i + d; } return -1; }
+function drawScene(P) {
+  if (!setKey) return;
+  const c = cover();
+  let A, B = null, t = 0, key;
+  if (P >= SCENE.end && endFrame) { A = endFrame; key = "end"; }
+  else {
+    const f = clamp(P / SCENE.end) * (N() - 1);
+    // while the finger moves, blend neighbouring frames; at rest, show one sharp frame
+    const i = moving ? Math.floor(f) : Math.round(f);
+    const a = frames[i] ? i : nearest(i);
+    if (a < 0) return;
+    A = frames[a];
+    if (moving && a === i && frames[i + 1] && f - i > .02) { B = frames[i + 1]; t = f - i; }
+    key = a + (B ? ":" + t.toFixed(2) : "");
+  }
+  if (key === drawn) return;
+  drawn = key;
+  ctx.globalAlpha = 1; ctx.drawImage(A, c.x, c.y, c.w, c.h);
+  if (B) { ctx.globalAlpha = t; ctx.drawImage(B, c.x, c.y, c.w, c.h); ctx.globalAlpha = 1; }
+}
+/* where waffle i sits on the shelf, in screen pixels */
+function slotRect(i) {
+  const c = cover(), r = SCENE.sets[setKey].slots[i], top = pin.getBoundingClientRect().top;
+  return { left: (c.x + r[0] * c.k) / dpr, top: top + (c.y + r[1] * c.k) / dpr, width: r[2] * c.k / dpr, height: r[3] * c.k / dpr };
+}
+
+/* write a style only when it changes */
 const memo = new WeakMap();
 function put(el, prop, v) {
   if (!el) return;
@@ -879,68 +712,25 @@ function put(el, prop, v) {
   if (m[prop] === v) return; m[prop] = v; el.style[prop] = v;
 }
 const op = (el, v) => put(el, "opacity", String(Math.round(clamp(v) * 1000) / 1000));
-/* neon that warms up with a soft flicker instead of a hard on/off */
-const soft = (p, a, d) => { const t = seg(p, a, a + d); if (t <= 0 || t >= 1) return t; return sine(t) * (FLICK[Math.floor(t * FLICK.length)] ? 1 : .4); };
-
-const E = {
-  skyNight: $(".sky-night"), stars: $("#stars"), moon: $(".moon"), washes: $$(".wash"), glows: $$(".sconce .glow"),
-  posterDark: $(".poster .dark"), signLit: $(".signlogo .lit"), tubeLit: $(".tube.lit"), sides: $$(".signbox .side"),
-  bulbs: $$(".pendant .bulb"), groundGlow: $(".ground-glow"), steam: $$(".steam"), mascot: $(".mascot"), lightsOff: $(".lights-off"),
-  openLit: $(".open-sign .lit"), wallShade: $(".wall-shade"), head: $(".shutter-copy"), ui: $(".hero-ui"), fade: $(".hero-fade"), hdrLogo: $(".hdr-logo")
-};
+const heroUi = $(".hero-ui"), heroFade = $(".hero-fade");
 
 function renderHero(P) {
-  const night = sine(seg(P, 0, .14));
-  const lamps = sine(seg(P, .015, .08));
-  const sign = soft(P, .005, .1);
-  const sh = ease(seg(P, .05, .3));
-  const inside = sine(seg(P, .1, .24));
-  const openSign = soft(P, .25, .07);
-  const z = ease(seg(P, .28, .8));
-  const doors = ease(seg(P, .42, .6));
-  const glassA = 1 - sine(seg(P, .5, .64));
+  drawScene(P);
   const ui = 1 - sine(seg(P, .015, .1));
-  const head = 1 - sine(seg(P, .1, .22));
-  const fade = sine(seg(P, .84, .96));
-
-  op(E.skyNight, night); op(E.stars, night * .9); op(E.moon, night);
-  E.washes.forEach(w => op(w, lamps)); E.glows.forEach(g => op(g, lamps)); op(E.posterDark, .55 - lamps * .5);
-  op(E.signLit, sign); op(E.tubeLit, sign); E.sides.forEach(s => op(s, .35 + sign * .65));
-  E.bulbs.forEach(b => op(b, inside)); op(E.groundGlow, inside * sh); E.steam.forEach(s => op(s, inside * .55));
-  op(E.mascot, .25 + inside * .75); op(E.lightsOff, 1 - inside * .88); op(E.openLit, openSign);
-  op(E.wallShade, .08 + night * .5); op(E.head, head); op(E.ui, ui); op(E.fade, fade);
-  op(E.hdrLogo, seg(P, .86, .96));
-  put(intro, "pointerEvents", ui < .2 ? "none" : "auto");
-
-  // camera: from the whole shop front to the shelf
-  const S = base * Math.pow(sEnd / base, z);
-  const fx = 800, fy = lerp(portrait ? 540 : 500, 668, z);
-  const cx = vw / 2, cy = lerp(portrait ? vh * .45 : vh / 2, vh * .5, z);
-  put(camera, "transform", `translate3d(${(cx - fx * S).toFixed(1)}px,${(cy - fy * S).toFixed(1)}px,0) scale(${S.toFixed(4)})`);
-  // depth: the front of the shop passes the camera faster than the shelf
-  const k = 1 + 1.6 * z * z;
-  put(facade, "transform", `scale(${k.toFixed(4)})`);
-  put(facade, "visibility", z > .985 ? "hidden" : "visible");
-  put(win, "transform", `scale(${k.toFixed(4)})`);
-  put(interior, "transform", `scale(${(1 / k).toFixed(4)})`);
-  put(glass, "transform", `scale(${(1 + .9 * z * z).toFixed(4)})`);
-  op(glass, glassA);
-  put(doorL, "transform", `translate3d(${(-doors * 112).toFixed(1)}px,0,0)`);
-  put(doorR, "transform", `translate3d(${(doors * 112).toFixed(1)}px,0,0)`);
-  put(shutter, "transform", `translate3d(0,${(-sh * 100).toFixed(2)}%,0)`);
+  op(heroUi, ui); put(intro, "pointerEvents", ui < .2 ? "none" : "auto");
+  op(heroFade, sine(seg(P, .84, .96)));
 }
 
 /* the waffles lift off the shelf and land in their cards */
 function renderFlight(P, y) {
   if (reduced) {
-    if (flightState !== "still") { flightState = "still"; slots.forEach(s => s.style.visibility = "visible"); cardImgs.forEach(c => c && c.classList.remove("pending")); flyers.forEach(f => f.style.display = "none"); }
+    if (flightState !== "still") { flightState = "still"; cardImgs.forEach(c => c && c.classList.remove("pending")); flyers.forEach(f => f.style.display = "none"); }
     return;
   }
   const flyN = Math.min(WAFFLES.length, cols * 2);
-  if (P < .8) {
+  if (P < SCENE.end) {
     if (flightState !== "shelf") {
       flightState = "shelf";
-      slotsByIdx.forEach(s => s && put(s, "visibility", "visible"));
       flyers.forEach(f => put(f, "display", "none"));
       cardImgs.forEach((c, i) => c && c.classList.toggle("pending", i < flyN && c.offsetParent !== null));
     }
@@ -953,22 +743,20 @@ function renderFlight(P, y) {
     if (flightState !== "landed") {
       flightState = "landed";
       flyers.forEach(fl => put(fl, "display", "none"));
-      slotsByIdx.forEach(s => s && put(s, "visibility", "hidden"));
       cardImgs.forEach(c => c && c.classList.remove("pending"));
     }
     return;
   }
   flightState = "air";
-  const lift = easeOut(seg(P, .8, .94)), fe = ease(f);
+  const lift = easeOut(seg(P, SCENE.end, .94)), fe = ease(f);
   WAFFLES.forEach((p, i) => {
-    const slotImg = slotsByIdx[i], card = cardImgs[i], fl = flyers[i];
-    if (!slotImg || !card) return;
-    put(slotImg, "visibility", "hidden");
+    const card = cardImgs[i], fl = flyers[i];
+    if (!card) return;
     const b = card.getBoundingClientRect();
     const canFly = i < flyN && b.width > 0;
     card.classList.toggle("pending", canFly);
     if (!canFly && f > .3) { put(fl, "display", "none"); return; }
-    const a = slotImg.getBoundingClientRect();
+    const a = slotRect(i);
     const bw = canFly ? b.width : a.width, bh = canFly ? b.height : a.height;
     put(fl, "width", bw.toFixed(1) + "px"); put(fl, "height", bh.toFixed(1) + "px");
     const dir = i % 2 ? 1 : -1;
@@ -1007,12 +795,14 @@ let cur = window.scrollY, running = false, lastT = 0;
 function tick(t) {
   const target = window.scrollY;
   const dt = lastT ? Math.min(50, t - lastT) : 16.7; lastT = t;
-  cur += (target - cur) * (1 - Math.exp(-dt / 100));
+  cur += (target - cur) * (1 - Math.exp(-dt / 90));
   if (Math.abs(target - cur) < .25) cur = target;
+  moving = cur !== target;
   update(cur);
   if (cur !== target) requestAnimationFrame(tick); else { running = false; lastT = 0; }
 }
-window.addEventListener("scroll", () => { if (reduced) { update(window.scrollY); return; } if (!running) { running = true; requestAnimationFrame(tick); } }, { passive: true });
+function requestUpdate() { if (!running) { running = true; requestAnimationFrame(tick); } }
+window.addEventListener("scroll", () => { if (reduced) { update(window.scrollY); return; } requestUpdate(); }, { passive: true });
 let rz; window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(measure, 80); });
 window.addEventListener("load", measure);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
