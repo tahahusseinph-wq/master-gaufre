@@ -97,13 +97,18 @@ html[lang="en"] .lang-pill{font-family:var(--f-body);font-size:14px;letter-spaci
 .veil.on{opacity:1}
 
 /* ---------- hero: pinned scene ---------- */
-.hero{position:relative;height:640vh;height:640svh}
-@media (max-width:760px){.hero{height:580vh;height:580svh}}
+.hero{position:relative;height:440vh;height:440svh}
+@media (max-width:760px){.hero{height:420vh;height:420svh}}
+/* the shop, out of focus, stays behind the whole menu */
+.shop-bg,.hero-fade{background:linear-gradient(180deg,rgba(9,6,12,.12),rgba(9,6,12,.42)),url(frames/l/bg.webp) center/cover no-repeat,#120A18}
+@media (max-aspect-ratio:4/5){.shop-bg,.hero-fade{background:linear-gradient(180deg,rgba(9,6,12,.12),rgba(9,6,12,.42)),url(frames/p/bg.webp) center/cover no-repeat,#120A18}}
+.shop-bg{position:fixed;inset:0;z-index:0;pointer-events:none}
+main{position:relative;z-index:1}
 .hero-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#0B0610;}
 .scene{position:absolute;inset:0;width:100%;height:100%;display:block}
 
 /* hero overlays */
-.hero-fade{position:absolute;inset:0;background:var(--night);opacity:0;will-change:opacity;pointer-events:none;z-index:3}
+.hero-fade{position:absolute;inset:0;opacity:0;will-change:opacity;pointer-events:none;z-index:3}
 .hero-ui{position:absolute;inset:0;z-index:5;pointer-events:none;will-change:opacity}
 .hero-ui::before{content:"";position:absolute;inset:auto 0 0;height:46%;background:linear-gradient(0deg,rgba(6,3,9,.88),transparent)}
 .intro{position:absolute;inset-inline-start:clamp(16px,4vw,52px);bottom:clamp(22px,5vh,52px);max-width:440px;display:grid;gap:16px}
@@ -134,7 +139,7 @@ html[lang="ar"] .scroll-hint{font-family:var(--f-body);letter-spacing:0;font-siz
 .flyers img{position:absolute;left:0;top:0;display:none;transform-origin:50% 50%;will-change:transform,opacity;filter:drop-shadow(0 24px 22px rgba(0,0,0,.55))}
 
 /* ---------- sweet board ---------- */
-.board{position:relative;background:var(--night);padding-block:clamp(40px,8vh,90px) 40px}
+.board{position:relative;background:transparent;padding-block:clamp(40px,8vh,90px) 40px}
 .board::before,.board::after{content:"";position:absolute;width:340px;height:340px;pointer-events:none;opacity:.55;
   background:radial-gradient(circle,var(--purple) 1.6px,transparent 2.2px) 0 0/14px 14px;
   -webkit-mask:radial-gradient(circle at var(--mx) var(--my),#000,transparent 68%);mask:radial-gradient(circle at var(--mx) var(--my),#000,transparent 68%)}
@@ -144,9 +149,9 @@ html[lang="ar"] .scroll-hint{font-family:var(--f-body);letter-spacing:0;font-siz
 .board-head{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:28px;align-items:end}
 .eyebrow{margin:0 0 8px;font:400 14px/1 var(--f-mono);color:var(--muted);letter-spacing:.08em}
 html[lang="ar"] .eyebrow{font-family:var(--f-body);letter-spacing:0;font-size:15px}
-.board h2{margin:0;font:400 clamp(44px,6.4vw,92px)/1.04 var(--display);color:var(--cream);text-wrap:balance}
+.board h2{text-shadow:0 4px 26px rgba(0,0,0,.55);margin:0;font:400 clamp(44px,6.4vw,92px)/1.04 var(--display);color:var(--cream);text-wrap:balance}
 html[lang="en"] .board h2{font-size:clamp(38px,5.4vw,76px);letter-spacing:-.015em}
-.now-card{width:min(400px,100%);box-sizing:border-box;padding:20px 22px;border-radius:22px;background:linear-gradient(160deg,rgba(255,255,255,.06),rgba(255,255,255,.02));
+.now-card{width:min(400px,100%);box-sizing:border-box;padding:20px 22px;border-radius:22px;background:linear-gradient(160deg,rgba(28,18,36,.86),rgba(16,10,21,.86));
   border:1px solid var(--line);display:grid;gap:12px}
 .now-top{display:flex;justify-content:space-between;align-items:center;gap:16px}
 .now-top .lbl{font-size:14px;color:var(--muted)}
@@ -160,7 +165,7 @@ html[lang="ar"] .night-bar{transform:scaleX(-1)}
 .night-ends{display:flex;justify-content:space-between;font:400 12px/1 var(--f-mono);color:var(--muted)}
 .tabs{display:flex;gap:8px;margin:34px 0 8px;overflow-x:auto;padding-bottom:6px;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
-.tab{flex:none;height:40px;padding:0 18px;border-radius:999px;border:1px solid var(--line);background:transparent;color:var(--cream);cursor:pointer;font:500 14.5px/1 var(--f-body)}
+.tab{flex:none;height:40px;padding:0 18px;border-radius:999px;border:1px solid rgba(255,255,255,.14);background:rgba(16,10,21,.7);color:var(--cream);cursor:pointer;font:500 14.5px/1 var(--f-body)}
 .tab:hover{border-color:rgba(254,197,11,.5)}
 .tab[aria-selected="true"]{background:var(--yellow);color:#1A0E00;border-color:var(--yellow);font-weight:700}
 .cat{margin-top:46px}
@@ -173,7 +178,7 @@ html[lang="ar"] .cat-h .slash{transform:scaleX(-1)}
 @media (max-width:1000px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.board-head{grid-template-columns:1fr}}
 @media (max-width:640px){.grid{grid-template-columns:minmax(0,1fr)}}
 .card{position:relative;display:flex;flex-direction:column;gap:10px;padding:16px 18px 18px;border-radius:24px;min-width:0;
-  background:linear-gradient(180deg,#1E1426,#140D19);border:1px solid rgba(254,197,11,.2);box-shadow:0 18px 40px rgba(0,0,0,.35)}
+  background:linear-gradient(180deg,rgba(30,20,38,.88),rgba(20,13,25,.92));border:1px solid rgba(254,197,11,.22);box-shadow:0 18px 40px rgba(0,0,0,.35)}
 .card-media{position:relative;aspect-ratio:16/10;min-height:0;overflow:visible;display:grid;place-items:center;margin:-4px -6px 4px;border-radius:18px;
   background:radial-gradient(ellipse at 50% 58%,rgba(149,11,161,.32),transparent 66%)}
 .card-media::after{content:"";position:absolute;left:18%;right:18%;bottom:9%;height:10%;border-radius:50%;background:rgba(0,0,0,.55);filter:blur(10px);z-index:0}
@@ -197,13 +202,13 @@ html[lang="en"] .card-name{font-size:20px;line-height:1.3}
 .add{height:40px;padding:0 18px;border-radius:999px;border:0;background:var(--yellow);color:#1A0E00;font:700 14.5px/1 var(--f-body);cursor:pointer;margin-inline-start:auto}
 .add:hover{background:#FFD447}
 .add:active{transform:scale(.96)}
-.note-card{justify-content:center;gap:14px;background:radial-gradient(circle at 80% 20%,rgba(149,11,161,.35),transparent 60%),#120B17;border-style:dashed}
+.note-card{justify-content:center;gap:14px;background:radial-gradient(circle at 80% 20%,rgba(149,11,161,.35),transparent 60%),rgba(18,11,23,.9);border-style:dashed}
 .note-card .big{font:800 96px/1 var(--f-led);color:var(--yellow);text-shadow:0 0 22px rgba(254,197,11,.4)}
 .note-card p{margin:0;font-size:16px;line-height:1.7}
 .note-card p + p{color:var(--muted);font-size:14.5px}
 .addons{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
 @media (max-width:900px){.addons{grid-template-columns:minmax(0,1fr)}}
-.addon{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;align-items:center;padding:16px;border-radius:22px;background:#150E1A;border:1px solid var(--line)}
+.addon{display:grid;grid-template-columns:110px minmax(0,1fr);gap:16px;align-items:center;padding:16px;border-radius:22px;background:rgba(21,14,26,.88);border:1px solid var(--line)}
 .addon .pic{height:96px;display:grid;place-items:center;border-radius:16px;background:radial-gradient(circle,rgba(149,11,161,.35),transparent 70%)}
 .addon .pic img{width:auto;height:auto;max-width:104px;max-height:88px;filter:drop-shadow(0 10px 10px rgba(0,0,0,.5))}
 .addon h4{margin:0;font:400 23px/1.2 var(--display);color:var(--yellow)}
@@ -215,8 +220,7 @@ html[lang="en"] .addon h4{font-size:18px}
 
 /* ---------- closing ---------- */
 .closing{position:relative;height:200vh;height:200svh}
-.closing-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;
-  background:radial-gradient(ellipse 70% 50% at 50% 110%,rgba(149,11,161,.35),transparent 70%),var(--night)}
+.closing-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:transparent}
 .closing-shutter{position:absolute;inset:0;transform:translateY(-100%);will-change:transform;display:grid;place-items:center;
   background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.05) 40%,rgba(0,0,0,.4)),
   repeating-linear-gradient(180deg,#3E3B46 0 3px,#6E6A77 3px 9px,#4D4A55 9px 16px,#24222A 16px 20px)}
@@ -265,6 +269,7 @@ html.reduced .closing{height:100vh;height:100svh}
 </style>
 </head>
 <body>
+<div class="shop-bg" aria-hidden="true"></div>
 <header class="hdr">
   <a class="hdr-logo" href="#top" aria-label="Master Gaufre"><img src="img/logo.webp" alt="" width="828" height="632"></a>
   <div class="pill clock" aria-live="off"><i class="dot"></i><span class="t" id="clock-t">5:58</span><span class="ap" id="clock-ap">م</span></div>
@@ -644,7 +649,7 @@ function measure() {
 }
 
 /* ================= scene: pre-rendered frames played by scroll ================= */
-const SCENE = {"end":0.8,"sets":{"p":{"w":720,"h":1500,"n":96,"slots":[[483.1,608.5,205.1,112.8],[257.5,608.5,205.1,112.8],[31.9,612.8,205.1,108.5],[483.1,770.3,205.1,104.8],[257.5,786.3,205.1,88.9],[31.9,781.2,205.1,94.0]]},"l":{"w":1600,"h":1000,"n":72,"slots":[[1073.5,185.6,455.7,250.7],[572.2,185.6,455.7,250.7],[70.9,195.1,455.7,241.2],[1073.5,545.1,455.7,232.9],[572.2,580.6,455.7,197.5],[70.9,569.2,455.7,208.9]]}}};
+const SCENE = {"end":0.72,"sets":{"p":{"w":720,"h":1500,"n":88,"slots":[[483.1,608.5,205.1,112.8],[257.5,608.5,205.1,112.8],[31.9,612.8,205.1,108.5],[483.1,770.3,205.1,104.8],[257.5,786.3,205.1,88.9],[31.9,781.2,205.1,94.0]]},"l":{"w":1600,"h":1000,"n":72,"slots":[[1073.5,185.6,455.7,250.7],[572.2,185.6,455.7,250.7],[70.9,195.1,455.7,241.2],[1073.5,545.1,455.7,232.9],[572.2,580.6,455.7,197.5],[70.9,569.2,455.7,208.9]]}}};
 const canvas = $("#scene"), ctx = canvas.getContext("2d", { alpha: false });
 let setKey = "", frames = [], endFrame = null, drawn = "", cw = 0, ch = 0, dpr = 1, moving = false;
 const N = () => SCENE.sets[setKey].n;
@@ -659,7 +664,7 @@ function loadSet(key) {
   const queue = [...frameOrder(N()), "end"];
   let active = 0;
   const next = () => {
-    while (active < 4 && queue.length) {
+    while (active < 6 && queue.length) {
       const k = queue.shift(); active++;
       const im = new Image();
       const done = () => { active--; if (setKey === key) { if (k === "end") endFrame = im; else frames[k] = im; drawn = ""; requestUpdate(); } next(); };
@@ -718,7 +723,7 @@ function renderHero(P) {
   drawScene(P);
   const ui = 1 - sine(seg(P, .015, .1));
   op(heroUi, ui); put(intro, "pointerEvents", ui < .2 ? "none" : "auto");
-  op(heroFade, sine(seg(P, .84, .96)));
+  op(heroFade, sine(seg(P, .74, .88)));   // focus pull: the shop goes soft behind the waffles
 }
 
 /* the waffles lift off the shelf and land in their cards */
@@ -748,7 +753,7 @@ function renderFlight(P, y) {
     return;
   }
   flightState = "air";
-  const lift = easeOut(seg(P, SCENE.end, .94)), fe = ease(f);
+  const lift = easeOut(seg(P, SCENE.end, SCENE.end + .14)), fe = ease(f);
   WAFFLES.forEach((p, i) => {
     const card = cardImgs[i], fl = flyers[i];
     if (!card) return;
@@ -786,7 +791,7 @@ function update(y) {
   renderFlight(P, y);
   if (y > closingTop - vh * 2) renderClosing(y);
   hdr.classList.toggle("solid", !reduced ? y > pinEnd + vh * .55 : y > vh * .5);
-  if (!reduced && y < pinEnd - 2) setClock(OPEN - 2 + seg(P, 0, .3) * 2 + seg(P, .3, 1) * 12);
+  if (!reduced && y < pinEnd - 2) setClock(OPEN - 2 + seg(P, 0, .25) * 2 + seg(P, .25, 1) * 12);
   else setClock(nowMin());
 }
 
