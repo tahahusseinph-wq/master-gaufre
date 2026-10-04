@@ -1,0 +1,790 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>مستر غوفر | Master Gaufre</title>
+<meta name="description" content="وافل ذهبي مقرمش وبان كيك هش، مغطّسين بصوصات غنية ومزيّنين بفواكه موسمية طازة. اطلب على واتساب.">
+<meta name="theme-color" content="#EDE6DB">
+<link rel="icon" type="image/png" href="../img/icon.png">
+<link rel="apple-touch-icon" href="../img/icon.png">
+<meta property="og:type" content="website">
+<meta property="og:title" content="مستر غوفر | Master Gaufre">
+<meta property="og:description" content="وافل وبان كيك سخن كل ليلة. شوف المنيو واطلب على واتساب.">
+<meta property="og:image" content="https://tahahusseinph-wq.github.io/master-gaufre/img/og.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:url" content="https://tahahusseinph-wq.github.io/master-gaufre/v2/">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="../fonts/lalezar.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/plex-ar-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="frames/p/000.webp" as="image" media="(max-aspect-ratio: 4/5)" fetchpriority="high">
+<link rel="preload" href="frames/l/000.webp" as="image" media="(min-aspect-ratio: 4/5)" fetchpriority="high">
+<style>
+@font-face{font-family:"Lalezar";src:url(../fonts/lalezar.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"IBM Plex Sans Arabic";src:url(../fonts/plex-ar-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"IBM Plex Sans Arabic";src:url(../fonts/plex-ar-700.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Space Mono";src:url(../fonts/spacemono-400.woff2) format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"Space Mono";src:url(../fonts/spacemono-700.woff2) format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Bagel Fat One";src:url(../fonts/bagel.woff2) format("woff2");font-display:swap}
+@font-face{font-family:"Doto";src:url(../fonts/doto-800.woff2) format("woff2");font-weight:100 900;font-display:swap}
+</style>
+<style>
+/* Layout: one scroll story. A night storefront pinned on scroll (shutter up, neon on, camera through the door),
+   the waffles lift off the shelf and land on the sweet board, then a shutter comes down to close the night.
+   Single dark look built from the logo: black, purple, yellow. */
+:root{
+  color-scheme: dark;
+  --night:#09060C;
+  --plum:#140C19;
+  --card:#1A1121;
+  --line:#2E2137;
+  --purple:#950BA1;
+  --purple-hi:#CF5BDD;
+  --yellow:#FEC50B;
+  --cream:#F6EDE0;
+  --muted:#A897B2;
+  --board:#EDE6DB;--card-bg:#F7F3EC;--ink:#1F1A16;--ink-2:#5F564D;--muted2:#8C8379;--orange:#E2662A;--line2:#DDD3C5;
+  --f-ar-display:"Lalezar","IBM Plex Sans Arabic",system-ui,sans-serif;
+  --f-en-display:"Bagel Fat One","Lalezar",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Arabic",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"Space Mono",ui-monospace,SFMono-Regular,Menlo,monospace;
+  --f-led:"Doto","Space Mono",ui-monospace,monospace;
+  --display:var(--f-ar-display);
+}
+html[lang="en"]{--display:var(--f-en-display)}
+html{background:var(--night)}
+body{margin:0;background:var(--night);color:var(--cream);font-family:var(--f-body);font-size:15px;line-height:1.6;overflow-x:clip;-webkit-font-smoothing:antialiased}
+img{max-width:100%}
+[hidden]{display:none!important}
+button{font:inherit;color:inherit}
+a{color:inherit}
+:focus-visible{outline:2px solid var(--yellow);outline-offset:3px;border-radius:10px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ---------- header ---------- */
+.hdr{position:fixed;inset-inline:0;top:0;z-index:100;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:10px;
+  padding:calc(env(safe-area-inset-top,0px) + 14px) clamp(16px,3vw,32px) 12px;pointer-events:none}
+.hdr>*{pointer-events:auto}
+.hdr::before{content:"";position:absolute;inset:0 0 -28px;z-index:-1;pointer-events:none;opacity:0;transition:opacity .3s;
+  background:linear-gradient(180deg,rgba(9,6,12,.94),rgba(9,6,12,.7) 60%,rgba(9,6,12,0))}
+.hdr.solid::before{opacity:1}
+.hdr.light::before{background:linear-gradient(180deg,rgba(237,230,219,.96),rgba(237,230,219,.75) 60%,rgba(237,230,219,0))}
+.hdr.light .pill{background:rgba(255,255,255,.8);color:var(--ink);border-color:rgba(31,26,22,.08)}
+.hdr.light .clock .ap{color:var(--muted2)}
+.hdr-logo{justify-self:start;display:block;height:46px}
+.hdr-logo img{height:100%;width:auto;display:block;filter:drop-shadow(0 4px 10px rgba(0,0,0,.5))}
+.pill{display:inline-flex;align-items:center;gap:8px;height:38px;padding:0 14px;border-radius:999px;background:rgba(14,8,18,.86);
+  border:1px solid rgba(255,255,255,.09);color:var(--cream);font:500 14px/1 var(--f-body);text-decoration:none;white-space:nowrap}
+button.pill{cursor:pointer}
+button.pill:hover{border-color:rgba(254,197,11,.5)}
+.clock{justify-self:center;gap:9px}
+.clock .dot{width:7px;height:7px;border-radius:50%;background:var(--orange);box-shadow:0 0 10px var(--orange);animation:pulse 1.8s ease-in-out infinite}
+.clock .t{font:800 20px/1 var(--f-led);letter-spacing:.03em;font-variant-numeric:tabular-nums;direction:ltr}
+.clock .ap{font:400 12px/1 var(--f-body);color:var(--muted)}
+.hdr-actions{justify-self:end;display:flex;gap:8px}
+.lang-pill{font-family:var(--f-mono);font-size:13px;letter-spacing:.04em}
+html[lang="en"] .lang-pill{font-family:var(--f-body);font-size:14px;letter-spacing:0}
+.bag-pill svg{width:16px;height:16px}
+.bag-count{min-width:20px;height:20px;border-radius:999px;background:var(--orange);color:#fff;font:700 12px/20px var(--f-mono);text-align:center;padding:0 5px}
+.bag-count.bump{animation:bump .45s ease}
+@keyframes bump{40%{transform:scale(1.35)}}
+@keyframes pulse{50%{opacity:.35}}
+@media (max-width:560px){
+  .hdr{gap:6px}
+  .hdr-logo{height:40px}
+  .pill{height:36px;padding:0 11px}
+  .clock{padding:0 10px;gap:7px}
+}
+.veil{position:fixed;inset:0;z-index:140;background:var(--night);opacity:0;pointer-events:none;transition:opacity .3s ease}
+.veil.on{opacity:1}
+
+/* ---------- hero: pinned scene ---------- */
+.hero{position:relative;height:440vh;height:440svh}
+@media (max-width:760px){.hero{height:420vh;height:420svh}}
+.hero-fade{background:var(--board)}
+.hero-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:#0B0610;}
+.scene{position:absolute;inset:0;width:100%;height:100%;display:block}
+
+/* hero overlays */
+.hero-fade{position:absolute;inset:0;opacity:0;will-change:opacity;pointer-events:none;z-index:3}
+.hero-ui{position:absolute;inset:0;z-index:5;pointer-events:none;will-change:opacity}
+.hero-ui::before{content:"";position:absolute;inset:auto 0 0;height:46%;background:linear-gradient(0deg,rgba(6,3,9,.88),transparent)}
+.intro{position:absolute;inset-inline-start:clamp(16px,4vw,52px);bottom:clamp(22px,5vh,52px);max-width:440px;display:grid;gap:16px}
+.intro p{margin:0;font-size:16px;line-height:1.75;color:#EDE2F2;text-wrap:pretty}
+.btn{box-sizing:border-box;display:inline-flex;align-items:center;justify-content:center;gap:8px;height:46px;padding:0 22px;border-radius:999px;font:700 15px/1 var(--f-body);
+  text-decoration:none;cursor:pointer;border:0;transition:transform .15s ease,background-color .15s}
+.btn:active{transform:scale(.97)}
+.btn-y{background:var(--yellow);color:#1A0E00}
+.btn-y:hover{background:#FFD447}
+.btn-ghost{background:rgba(255,255,255,.08);color:var(--cream);border:1px solid rgba(255,255,255,.18);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px)}
+.btn-ghost:hover{background:rgba(255,255,255,.14)}
+.led-note{position:absolute;inset-inline-end:clamp(16px,4vw,52px);bottom:clamp(26px,5vh,56px);text-align:end;display:grid;gap:6px}
+.led-note b{font:800 clamp(44px,5.4vw,72px)/1 var(--f-led);color:#F0A060;text-shadow:0 0 18px rgba(226,102,42,.45);direction:ltr}
+.led-note span{font-size:14px;color:#E2D6E8}
+.scroll-hint{position:absolute;left:50%;transform:translateX(-50%);bottom:18px;font:400 12px/1 var(--f-mono);color:#BFAFC8;letter-spacing:.06em;display:flex;align-items:center;gap:8px}
+html[lang="ar"] .scroll-hint{font-family:var(--f-body);letter-spacing:0;font-size:13px}
+.scroll-hint i{width:1px;height:18px;background:currentColor;animation:hint 1.6s ease-in-out infinite}
+@keyframes hint{50%{transform:translateY(5px);opacity:.4}}
+@media (max-width:760px){
+  .led-note{display:none}
+  .intro{inset-inline-end:16px;max-width:none;bottom:74px}
+  .scroll-hint{bottom:calc(env(safe-area-inset-bottom,0px) + 26px);font-size:13px}
+  .intro p{font-size:15px}
+}
+
+/* flyers */
+.flyers{position:fixed;inset:0;z-index:90;pointer-events:none;overflow:hidden}
+.flyers img{position:absolute;left:0;top:0;display:none;transform-origin:50% 50%;will-change:transform,opacity;filter:drop-shadow(0 22px 20px rgba(80,50,20,.3))}
+
+/* ---------- sweet board: a light bakery board, like the reference ---------- */
+.board{position:relative;background:var(--board);color:var(--ink);padding-block:clamp(40px,8vh,90px) 50px}
+.wrap{position:relative;z-index:1;max-width:1280px;margin:0 auto;padding-inline:clamp(16px,4vw,40px)}
+.eyebrow{margin:0 0 14px;font:400 14px/1 var(--f-mono);color:var(--muted2);letter-spacing:.08em}
+html[lang="ar"] .eyebrow{font-family:var(--f-body);letter-spacing:0;font-size:15px}
+.board-head{display:grid;grid-template-columns:minmax(0,1fr) minmax(300px,460px);gap:28px;align-items:end;margin-bottom:34px}
+.board h2{margin:0;font:400 clamp(46px,6.6vw,98px)/1.02 var(--display);color:var(--ink);text-wrap:balance}
+html[lang="en"] .board h2{font-size:clamp(40px,5.6vw,82px);letter-spacing:-.015em}
+.now-card{width:100%;max-width:460px;box-sizing:border-box;padding:22px 24px;border-radius:26px;background:rgba(255,255,255,.55);
+  border:1px solid rgba(255,255,255,.8);box-shadow:0 10px 30px rgba(80,60,40,.08);display:grid;gap:14px}
+.now-top{display:flex;justify-content:space-between;align-items:center;gap:16px}
+.now-top .lbl{font-size:14px;color:var(--ink-2)}
+.led-wrap{display:inline-flex;align-items:baseline;gap:8px;direction:ltr}
+.now-top .ap{font-size:14px;color:var(--muted2)}
+.now-top .led{font:800 54px/1 var(--f-led);color:var(--orange);direction:ltr;font-variant-numeric:tabular-nums}
+.peek{display:grid;gap:12px;font-size:13.5px;color:var(--ink-2)}
+.peek input{-webkit-appearance:none;appearance:none;width:100%;height:4px;margin:6px 0;border-radius:4px;background:linear-gradient(90deg,var(--ink),var(--orange));outline:none;cursor:pointer}
+html[lang="ar"] .peek input{transform:scaleX(-1)}
+.peek input::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:24px;height:24px;border-radius:50%;background:var(--ink);border:3px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.25)}
+.peek input::-moz-range-thumb{width:20px;height:20px;border-radius:50%;background:var(--ink);border:3px solid #fff}
+.peek input:focus-visible{outline:2px solid var(--orange);outline-offset:6px}
+.now-status{margin:0;font-size:14px;color:var(--ink)}
+.now-status .st{display:inline-block;width:8px;height:8px;border-radius:50%;margin-inline-end:8px;background:#2FA866;vertical-align:middle}
+.now-status.closed .st{background:#D9473F}
+.grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:16px}
+@media (max-width:1100px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.board-head{grid-template-columns:1fr}}
+@media (max-width:640px){.grid{grid-template-columns:minmax(0,1fr)}}
+.card{position:relative;display:flex;flex-direction:column;gap:8px;padding:16px 18px 18px;border-radius:26px;min-width:0;background:var(--card-bg);
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.9),0 10px 30px rgba(80,60,40,.06)}
+.card-media{position:relative;aspect-ratio:4/3;min-height:0;margin:0 -4px 4px}
+.card-media::after{content:"";position:absolute;left:20%;right:20%;bottom:8%;height:8%;border-radius:50%;background:rgba(80,55,30,.22);filter:blur(8px);z-index:0}
+.card-img{position:absolute;inset:0;margin:auto;z-index:1;display:block;width:auto;height:auto;max-width:94%;max-height:88%;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1);filter:drop-shadow(0 10px 10px rgba(80,50,20,.25))}
+.card:hover .card-img{transform:translateY(-6px) rotate(-1.5deg)}
+.card-img.pending{visibility:hidden}
+.card-meta{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.num{font:800 30px/1 var(--f-led);color:var(--ink-2);direction:ltr}
+.tag{display:inline-flex;align-items:center;gap:6px;height:28px;padding:0 12px;border-radius:999px;border:1px solid var(--line2);color:var(--ink-2);font-size:12.5px;white-space:nowrap;background:rgba(255,255,255,.55)}
+.tag::before{content:"";width:5px;height:5px;border-radius:50%;background:currentColor;opacity:.7}
+.tag.sig{background:var(--orange);border-color:var(--orange);color:#fff;font-weight:700}
+.card-name{margin:6px 0 0;font:400 26px/1.2 var(--display);color:var(--ink)}
+html[lang="en"] .card-name{font-size:21px}
+.card-alt{margin:0;font-size:13px;color:var(--muted2)}
+.card-desc{margin:4px 0 0;font-size:14.5px;line-height:1.7;color:var(--ink-2);flex:1}
+.card-kind{margin:2px 0 0;font-size:12px;color:var(--muted2)}
+.card-foot{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-top:8px}
+.price{font:700 17px/1 var(--f-mono);color:var(--ink);direction:ltr}
+.add{height:40px;padding:0 18px;border-radius:999px;border:0;background:var(--ink);color:#fff;font:700 14.5px/1 var(--f-body);cursor:pointer;margin-inline-start:auto}
+.add:hover{background:#000}
+.add:active{transform:scale(.96)}
+.note-card{justify-content:center;gap:12px}
+.note-card .big{font:800 112px/1 var(--f-led);color:var(--orange)}
+.note-card p{margin:0;font-size:16px;line-height:1.7;color:var(--ink)}
+.note-card p + p{color:var(--ink-2);font-size:14.5px}
+.addons-card ul{list-style:none;margin:8px 0 0;padding:0;display:grid;gap:14px}
+.addons-card li{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:12px;align-items:center}
+.addons-card li img{width:64px;height:50px;object-fit:contain;filter:drop-shadow(0 6px 6px rgba(80,50,20,.2))}
+.addons-card li b{display:block;font:400 20px/1.2 var(--display);color:var(--ink)}
+html[lang="en"] .addons-card li b{font-size:16px}
+.addons-card li span{display:block;font-size:12.5px;color:var(--ink-2);line-height:1.5}
+.addons-card .add{width:36px;height:36px;padding:0;font-size:18px;margin:0}
+.allergy{display:flex;gap:12px;align-items:center;margin:28px 0 0;padding:14px 18px;border-radius:16px;background:rgba(226,102,42,.08);border:1px solid rgba(226,102,42,.25);font-size:14.5px;color:var(--ink)}
+.allergy svg{flex:none;width:24px;height:24px}
+
+/* ---------- closing ---------- */
+.closing{position:relative;height:200vh;height:200svh}
+.closing-pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;background:var(--board)}
+.closing-shutter{position:absolute;inset:0;transform:translateY(-100%);will-change:transform;display:grid;place-items:center;
+  background:linear-gradient(180deg,rgba(0,0,0,.25),rgba(0,0,0,.05) 40%,rgba(0,0,0,.4)),
+  repeating-linear-gradient(180deg,#3E3B46 0 3px,#6E6A77 3px 9px,#4D4A55 9px 16px,#24222A 16px 20px)}
+.closing-shutter::after{content:"";position:absolute;left:0;right:0;bottom:0;height:34px;background:linear-gradient(180deg,#77737F,#3A3740 60%,#1D1B22)}
+.closing-copy{position:relative;z-index:1;display:grid;justify-items:center;text-align:center;gap:14px;padding:0 16px;opacity:0}
+.closing-copy img{width:min(420px,72vw);height:auto;transform:rotate(-4deg);filter:drop-shadow(0 18px 24px rgba(0,0,0,.55))}
+.closing-copy .see{margin:6px 0 0;font:400 clamp(38px,6vw,76px)/1.05 var(--display);color:var(--cream);text-shadow:0 3px 0 rgba(0,0,0,.35)}
+.closing-copy .hours{margin:0;font:400 15px/1.5 var(--f-mono);color:#E6DACB}
+html[lang="ar"] .closing-copy .hours{font-family:var(--f-body)}
+.btn-cream{background:var(--cream);color:#1A0E00;margin-top:8px}
+.btn-cream:hover{background:#fff}
+.credit{position:absolute;bottom:46px;left:0;right:0;text-align:center;margin:0;font-size:12px;color:#CFC4D6;z-index:1}
+
+/* ---------- drawer, menu, toast ---------- */
+.scrim{position:fixed;inset:0;z-index:110;background:rgba(4,2,6,.6);-webkit-backdrop-filter:blur(3px);backdrop-filter:blur(3px)}
+.drawer{position:fixed;top:0;bottom:0;inset-inline-end:0;z-index:120;width:min(430px,100%);box-sizing:border-box;display:flex;flex-direction:column;
+  background:#120B16;border-inline-start:1px solid var(--line);padding:calc(env(safe-area-inset-top,0px) + 18px) 20px calc(env(safe-area-inset-bottom,0px) + 18px);box-shadow:-30px 0 60px rgba(0,0,0,.5)}
+.drawer-h{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:14px}
+.drawer-h h3{margin:0;font:400 34px/1 var(--display);color:var(--yellow)}
+html[lang="en"] .drawer-h h3{font-size:26px}
+.x{width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:transparent;cursor:pointer;display:grid;place-items:center}
+.x svg{width:16px;height:16px}
+.lines{flex:1;overflow:auto;display:grid;align-content:start;gap:10px;margin:0;padding:0;list-style:none}
+.line{display:grid;grid-template-columns:64px minmax(0,1fr) auto;gap:12px;align-items:center;padding:10px;border-radius:16px;background:#1A1120}
+.line img{width:64px;height:48px;object-fit:contain}
+.line b{display:block;font-weight:500;font-size:14.5px;line-height:1.4}
+.qty{display:flex;align-items:center;gap:6px}
+.qty button{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);background:transparent;cursor:pointer;font:700 16px/1 var(--f-mono)}
+.qty span{min-width:20px;text-align:center;font:700 15px/1 var(--f-mono)}
+.empty{color:var(--muted);padding:24px 4px}
+.fields{display:grid;gap:10px;margin:14px 0}
+.fields label{display:grid;gap:6px;font-size:13px;color:var(--muted)}
+.fields input,.fields textarea{width:100%;box-sizing:border-box;border-radius:14px;border:1px solid var(--line);background:#0C070F;color:var(--cream);font:400 15px/1.5 var(--f-body);padding:10px 12px}
+.fields textarea{min-height:70px;resize:vertical}
+.send{width:100%;height:50px}
+.send[aria-disabled="true"]{opacity:.4;pointer-events:none}
+.send-hint{margin:10px 0 0;font-size:12.5px;color:var(--muted);text-align:center}
+html[lang="ar"] .toast{position:fixed;left:50%;bottom:calc(env(safe-area-inset-bottom,0px) + 22px);z-index:130;transform:translate(-50%,20px);opacity:0;pointer-events:none;
+  padding:12px 18px;border-radius:999px;background:var(--cream);color:#1A0E00;font-weight:700;font-size:14px;transition:opacity .2s,transform .2s;box-shadow:0 12px 30px rgba(0,0,0,.4)}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* reduced motion: a still, open shop */
+html.reduced .hero{height:100vh;height:100svh}
+html.reduced .steam,html.reduced .clock .dot,html.reduced .scroll-hint{animation:none}
+html.reduced .closing{height:100vh;height:100svh}
+</style>
+</head>
+<body>
+<header class="hdr">
+  <a class="hdr-logo" href="#top" aria-label="Master Gaufre"><img src="../img/logo.webp" alt="" width="828" height="632"></a>
+  <div class="pill clock" aria-live="off"><i class="dot"></i><span class="t" id="clock-t">5:58</span><span class="ap" id="clock-ap">م</span></div>
+  <div class="hdr-actions">
+    <button class="pill lang-pill" id="lang-btn" type="button">EN</button>
+    <button class="pill bag-pill" type="button" data-open-bag aria-label="">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M5 8h14l-1.2 12H6.2z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      <span class="bag-count" id="bag-count">0</span>
+    </button>
+  </div>
+</header>
+
+<main id="top">
+<section class="hero" id="hero" aria-label="">
+  <div class="hero-pin" id="pin">
+    <canvas class="scene" id="scene" aria-hidden="true"></canvas>
+    <div class="hero-fade"></div>
+    <div class="hero-ui">
+      <div class="intro" id="intro">
+        <p data-i18n="intro"></p>
+      </div>
+      <div class="led-note"><b id="hero-led">6:00</b><span id="hero-led-note"></span></div>
+      <div class="scroll-hint"><i></i><span id="hint-text"></span></div>
+    </div>
+  </div>
+</section>
+
+<section class="board" id="menu">
+  <div class="wrap">
+    <p class="eyebrow" data-i18n="eyebrow"></p>
+    <div class="board-head">
+      <h2 data-i18n="board_h2"></h2>
+      <aside class="now-card" aria-live="polite">
+        <div class="now-top"><span class="lbl" id="now-lbl"></span><span class="led-wrap"><b class="led" id="now-led">0:00</b><span class="ap" id="now-ap"></span></span></div>
+        <label class="peek" for="peek"><span data-i18n="peek"></span><input type="range" id="peek" min="0" max="1425" step="15" value="1080"></label>
+        <p class="now-status" id="now-status"><i class="st"></i><span></span></p>
+      </aside>
+    </div>
+    <div class="grid" id="grid"></div>
+    <p class="allergy"><svg viewBox="0 0 24 24"><path d="M12 3 22 20H2z" fill="#E2662A"/><path d="M12 9v5" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/><circle cx="12" cy="17" r="1.3" fill="#fff"/></svg><span data-i18n="allergy"></span></p>
+  </div>
+</section>
+
+<section class="closing" id="closing">
+  <div class="closing-pin">
+    <div class="closing-shutter" id="closing-shutter">
+      <div class="closing-copy" id="closing-copy">
+        <img src="../img/logo.webp" alt="Master Gaufre" width="828" height="632">
+        <p class="see" id="see-you"></p>
+        <p class="hours" id="closing-hours"></p>
+        <button class="btn btn-cream" type="button" id="reopen" data-i18n="reopen"></button>
+      </div>
+      <p class="credit" data-i18n="credit"></p>
+    </div>
+  </div>
+</section>
+</main>
+
+<div class="flyers" id="flyers" aria-hidden="true"></div>
+
+<div class="scrim" id="scrim" hidden></div>
+<aside class="drawer" id="drawer" hidden aria-labelledby="bag-title" role="dialog" aria-modal="true">
+  <div class="drawer-h"><h3 id="bag-title" data-i18n="bag_title"></h3><button class="x" type="button" id="bag-close" data-i18n-aria="close"><svg viewBox="0 0 16 16" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 3l10 10M13 3 3 13"/></svg></button></div>
+  <ul class="lines" id="lines"></ul>
+  <div class="fields">
+    <label for="order-name"><span data-i18n="f_name"></span><input id="order-name" type="text" autocomplete="name"></label>
+    <label for="order-notes"><span data-i18n="f_notes"></span><textarea id="order-notes"></textarea></label>
+  </div>
+  <a class="btn btn-y send" id="send" href="#" target="_blank" rel="noopener" data-i18n="send"></a>
+  <p class="send-hint" data-i18n="send_hint"></p>
+</aside>
+
+<div class="veil" id="veil" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+(() => {
+/* ================= settings — edit these ================= */
+const CONFIG = {
+  whatsapp: "",          // رقم الواتساب بصيغة دولية بدون + أو أصفار بالبداية، مثال: "963912345678"
+  open: "18:00",         // وقت الفتح
+  close: "02:00",        // وقت التسكير
+  preheat: "17:00",      // من أي ساعة القوالب عم تسخن
+  currency: { ar: "ل.س", en: "SYP" },
+  year: 2026
+};
+/* price: حط السعر رقم (مثلاً 25000) أو خليه null ليختفي */
+const PRODUCTS = [
+  { id:"w_choco", cat:"waffle", img:"../img/waffle-choco.webp", w:720, h:396, price:null,
+    ar:{ name:"غوفر شوكولا فواكه", tag:"3 فواكه موسمية", desc:"عجينة وافل ذهبية مقرمشة مغطسة بالشوكولا السائلة ومزينة بثلاثة أنواع من الفواكه الموسمية الطازجة." },
+    en:{ name:"chocolate fruit gaufre", tag:"3 seasonal fruits", desc:"Golden crispy waffle dipped in melted chocolate and topped with three kinds of fresh seasonal fruit." } },
+  { id:"w_kinder", cat:"waffle", img:"../img/waffle-kinder.webp", w:720, h:396, price:null,
+    ar:{ name:"غوفر كيندر فواكه", tag:"3 فواكه موسمية", desc:"عجينة وافل ذهبية مقرمشة مغطسة بصوص الكيندر الغني ومزينة بثلاثة أنواع من الفواكه الموسمية الطازجة." },
+    en:{ name:"kinder fruit gaufre", tag:"3 seasonal fruits", desc:"Golden crispy waffle dipped in rich Kinder sauce and topped with three kinds of fresh seasonal fruit." } },
+  { id:"w_lotus", cat:"waffle", img:"../img/waffle-lotus.webp", w:720, h:381, price:null,
+    ar:{ name:"غوفر لوتس فواكه", tag:"3 فواكه موسمية", desc:"عجينة وافل ذهبية مقرمشة مغطسة بصوص اللوتس الكريمي ومزينة بثلاثة أنواع من الفواكه الموسمية الطازجة." },
+    en:{ name:"lotus fruit gaufre", tag:"3 seasonal fruits", desc:"Golden crispy waffle dipped in creamy Lotus sauce and topped with three kinds of fresh seasonal fruit." } },
+  { id:"w_mix", cat:"waffle", img:"../img/waffle-mix.webp", w:720, h:368, price:null,
+    ar:{ name:"غوفر ميكس فواكه", tag:"صوصين على ذوقك", desc:"عجينة وافل ذهبية مقرمشة مغطسة بمزيج من صوصين حسب اختيارك ومزينة بثلاثة أنواع من الفواكه الموسمية الطازجة." },
+    en:{ name:"mix fruit gaufre", tag:"two sauces, your pick", desc:"Golden crispy waffle dipped in two sauces of your choice and topped with three kinds of fresh seasonal fruit." } },
+  { id:"w_pistachio", cat:"waffle", img:"../img/waffle-pistachio.webp", w:720, h:312, price:null,
+    ar:{ name:"غوفر بيستاشيو", tag:"فستق حلبي", desc:"عجينة وافل ذهبية مقرمشة مغطسة بكريمة البيستاشيو الفاخرة ومزينة بحبات الفستق الحلبي." },
+    en:{ name:"pistachio gaufre", tag:"aleppo pistachio", desc:"Golden crispy waffle dipped in rich pistachio cream and finished with Aleppo pistachios." } },
+  { id:"w_master", cat:"waffle", img:"../img/waffle-master.webp", w:720, h:330, price:null, sig:true,
+    ar:{ name:"غوفر مستر غوفر الخاص", tag:"وصفة البيت", desc:"عجينة وافل ذهبية مقرمشة محضرة بوصفة مستر غوفر الخاصة مع تشكيلة مميزة من النكهات والإضافات." },
+    en:{ name:"master gaufre special", tag:"house recipe", desc:"Golden crispy waffle made to Master Gaufre's own recipe, with a signature mix of flavours and toppings." } },
+
+  { id:"m_choco", cat:"mini", img:"../img/mini-choco.webp", w:620, h:439, price:null,
+    ar:{ name:"ميني بان كيك شوكولا", tag:"10 قطع", desc:"10 قطع من البان كيك الهش مغطسة بالشوكولا السائلة ومقدمة بطريقة شهية ومميزة." },
+    en:{ name:"mini pancakes, chocolate", tag:"10 pieces", desc:"10 fluffy mini pancakes dipped in melted chocolate." } },
+  { id:"m_kinder", cat:"mini", img:"../img/mini-kinder.webp", w:620, h:398, price:null,
+    ar:{ name:"ميني بان كيك كيندر", tag:"10 قطع", desc:"10 قطع من البان كيك الهش مغطسة بصوص الكيندر الغني ومقدمة بطريقة شهية ومميزة." },
+    en:{ name:"mini pancakes, kinder", tag:"10 pieces", desc:"10 fluffy mini pancakes dipped in rich Kinder sauce." } },
+  { id:"m_lotus", cat:"mini", img:"../img/mini-lotus.webp", w:620, h:431, price:null,
+    ar:{ name:"ميني بان كيك لوتس", tag:"10 قطع", desc:"10 قطع من البان كيك الهش مغطسة بصوص اللوتس الكريمي ومقدمة بطريقة شهية ومميزة." },
+    en:{ name:"mini pancakes, lotus", tag:"10 pieces", desc:"10 fluffy mini pancakes dipped in creamy Lotus sauce." } },
+  { id:"m_pistachio", cat:"mini", img:"../img/mini-pistachio.webp", w:620, h:396, price:null,
+    ar:{ name:"ميني بان كيك بيستاشيو", tag:"10 قطع", desc:"10 قطع من البان كيك الهش مغطسة بكريمة البيستاشيو الفاخرة ومزينة بحبات الفستق الحلبي." },
+    en:{ name:"mini pancakes, pistachio", tag:"10 pieces", desc:"10 fluffy mini pancakes dipped in rich pistachio cream and finished with Aleppo pistachios." } },
+  { id:"m_mix", cat:"mini", img:"../img/mini-mix.webp", w:620, h:408, price:null,
+    ar:{ name:"ميني بان كيك ميكس", tag:"صوصين على ذوقك", desc:"10 قطع من البان كيك الهش مغطسة بمزيج من صوصين حسب اختيارك لتجربة غنية ومتنوعة." },
+    en:{ name:"mini pancakes, mix", tag:"two sauces, your pick", desc:"10 fluffy mini pancakes dipped in two sauces of your choice." } },
+
+  { id:"p_fruit", cat:"stack", img:"../img/stack-fruit.webp", w:560, h:622, price:null,
+    ar:{ name:"بان كيك فواكه", tag:"طبقتين", desc:"طبقتان من البان كيك الهش محشوتان بالفواكه الموسمية والكريمة والبراونيز ومغطستان بالشوكولا السائلة." },
+    en:{ name:"fruit pancake stack", tag:"2 layers", desc:"Two layers of fluffy pancakes filled with seasonal fruit, cream and brownies, drenched in melted chocolate." } },
+  { id:"p_brownie", cat:"stack", img:"../img/stack-brownie.webp", w:560, h:550, price:null,
+    ar:{ name:"بان كيك براونيز", tag:"4 طبقات", desc:"أربع طبقات من البان كيك الهش محشوة بالبراونيز الغني ومغطاة بالشوكولا السائلة." },
+    en:{ name:"brownie pancake stack", tag:"4 layers", desc:"Four layers of fluffy pancakes filled with rich brownies, drenched in melted chocolate." } },
+  { id:"p_master", cat:"stack", img:"../img/stack-master.webp", w:560, h:642, price:null, sig:true,
+    ar:{ name:"بان كيك مستر غوفر", tag:"وصفة البيت", desc:"طبقات بان كيك محضرة بوصفة مستر غوفر الخاصة مع مزيج مميز من النكهات والإضافات المختارة." },
+    en:{ name:"master gaufre stack", tag:"house recipe", desc:"Pancake layers made to Master Gaufre's own recipe, with a signature mix of flavours and toppings." } },
+
+  { id:"a_icecream", cat:"addon", img:"../img/add-icecream.webp", w:300, h:159, price:null,
+    ar:{ name:"كرة بوظة", desc:"اختيارك من بوظة الفانيلا أو الشوكولا لإضافة لمسة منعشة إلى طلبك." },
+    en:{ name:"ice cream scoop", desc:"Vanilla or chocolate, for a cool finish on your plate." } },
+  { id:"a_sauce", cat:"addon", img:"../img/add-sauce.webp", w:200, h:297, price:null,
+    ar:{ name:"صوص دبل", desc:"كمية إضافية من الصوص المفضل لديك: شوكولا، لوتس، أو كيندر." },
+    en:{ name:"double sauce", desc:"An extra pour of your favourite: chocolate, Lotus or Kinder." } },
+  { id:"a_fruit", cat:"addon", img:"../img/add-fruit.webp", w:300, h:153, price:null,
+    ar:{ name:"فواكه موسمية", desc:"اختار 3 أصناف من الفواكه الموسمية المتوفرة: فراولة، موز، كيوي، أناناس، كرز وغيرها." },
+    en:{ name:"seasonal fruit", desc:"Pick 3 of today's fresh fruit: strawberry, banana, kiwi, pineapple, cherry and more." } },
+];
+
+const T = {
+  ar: {
+    menu:"القائمة", lang:"EN", ap_pm:"م", ap_am:"ص",
+    hero_h1:"الحلو بيصحى<br>لما الشمس بتنام.", open_sign:"مفتوح", poster:"بان كيك طبقات",
+    aframe:"وافل<br>بان كيك<br>بوظة", aframe_x:"+ صوص دبل",
+    intro:"وافل ذهبي مقرمش وبان كيك هش، مغطّسين بصوصات غنية ومزيّنين بفواكه موسمية طازة.",
+    hint:"نزّل لتحت، ومنفتحلك", hint_touch:"اسحب لفوق، ومنفتحلك",
+    led_note:(h)=>`قوالب الوافل عم تسخن من الساعة ${h}.`,
+    eyebrow:"لوح الحلو", board_h2:"شو عم يطلع سخن الليلة؟", now_lbl:"الوقت هلق", peek:"شوف ساعة تانية", peek_lbl:"بهالساعة",
+    st_open_at:(t)=>`مفتوحين بهالوقت · منسكّر الساعة ${t}`, st_closed_at:(t)=>`مسكّرين بهالوقت · منفتح الساعة ${t}`,
+    st_open:(t)=>`مفتوحين هلق · منسكّر الساعة ${t}`, st_closed:(t)=>`مسكّرين هلق · منفتح الساعة ${t}`,
+    tab_all:"الكل", cat_waffle:"الوافل", cat_mini:"ميني بان كيك", cat_stack:"بان كيك طبقات", cat_addon:"الإضافات (+)",
+    kind_waffle:"وافل", kind_mini:"ميني بان كيك", kind_stack:"بان كيك طبقات",
+    add:"+ أضف", added:"انضاف لطلبك",
+    note_big:"10", note_1:"قطع بكل طبق ميني بان كيك.", note_2:"وبالميكس بتختار صوصين على ذوقك.",
+    allergy:"ملاحظة: يرجى إخبارنا في حال وجود حساسية من أحد أنواع الفواكه أو المكونات المستخدمة.",
+    bag_title:"طلبك", empty:"طلبك لسا فاضي. اختار شي طيّب من المنيو.", f_name:"الاسم", f_notes:"ملاحظات (حساسية؟ أي صوصين للميكس؟)",
+    send:"ابعت الطلب على واتساب", send_hint:"رح ينفتح واتساب والطلب مكتوب، بس اضغط إرسال.", close:"سكّر",
+    nav_menu:"المنيو", nav_addons:"الإضافات", nav_bag:"طلبك",
+    see_you:(h)=>`نشوفك الساعة ${h} المسا.`, reopen:"افتحلنا كمان مرة",
+    credit:"© 2026 مستر غوفر · Master Gaufre",
+    hours:(o,c)=>`من ${o} المسا لـ ${c} بعد نص الليل`,
+    wa_hello:"مرحبا مستر غوفر، بدي اطلب:", wa_notes:"ملاحظات", wa_name:"الاسم",
+    inc:"زيد", dec:"نقّص", hero_label:"واجهة المحل"
+  },
+  en: {
+    menu:"menu", lang:"عربي", ap_pm:"pm", ap_am:"am",
+    hero_h1:"sweet wakes up<br>when the sun goes down.", open_sign:"open", poster:"pancake stacks",
+    aframe:"waffles<br>pancakes<br>ice cream", aframe_x:"+ double sauce",
+    intro:"Golden crispy waffles and fluffy pancakes, dipped in rich sauces and topped with fresh seasonal fruit.",
+    hint:"scroll down and we'll open up", hint_touch:"swipe up and we'll open up",
+    led_note:(h)=>`the waffle irons have been heating since ${h}.`,
+    eyebrow:"the sweet board", board_h2:"what's coming off the iron tonight?", now_lbl:"right now", peek:"peek at another hour", peek_lbl:"at this hour",
+    st_open_at:(t)=>`open at this hour · we close at ${t}`, st_closed_at:(t)=>`closed at this hour · we open at ${t}`,
+    st_open:(t)=>`open now · we close at ${t}`, st_closed:(t)=>`closed now · we open at ${t}`,
+    tab_all:"all", cat_waffle:"waffles", cat_mini:"mini pancakes", cat_stack:"pancake stacks", cat_addon:"add-ons (+)",
+    kind_waffle:"waffle", kind_mini:"mini pancakes", kind_stack:"pancake stack",
+    add:"+ add", added:"added to your order",
+    note_big:"10", note_1:"pieces in every mini pancake plate.", note_2:"go mix and pick any two sauces.",
+    allergy:"Note: please tell us if you're allergic to any fruit or ingredient we use.",
+    bag_title:"your order", empty:"your order is empty. pick something sweet from the menu.", f_name:"name", f_notes:"notes (allergies? which two sauces for the mix?)",
+    send:"send order on whatsapp", send_hint:"whatsapp opens with your order typed in. just hit send.", close:"close",
+    nav_menu:"menu", nav_addons:"add-ons", nav_bag:"your order",
+    see_you:(h)=>`see you at ${h}.`, reopen:"open up again",
+    credit:"© 2026 Master Gaufre · مستر غوفر",
+    hours:(o,c)=>`${o} pm till ${c} am`,
+    wa_hello:"Hi Master Gaufre, I'd like to order:", wa_notes:"Notes", wa_name:"Name",
+    inc:"add one", dec:"remove one", hero_label:"shop front"
+  }
+};
+
+/* ================= helpers ================= */
+const $ = (s, r=document) => r.querySelector(s);
+const $$ = (s, r=document) => [...r.querySelectorAll(s)];
+const clamp = (v, a=0, b=1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const seg = (p, a, b) => clamp((p - a) / (b - a));
+const ease = t => t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t + 2, 3) / 2;
+const easeOut = t => 1 - Math.pow(1 - t, 3);
+const sine = t => -(Math.cos(Math.PI * t) - 1) / 2;
+const FLICK = [0,1,0,0,1,1,0,1,0,0,1,1];
+const flick = (p, a, d) => p < a ? 0 : p >= a + d ? 1 : FLICK[Math.floor((p - a) / d * FLICK.length)] ?? 1;
+const toMin = s => { const [h, m] = s.split(":").map(Number); return h * 60 + m; };
+const hm = m => { m = ((Math.round(m) % 1440) + 1440) % 1440; const h = Math.floor(m / 60), mm = m % 60; return { h12: (h % 12) || 12, mm: String(mm).padStart(2, "0"), pm: h >= 12 }; };
+const fmt = m => { const t = hm(m); return `${t.h12}:${t.mm}`; };
+
+const root = document.documentElement;
+const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+if (reduced) root.classList.add("reduced");
+let lang = "ar";
+try { const saved = localStorage.getItem("mg-lang"); if (saved === "en" || saved === "ar") lang = saved; } catch (e) {}
+
+const OPEN = toMin(CONFIG.open), CLOSE = toMin(CONFIG.close), PRE = toMin(CONFIG.preheat);
+const WAFFLES = PRODUCTS.filter(p => p.cat === "waffle");
+const SHELF = ["w_choco","w_kinder","w_lotus","w_pistachio","w_mix","w_master","p_fruit","p_brownie"].map(id => PRODUCTS.find(p => p.id === id));
+const bag = new Map();
+
+const hdr = $(".hdr"), pin = $("#pin");
+const intro = $("#intro"), hero = $("#hero"), closing = $("#closing");
+const flyersBox = $("#flyers");
+const flyers = SHELF.map(() => { const im = document.createElement("img"); im.alt = ""; flyersBox.appendChild(im); return im; });
+
+/* ================= text ================= */
+function applyText() {
+  const t = T[lang];
+  root.lang = lang; root.dir = lang === "ar" ? "rtl" : "ltr";
+  $$("[data-i18n]").forEach(el => { const v = t[el.dataset.i18n]; if (typeof v === "string") el.textContent = v; });
+  $$("[data-i18n-html]").forEach(el => { el.innerHTML = t[el.dataset.i18nHtml]; });
+  $$("[data-i18n-aria]").forEach(el => el.setAttribute("aria-label", t[el.dataset.i18nAria]));
+  $("#lang-btn").textContent = t.lang;
+  $("#lang-btn").setAttribute("aria-label", lang === "ar" ? "English" : "العربية");
+  $(".bag-pill").setAttribute("aria-label", t.bag_title);
+  hero.setAttribute("aria-label", t.hero_label);
+  const o = fmt(OPEN), c = fmt(CLOSE);
+  $("#hint-text").textContent = window.matchMedia("(pointer: coarse)").matches ? t.hint_touch : t.hint;
+  $("#hero-led").textContent = o;
+  $("#hero-led-note").textContent = t.led_note(hm(PRE).h12);
+  $("#see-you").textContent = t.see_you(hm(OPEN).h12);
+  $("#closing-hours").textContent = t.hours(o, c);
+  document.title = lang === "ar" ? "مستر غوفر" : "Master Gaufre";
+  SHELF.forEach((p, i) => { flyers[i].src = p.img; });
+  renderCards(); renderBag(); renderNow();
+}
+
+/* ================= menu cards ================= */
+// the board reads like the shelf: the first 8 cards are the 8 baskets
+const ORDER = ["w_choco","w_kinder","w_lotus","w_pistachio","w_mix","w_master","p_fruit","p_brownie","p_master","m_choco","m_kinder","m_lotus","m_pistachio","m_mix"];
+const NUM = Object.fromEntries(ORDER.map((id, i) => [id, String(i + 1).padStart(2, "0")]));
+function priceText(p) { return p.price != null ? `${Number(p.price).toLocaleString("en")} ${CONFIG.currency[lang]}` : ""; }
+function cardHTML(p) {
+  const L = p[lang], t = T[lang], other = p[lang === "ar" ? "en" : "ar"].name;
+  const eager = SHELF.includes(p);
+  return `<article class="card" data-id="${p.id}">
+    <div class="card-media"><img class="card-img" src="${p.img}" alt="${L.name}" width="${p.w}" height="${p.h}" decoding="async"${eager ? "" : ' loading="lazy"'}></div>
+    <div class="card-meta"><b class="num">${NUM[p.id]}</b><span class="tag${p.sig ? " sig" : ""}">${L.tag}</span></div>
+    <h4 class="card-name">${L.name}</h4>
+    <p class="card-alt" lang="${lang === "ar" ? "en" : "ar"}">${other}</p>
+    <p class="card-desc">${L.desc}</p>
+    <p class="card-kind">${t["kind_" + p.cat]}</p>
+    <div class="card-foot"><span class="price">${priceText(p)}</span><button class="add" type="button" data-add="${p.id}">${t.add}</button></div>
+  </article>`;
+}
+function renderCards() {
+  const t = T[lang];
+  const addons = PRODUCTS.filter(p => p.cat === "addon");
+  $("#grid").innerHTML = ORDER.map(id => cardHTML(PRODUCTS.find(p => p.id === id))).join("") +
+    `<article class="card note-card"><b class="big" dir="ltr">${t.note_big}</b><p>${t.note_1}</p><p>${t.note_2}</p></article>` +
+    `<article class="card addons-card"><h4 class="card-name">${t.cat_addon}</h4><ul>${addons.map(p => `<li>
+        <img src="${p.img}" alt="" width="${p.w}" height="${p.h}" loading="lazy"><div><b>${p[lang].name}</b><span>${p[lang].desc}</span></div>
+        <button class="add" type="button" data-add="${p.id}" aria-label="${t.add} ${p[lang].name}">+</button></li>`).join("")}</ul></article>`;
+  cardImgs = SHELF.map(p => $(`#grid .card[data-id="${p.id}"] .card-img`));
+  measure();
+}
+
+/* ================= bag ================= */
+function renderBag() {
+  const t = T[lang];
+  let count = 0; bag.forEach(q => count += q);
+  const badge = $("#bag-count"); badge.textContent = count;
+  const lines = $("#lines");
+  if (!bag.size) { lines.innerHTML = `<li class="empty">${t.empty}</li>`; }
+  else {
+    lines.innerHTML = [...bag].map(([id, q]) => { const p = PRODUCTS.find(x => x.id === id);
+      return `<li class="line"><img src="${p.img}" alt=""><div><b>${p[lang].name}</b>${p.price != null ? `<span class="price" style="font-size:13px">${priceText(p)}</span>` : ""}</div>
+        <div class="qty"><button type="button" data-dec="${id}" aria-label="${t.dec}">−</button><span>${q}</span><button type="button" data-inc="${id}" aria-label="${t.inc}">+</button></div></li>`; }).join("");
+  }
+  updateSend();
+}
+function updateSend() {
+  const t = T[lang], send = $("#send");
+  if (!bag.size) { send.setAttribute("aria-disabled", "true"); send.href = "#"; return; }
+  send.removeAttribute("aria-disabled");
+  const rows = [...bag].map(([id, q]) => `• ${q} × ${NUM[id] ? "(" + NUM[id] + ") " : ""}${PRODUCTS.find(x => x.id === id)[lang].name}`);
+  const name = $("#order-name").value.trim(), notes = $("#order-notes").value.trim();
+  let msg = `${t.wa_hello}\n${rows.join("\n")}`;
+  if (notes) msg += `\n\n${t.wa_notes}: ${notes}`;
+  if (name) msg += `\n${t.wa_name}: ${name}`;
+  send.href = `https://wa.me/${CONFIG.whatsapp}?text=${encodeURIComponent(msg)}`;
+}
+$("#order-name").addEventListener("input", updateSend);
+$("#order-notes").addEventListener("input", updateSend);
+let toastTimer;
+function toast(msg) { const el = $("#toast"); el.textContent = msg; el.classList.add("on"); clearTimeout(toastTimer); toastTimer = setTimeout(() => el.classList.remove("on"), 1600); }
+document.addEventListener("click", e => {
+  const add = e.target.closest("[data-add]");
+  if (add) { const id = add.dataset.add; bag.set(id, (bag.get(id) || 0) + 1); renderBag(); const b = $("#bag-count"); b.classList.remove("bump"); void b.offsetWidth; b.classList.add("bump"); toast(T[lang].added); return; }
+  const inc = e.target.closest("[data-inc]"); if (inc) { bag.set(inc.dataset.inc, bag.get(inc.dataset.inc) + 1); renderBag(); return; }
+  const dec = e.target.closest("[data-dec]"); if (dec) { const id = dec.dataset.dec, q = bag.get(id) - 1; q > 0 ? bag.set(id, q) : bag.delete(id); renderBag(); return; }
+  if (e.target.closest("[data-open-bag]")) { openBag(); return; }
+});
+function openBag() { $("#drawer").hidden = false; $("#scrim").hidden = false; $("#bag-close").focus(); }
+function closeBag() { $("#drawer").hidden = true; $("#scrim").hidden = true; }
+$("#bag-close").addEventListener("click", closeBag);
+$("#scrim").addEventListener("click", closeBag);
+document.addEventListener("keydown", e => { if (e.key === "Escape") closeBag(); });
+$("#lang-btn").addEventListener("click", () => { lang = lang === "ar" ? "en" : "ar"; try { localStorage.setItem("mg-lang", lang); } catch (e) {} applyText(); update(window.scrollY); });
+$("#reopen").addEventListener("click", () => {
+  // fade out, jump to the top in one step, fade back in: no rushing back through the whole page
+  const v = $("#veil"); v.classList.add("on");
+  setTimeout(() => { window.scrollTo(0, 0); cur = 0; update(0); requestAnimationFrame(() => requestAnimationFrame(() => v.classList.remove("on"))); }, reduced ? 0 : 320);
+});
+
+/* ================= clock ================= */
+function nowMin() { const d = new Date(); return d.getHours() * 60 + d.getMinutes(); }
+function isOpen(m) { return CLOSE > OPEN ? (m >= OPEN && m < CLOSE) : (m >= OPEN || m < CLOSE); }
+function setClock(m) {
+  const t = hm(m), s = `${t.h12}:${t.mm}`;
+  const el = $("#clock-t"); if (el.textContent !== s) el.textContent = s;
+  const ap = t.pm ? T[lang].ap_pm : T[lang].ap_am; const a = $("#clock-ap"); if (a.textContent !== ap) a.textContent = ap;
+}
+let peekMin = null;   // null = follow the real clock
+function renderNow() {
+  const live = peekMin == null, m = live ? nowMin() : peekMin, t = T[lang];
+  $("#now-lbl").textContent = live ? t.now_lbl : t.peek_lbl;
+  $("#now-led").textContent = fmt(m);
+  $("#now-ap").textContent = hm(m).pm ? t.ap_pm : t.ap_am;
+  if (live) $("#peek").value = String(Math.round(m / 15) * 15 % 1440);
+  const open = isOpen(m), st = $("#now-status");
+  st.classList.toggle("closed", !open);
+  st.querySelector("span").textContent = live ? (open ? t.st_open(fmt(CLOSE)) : t.st_closed(fmt(OPEN))) : (open ? t.st_open_at(fmt(CLOSE)) : t.st_closed_at(fmt(OPEN)));
+}
+$("#peek").addEventListener("input", e => { peekMin = Number(e.target.value); renderNow(); });
+
+/* ================= layout ================= */
+let vw = 0, vh = 0, heroTop = 0, heroH = 1, pinEnd = 0, closingTop = 0, cols = 3;
+let cardImgs = [], flightState = "";
+function measure() {
+  vw = window.innerWidth; vh = window.innerHeight;
+  const y = window.scrollY;
+  heroTop = hero.getBoundingClientRect().top + y; heroH = hero.offsetHeight;
+  pinEnd = heroTop + heroH - vh;
+  closingTop = closing.getBoundingClientRect().top + y;
+  const g = $("#grid");
+  cols = g ? getComputedStyle(g).gridTemplateColumns.split(" ").filter(Boolean).length || 1 : 3;
+  flightState = "";
+  sizeCanvas();
+  update(cur = y);
+}
+
+/* ================= scene: pre-rendered frames played by scroll ================= */
+const SCENE = {"end":0.72,"sets":{"p":{"w":720,"h":1500,"n":88,"slots":[[540.5,620.2,135.4,74.4],[371.3,620.2,135.4,74.4],[202.1,623.0,135.4,71.6],[32.9,636.0,135.4,58.6],[540.5,779.3,135.4,69.2],[371.3,786.4,135.4,62.0],[229.1,758.3,81.2,90.2],[54.6,758.3,91.9,90.2]]},"l":{"w":1600,"h":1000,"n":72,"slots":[[1201.1,211.6,300.8,165.4],[825.1,211.6,300.8,165.4],[449.1,217.8,300.8,159.2],[73.1,246.7,300.8,130.3],[1201.1,565.1,300.8,153.7],[825.1,580.9,300.8,137.9],[509.3,518.3,180.5,200.5],[121.4,518.3,204.2,200.5]]}}};
+const canvas = $("#scene"), ctx = canvas.getContext("2d", { alpha: false });
+let setKey = "", frames = [], endFrame = null, drawn = "", cw = 0, ch = 0, dpr = 1, moving = false;
+const N = () => SCENE.sets[setKey].n;
+function frameOrder(n) { // coarse to fine, so a fast swipe always has a frame close by
+  const seen = new Set([0]), out = [0];
+  for (let step = 32; step >= 1; step >>= 1) for (let i = 0; i < n; i += step) if (!seen.has(i)) { seen.add(i); out.push(i); }
+  return out;
+}
+function loadSet(key) {
+  if (key === setKey) return;
+  setKey = key; frames = new Array(N()).fill(null); endFrame = null; drawn = "";
+  const queue = [...frameOrder(N()), "end"];
+  let active = 0;
+  const next = () => {
+    while (active < 6 && queue.length) {
+      const k = queue.shift(); active++;
+      const im = new Image();
+      const done = () => { active--; if (setKey === key) { if (k === "end") endFrame = im; else frames[k] = im; drawn = ""; requestUpdate(); } next(); };
+      im.onload = () => { (im.decode ? im.decode().catch(() => {}) : Promise.resolve()).then(done); };
+      im.onerror = () => { active--; next(); };
+      im.src = `frames/${key}/${k === "end" ? "end" : String(k).padStart(3, "0")}.webp`;
+    }
+  };
+  next();
+}
+function sizeCanvas() {
+  dpr = Math.min(2, window.devicePixelRatio || 1);
+  cw = Math.round(vw * dpr); ch = Math.round(vh * dpr);
+  if (canvas.width !== cw || canvas.height !== ch) { canvas.width = cw; canvas.height = ch; drawn = ""; }
+  loadSet(vw / vh < .8 ? "p" : "l");
+}
+function cover() { const s = SCENE.sets[setKey]; const k = Math.max(cw / s.w, ch / s.h); return { k, x: (cw - s.w * k) / 2, y: (ch - s.h * k) / 2, w: s.w * k, h: s.h * k }; }
+function nearest(i) { for (let d = 1; d < N(); d++) { if (frames[i - d]) return i - d; if (frames[i + d]) return i + d; } return -1; }
+function drawScene(P) {
+  if (!setKey) return;
+  const c = cover();
+  let A, B = null, t = 0, key;
+  if (P >= SCENE.end && endFrame) { A = endFrame; key = "end"; }
+  else {
+    const f = clamp(P / SCENE.end) * (N() - 1);
+    // while the finger moves, blend neighbouring frames; at rest, show one sharp frame
+    const i = moving ? Math.floor(f) : Math.round(f);
+    const a = frames[i] ? i : nearest(i);
+    if (a < 0) return;
+    A = frames[a];
+    if (moving && a === i && frames[i + 1] && f - i > .02) { B = frames[i + 1]; t = f - i; }
+    key = a + (B ? ":" + t.toFixed(2) : "");
+  }
+  if (key === drawn) return;
+  drawn = key;
+  ctx.globalAlpha = 1; ctx.drawImage(A, c.x, c.y, c.w, c.h);
+  if (B) { ctx.globalAlpha = t; ctx.drawImage(B, c.x, c.y, c.w, c.h); ctx.globalAlpha = 1; }
+}
+/* where waffle i sits on the shelf, in screen pixels */
+function slotRect(i) {
+  const c = cover(), r = SCENE.sets[setKey].slots[i], top = pin.getBoundingClientRect().top;
+  return { left: (c.x + r[0] * c.k) / dpr, top: top + (c.y + r[1] * c.k) / dpr, width: r[2] * c.k / dpr, height: r[3] * c.k / dpr };
+}
+
+/* write a style only when it changes */
+const memo = new WeakMap();
+function put(el, prop, v) {
+  if (!el) return;
+  let m = memo.get(el); if (!m) memo.set(el, m = {});
+  if (m[prop] === v) return; m[prop] = v; el.style[prop] = v;
+}
+const op = (el, v) => put(el, "opacity", String(Math.round(clamp(v) * 1000) / 1000));
+const heroUi = $(".hero-ui"), heroFade = $(".hero-fade");
+
+function renderHero(P) {
+  drawScene(P);
+  const ui = 1 - sine(seg(P, .015, .1));
+  op(heroUi, ui); put(intro, "pointerEvents", ui < .2 ? "none" : "auto");
+  op(heroFade, sine(seg(P, .74, .88)));   // focus pull: the shop goes soft behind the waffles
+}
+
+/* the waffles lift off the shelf and land in their cards */
+function renderFlight(P, y) {
+  if (reduced) {
+    if (flightState !== "still") { flightState = "still"; cardImgs.forEach(c => c && c.classList.remove("pending")); flyers.forEach(f => f.style.display = "none"); }
+    return;
+  }
+  const flyN = Math.min(SHELF.length, cols * 2);
+  if (P < SCENE.end) {
+    if (flightState !== "shelf") {
+      flightState = "shelf";
+      flyers.forEach(f => put(f, "display", "none"));
+      cardImgs.forEach((c, i) => c && c.classList.toggle("pending", i < flyN && c.offsetParent !== null));
+    }
+    return;
+  }
+  const gridTop = $("#grid").getBoundingClientRect().top + window.scrollY;
+  const flightEnd = Math.max(pinEnd + vh * .4, gridTop - vh * .3);
+  const f = clamp((y - pinEnd) / (flightEnd - pinEnd));
+  if (f >= 1) {
+    if (flightState !== "landed") {
+      flightState = "landed";
+      flyers.forEach(fl => put(fl, "display", "none"));
+      cardImgs.forEach(c => c && c.classList.remove("pending"));
+    }
+    return;
+  }
+  flightState = "air";
+  const lift = easeOut(seg(P, SCENE.end, SCENE.end + .14)), fe = ease(f);
+  SHELF.forEach((p, i) => {
+    const card = cardImgs[i], fl = flyers[i];
+    if (!card) return;
+    const b = card.getBoundingClientRect();
+    const canFly = i < flyN && b.width > 0;
+    card.classList.toggle("pending", canFly);
+    if (!canFly && f > .3) { put(fl, "display", "none"); return; }
+    const a = slotRect(i);
+    const bw = canFly ? b.width : a.width, bh = canFly ? b.height : a.height;
+    put(fl, "width", bw.toFixed(1) + "px"); put(fl, "height", bh.toFixed(1) + "px");
+    const dir = i % 2 ? 1 : -1;
+    const acx = a.left + a.width / 2, acy = a.top + a.height / 2 - vh * .05 * lift;
+    let cx, cy, sc, rot, o = 1;
+    if (canFly) {
+      cx = lerp(acx, b.left + b.width / 2, fe);
+      cy = lerp(acy, b.top + b.height / 2, fe) - vh * .1 * Math.sin(Math.PI * f);
+      sc = lerp(a.width / b.width, 1, fe) * (1 + .05 * lift * (1 - fe));
+      rot = lerp(dir * 6 * lift, 0, fe);
+    } else { cx = acx; cy = acy - f * vh * .3; sc = 1 + .05 * lift; rot = dir * 6 * lift; o = 1 - f / .3; }
+    put(fl, "display", "block"); op(fl, o);
+    fl.style.transform = `translate3d(${(cx - bw / 2).toFixed(1)}px,${(cy - bh / 2).toFixed(1)}px,0) rotate(${rot.toFixed(2)}deg) scale(${sc.toFixed(4)})`;
+  });
+}
+
+const closingShutter = $("#closing-shutter"), closingCopy = $("#closing-copy");
+function renderClosing(y) {
+  const c = reduced ? 1 : ease(clamp((y - (closingTop - vh * .6)) / (vh * 1.2)));
+  put(closingShutter, "transform", `translate3d(0,${((c - 1) * 100).toFixed(2)}%,0)`);
+  op(closingCopy, seg(c, .72, 1));
+}
+
+function update(y) {
+  const P = reduced ? .36 : clamp((y - heroTop) / Math.max(1, heroH - vh));
+  if (y < pinEnd + vh * 2) renderHero(P);
+  renderFlight(P, y);
+  if (y > closingTop - vh * 2) renderClosing(y);
+  hdr.classList.toggle("solid", !reduced ? y > pinEnd + vh * .55 : y > vh * .5);
+  hdr.classList.toggle("light", reduced ? y > vh * .5 : (P >= .86 || y > pinEnd) && y < closingTop + vh * .2);
+  if (!reduced && y < pinEnd - 2) setClock(OPEN - 2 + seg(P, 0, .25) * 2 + seg(P, .25, 1) * 12);
+  else setClock(nowMin());
+}
+
+/* scroll follows the finger with a soft, frame-rate independent glide */
+let cur = window.scrollY, running = false, lastT = 0;
+function tick(t) {
+  const target = window.scrollY;
+  const dt = lastT ? Math.min(50, t - lastT) : 16.7; lastT = t;
+  cur += (target - cur) * (1 - Math.exp(-dt / 90));
+  if (Math.abs(target - cur) < .25) cur = target;
+  moving = cur !== target;
+  update(cur);
+  if (cur !== target) requestAnimationFrame(tick); else { running = false; lastT = 0; }
+}
+function requestUpdate() { if (!running) { running = true; requestAnimationFrame(tick); } }
+window.addEventListener("scroll", () => { if (reduced) { update(window.scrollY); return; } requestUpdate(); }, { passive: true });
+let rz; window.addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(measure, 80); });
+window.addEventListener("load", measure);
+if (document.fonts && document.fonts.ready) document.fonts.ready.then(measure);
+setInterval(() => { renderNow(); if (window.scrollY >= pinEnd - 2) setClock(nowMin()); }, 15000);
+
+applyText();
+measure();
+})();
+</script>
+
+</body>
+</html>
